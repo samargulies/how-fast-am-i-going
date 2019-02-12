@@ -14,10 +14,10 @@ const router = new Router({
       path: '/lang/:lang.html',
       redirect: to => `/${to.params.lang}/`,
     },
-    {
-      path: '/en/*',
-      redirect: to => `/${to.params.pathMatch}`,
-    },
+    // {
+    //   path: '/en/*',
+    //   redirect: to => `/${to.params.pathMatch}`,
+    // },
     {
       path: '/:lang?',
       component: {

@@ -5,13 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>what-is-my-elevation</title>
+    <title>What is my elevation?</title>
+    <meta name="description"
+      content="Find the elevation of your current location, or any point on Earth.">
+
+    <meta property="og:title" content="What is my elevation?">
+    <meta property="og:description"
+      content="Find the elevation of your current location, or any point on Earth.">
+    <meta property="og:image" content="/apple-touch-icon-144x144-precomposed.png">
+    <meta name="twitter:card" content="summary_large_image">
+
   </head>
   <body>
     <noscript>
       <strong>We're sorry but what-is-my-elevation doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <% if (NODE_ENV === 'production') { %>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <% } %>
   </body>
 </html>

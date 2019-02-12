@@ -32,29 +32,6 @@ export default {
     longitude: { type: String },
   },
   methods: {
-    getLocation() {
-      navigator.geolocation.getCurrentPosition(
-        this.setLocation,
-        this.locationError,
-        { enableHighAccuracy: true },
-      );
-    },
-    setLocation(location) {
-      console.log({ location });
-      this.$store.dispatch('updateLocation', {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        accuracy: location.coords.accuracy,
-      });
-      if (location.coords.altitude) {
-        this.$store.dispatch('updateElevation', {
-          elevation: location.coords.altitude,
-          source: 'phone',
-        });
-      } else {
-        this.$store.dispatch('fetchElevation');
-      }
-    },
     updateLocation() {
       console.log('updateLocation');
       const title = parseUrlTitle(this.title);
@@ -66,18 +43,13 @@ export default {
       });
       this.$store.dispatch('fetchElevation');
     },
-    locationError(error) {
-      console.warn('location access denied', error);
-      this.$store.commit('setItem', { item: 'loading', value: false });
-      this.$store.dispatch('setLocationOpen', true);
-    },
   },
   created() {
     this.$store.dispatch('setUseFeet', this.$t('units.feet-default') === 'true');
     if (this.latitude && this.longitude) {
       this.updateLocation();
     } else {
-      this.getLocation();
+      this.$store.dispatch('getUserLocation');
     }
   },
   watch: {

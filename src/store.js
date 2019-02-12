@@ -11,8 +11,38 @@ export default new Vuex.Store({
     location: {},
     elevation: {},
     useFeet: true,
+    supportsElevation: false,
   },
   actions: {
+    getUserLocation({ dispatch }) {
+      navigator.geolocation.getCurrentPosition(
+        location => dispatch('setUserLocation', location),
+        error => dispatch('locationError', error),
+        { enableHighAccuracy: true },
+      );
+    },
+    setUserLocation({ dispatch }, location) {
+      console.log({ location });
+      dispatch('updateLocation', {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        accuracy: location.coords.accuracy,
+      });
+      if (location.coords.altitude) {
+        dispatch('updateSupportsElevation', true);
+        dispatch('updateElevation', {
+          elevation: location.coords.altitude,
+          source: 'phone',
+        });
+      } else {
+        dispatch('fetchElevation');
+      }
+    },
+    locationError(error) {
+      console.warn('location access denied', error);
+      this.$store.commit('setItem', { item: 'loading', value: false });
+      this.$store.dispatch('setLocationOpen', true);
+    },
     fetchElevation({ state, dispatch }) {
       dispatch('setLoading', true);
       return getElevation({
@@ -49,6 +79,10 @@ export default new Vuex.Store({
     setUseFeet({ commit }, isFeet) {
       commit('setItem', { item: 'useFeet', value: isFeet });
     },
+    setSupportsElevation({ commit }, supportsElevation) {
+      commit('setItem', { item: 'supportsElevation', value: supportsElevation });
+    },
+
   },
   mutations: {
     setItem(state, { item, value }) {

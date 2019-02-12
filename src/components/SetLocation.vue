@@ -19,46 +19,45 @@
     </div>
 
     <transition name="slide">
-      <form id="location-prompt" v-if="setLocationOpen" @submit.prevent="getSuggestions(true)">
+      <div id="location-prompt" v-if="setLocationOpen">
           <label for="address" class="visuallyhidden">{{ $t('address.label') }}</label>
           <div class="address-search">
-            <input id="address"
-              autocomplete="off"
-              :placeholder="$t('address.placeholder')"
-              v-model="query"
-              :tabindex="1"
-              ref="search"
-              @keydown.down.stop="focusSuggestion(0)">
-              <transition name="slide">
-                <div class="suggestions" v-if="autosuggestions.length > 0" ref="suggestions">
-                  <div class="suggestion"
-                    v-for="(suggestion, index) in autosuggestions"
-                    :key="suggestion.point.coordinates[0]"
-                    :tabindex="index + 2"
-                    @click="setLocation(suggestion)"
-                    @keydown.enter="setLocation(suggestion)"
-                    @keydown.up.stop="focusSuggestion(index - 1)"
-                    @keydown.down.stop="focusSuggestion(index + 1)">
-                      {{ suggestion.name }}
-                  </div>
-                </div>
-              </transition>
-          <input id="cancel-search" type="button" class="button" @click.prevent="toggleOpen" :value="$t('address.cancel')">
+             <Autocomplete
+              :items="autosuggestions"
+              v-model="item"
+              @update-items="updateItems"
+              @item-selected="setLocation"
+              :get-label="getLabel"
+              :component-item="template"
+              :auto-select-one-item="false"
+              ref='search'
+              :input-attrs="{
+                placeholder: $t('address.placeholder'),
+                id: 'address',
+              }" />
+          <input id="cancel-search"
+            type="button"
+            class="button"
+            @click.prevent="toggleOpen"
+            :value="$t('address.cancel')">
         </div>
-      </form>
+      </div>
     </transition>
   </div>
 </template>
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
 import { encodeUrlTitle } from '@/helpers';
 import { getAutosuggestions } from '@/bingMaps';
+import Autocomplete from 'v-autocomplete';
 
 export default {
+  components: { Autocomplete },
   data() {
     return {
-      query: '',
       autosuggestions: [],
+      item: null,
     };
   },
   computed: {
@@ -66,74 +65,52 @@ export default {
     hideUnitSelection() {
       return this.$t('units.hide-selection') === 'true';
     },
+    template() {
+      return Vue.component('autosuggestion', {
+        props: ['item'],
+        template: '<span>{{ item.name }}</span>',
+      });
+    },
   },
   methods: {
-    setLocation(data) {
-      console.log(data);
-
+    setLocation() {
+      this.autosuggestions = [];
       this.$router.push({
         name: 'location',
         params: {
-          latitude: `${data.point.coordinates[0]}`,
-          longitude: `${data.point.coordinates[1]}`,
-          title: encodeUrlTitle(data.address.formattedAddress),
+          latitude: `${this.item.point.coordinates[0]}`,
+          longitude: `${this.item.point.coordinates[1]}`,
+          title: encodeUrlTitle(this.item.address.formattedAddress),
         },
       });
     },
-    moveCursorToEnd(el) {
-      if (typeof el.selectionStart === 'number') {
-        el.selectionStart = el.selectionEnd = el.value.length;
-      } else if (typeof el.createTextRange !== 'undefined') {
-        el.focus();
-        const range = el.createTextRange();
-        range.collapse(false);
-        range.select();
-      }
+    getLabel(item) {
+      return item.name;
     },
-    focusSuggestion(index) {
-      if (typeof index === 'number') {
-        if (index === -1) {
-          this.$refs.search.focus();
-          this.moveCursorToEnd(this.$refs.search);
-        } else if (index < this.autosuggestions.length) {
-          this.focusIndex = index;
-          this.$refs.suggestions.children[index].focus();
-        } else {
-          this.focusIndex = null;
-        }
-      }
-    },
-    getSuggestions(force = false) {
-      const searchQuery = this.query;
-      if (searchQuery.length > 4 || force) {
-        getAutosuggestions({
-          query: searchQuery,
-          latitude: this.$store.state.location.latitude,
-          longitude: this.$store.state.location.longitude,
-          accuracy: this.$store.state.location.accuracy,
-        }).then((results) => {
-          const firstResult = results[0];
-          // on return accept a high confidence result, otherwise show options
-          if (force && firstResult.confidence === 'High') {
-            this.setLocation(firstResult);
-          } else if (this.query === searchQuery) {
-            this.autosuggestions = results;
-          }
-        });
-      } else {
+    updateItems(query) {
+      if (query.length < 3) {
         this.autosuggestions = [];
+        return;
       }
+      getAutosuggestions({
+        query,
+        latitude: this.$store.state.location.latitude,
+        longitude: this.$store.state.location.longitude,
+        accuracy: this.$store.state.location.accuracy,
+      }).then((results) => {
+        this.autosuggestions = results;
+      });
     },
     toggleOpen() {
-      this.$store.dispatch('setLocationOpen', !this.setLocationOpen);
+      this.$store.dispatch('setLocationOpen', !this.setLocationOpen)
+        .then(() => {
+          if (this.setLocationOpen) {
+            document.getElementById('address').focus();
+          }
+        });
     },
     toggleUnits() {
       this.$store.dispatch('setUseFeet', !this.useFeet);
-    },
-  },
-  watch: {
-    query() {
-      this.getSuggestions();
     },
   },
 };

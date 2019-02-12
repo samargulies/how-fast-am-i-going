@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="section section--atlas">
-      <h1 class="section__title">Snowfall Guide: Atlas</h1>
+      <h1 class="section__title">What is my elevation: Atlas</h1>
       <div v-for="state in states" :key="state" class="state">
         <h2 class="state__name">{{state}}</h2>
         <div class="state__cities">
@@ -25,7 +25,7 @@
 import '@/assets/css/style.scss';
 import TheFooter from '@/components/TheFooter.vue';
 import cities from '@/data/cities.json';
-import { parseUrlTitle } from '@/helpers';
+import { encodeUrlTitle } from '@/helpers';
 
 export default {
   components: { TheFooter },
@@ -44,7 +44,7 @@ export default {
       return this.cities.filter(city => city.state === state).sort();
     },
     cityNameUrl(city) {
-      return parseUrlTitle(`${city.city}, ${city.state}`);
+      return encodeUrlTitle(`${city.city}, ${city.state}`);
     },
   },
 };

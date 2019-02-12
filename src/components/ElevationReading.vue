@@ -10,17 +10,17 @@
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>
       <div class="metadata">
-        <div id="elevation-source">
+        <div id="elevation-source" v-if="supportsElevation">
           <div class="source--phone" v-if="elevation.source === 'phone'">
             <span>{{ $t('source.phone.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--web">
-              {{ $t('source.phone.toggle') }}
+              {{ $t('source.web.toggle') }}
             </a>
           </div>
           <div class="source--web" v-else>
             <span>{{ $t('source.web.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--phone">
-              {{ $t('source.web.toggle') }}
+              {{ $t('source.phone.toggle') }}
             </a>
           </div>
         </div>
@@ -39,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['useFeet', 'elevation', 'loading']),
+    ...mapState(['useFeet', 'elevation', 'loading', 'supportsElevation']),
     displayElevation() {
       const { value } = this.elevation;
       const elevation = round(this.useFeet ? metersToFeet(value) : value, 0);
@@ -51,7 +51,14 @@ export default {
   },
   methods: {
     toggleSource() {
-
+      if (!this.supportsElevation) {
+        return;
+      }
+      if (this.elevation.source === 'phone') {
+        this.$store.dispatch('getUserLocation');
+      } else {
+        this.$store.dispatch('fetchElevation');
+      }
     },
   },
 };
