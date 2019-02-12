@@ -1,0 +1,31 @@
+{
+	"site-title": "Qual è la mia altitudine?",
+	"site-description": "Trova l'altitudine della tua posizione attuale o di qualsiasi punto della Terra.",
+	"site-mobile-app-title": "Altitudine",
+	"source": {
+		"web": {
+			"description": "Da internet",
+			"toggle": "Usa internet"
+		},
+		"phone": {
+			"description": "Dal tuo smartphone",
+			"toggle": "Usa smartphone"
+		}
+	},
+	"units": {
+    	"feet-default": "false",
+		"hide-selection": "true",
+		"feet": "ft",
+		"meters": "m"
+	},
+	"location-format": "{value} {units}",
+	"change-location": "Cambia posizione",
+	"address": {
+		"label": "Posizione",
+		"placeholder": "Inserisci posizione",
+		"cancel": "Annulla"
+	},
+	"sponsored-by": "Sponsorizzato da",
+	"brought-to-you-by": "Offerto da <a href='http://belabor.org/'>belabor.org</a>",
+	"hide-altimeters": "true"
+}

@@ -1,0 +1,31 @@
+{
+	"site-title": "На какой высоте я нахожусь?",
+	"site-description": "Найдите высоту вашего текущего местоположения или любой точки Земли",
+	"site-mobile-app-title": "высоты",
+	"source": {
+		"web": {
+			"description": "Согласно данным из Интернета",
+			"toggle": "Использовать Интернет"
+		},
+		"phone": {
+			"description": "Согласно данным вашего телефона",
+			"toggle": "Использовать телефон"
+		}
+	},
+	"units": {
+        "feet-default": "false",
+		"hide-selection": "true",
+		"feet": "feet",
+		"meters": "м"
+	},
+	"location-format": "{value} {units}",
+	"change-location": "Изменить местоположение",
+	"address": {
+		"label": "Местоположение",
+		"placeholder": "Введите свое местоположение",
+		"cancel": "Отменить"
+	},
+	"sponsored-by": "При поддержке",
+	"brought-to-you-by": "Создано <a href='http://belabor.org/'>belabor.org</a>",
+	"hide-altimeters": "true"
+}

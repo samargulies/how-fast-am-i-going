@@ -1,0 +1,31 @@
+{
+	"site-title": "現在地の標高は？",
+	"site-description": "あなたが今いる場所、または地球上のあらゆる地点の標高を確認しましょう",
+	"site-mobile-app-title": "Elevation",
+	"source": {
+		"web": {
+			"description": "Web情報によれば",
+			"toggle": "Webを利用する"
+		},
+		"phone": {
+			"description": "あなたのスマホによれば",
+			"toggle": "スマホを利用する"
+		}
+	},
+	"units": {
+    	"feet-default": "false",
+		"hide-selection": "true",
+		"feet": "ft",
+		"meters": "m"
+	},
+	"location-format": "{value} {units}",
+	"change-location": "場所を変更する",
+	"address": {
+		"label": "場所",
+		"placeholder": "住所か地名を入力（例：千代田区）",
+		"cancel": "キャンセル"
+	},
+	"sponsored-by": "スポンサーは",
+	"brought-to-you-by": "<a href='http://belabor.org/'>belabor.org</a>の提供です",
+	"hide-altimeters": "true"
+}

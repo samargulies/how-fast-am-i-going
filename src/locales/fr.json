@@ -1,0 +1,31 @@
+{
+	"site-title": "À quelle altitude est-ce que je me trouve?",
+	"site-description": "Déterminez l'altitude à laquelle vous vous trouvez, ou l'altitude de n'importe quel point sur Terre.",
+	"site-mobile-app-title": "Altitude",
+	"source": {
+		"web": {
+			"description": "Selon internet",
+			"toggle": "Utiliser internet"
+		},
+		"phone": {
+			"description": "Selon votre téléphone",
+			"toggle": "Utiliser votre téléphone"
+		}
+	},
+	"units": {
+		"feet-default": "false",
+		"hide-selection": "true",
+		"feet": "ft",
+		"meters": "m"
+	},
+	"location-format": "{value} {units}",
+	"change-location": "Changer la localisation",
+	"address": {
+		"label": "Localisation",
+		"placeholder": "Entrez votre localisation",
+		"cancel": "Annuler"
+	},
+	"sponsored-by": "Sponsorisé par",
+	"brought-to-you-by": "Fourni par <a href='http://belabor.org/'>belabor.org</a>",
+	"hide-altimeters": "true"
+}

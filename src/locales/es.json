@@ -1,0 +1,31 @@
+{
+	"site-title": "¿Cuál es mi elevación?",
+	"site-description": "Encuentre la elevación de su actual posición, o de cualquier punto de la tierra.",
+	"site-mobile-app-title": "Elevación",
+	"source": {
+		"web": {
+			"description": "Según la red",
+			"toggle": "Utilice la red"
+		},
+		"phone": {
+			"description": "Según su celular",
+			"toggle": "Utilice el celular"
+		}
+	},
+	"units": {
+    	"feet-default": "false",
+		"hide-selection": "true",
+		"feet": "ft",
+		"meters": "m"
+	},
+	"location-format": "{value} {units}",
+	"change-location": "Cambie la ubicación",
+	"address": {
+		"label": "Ubicación",
+		"placeholder": "Introduzca su ubicación",
+		"cancel": "Cancelar"
+	},
+	"sponsored-by": "Patrocinado por",
+	"brought-to-you-by": "Presentado para ti por <a href='http://belabor.org/'>belabor.org</a>",
+	"hide-altimeters": "true"
+}

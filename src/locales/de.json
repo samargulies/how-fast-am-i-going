@@ -1,0 +1,31 @@
+{
+	"site-title": "Was ist meine Höhenlage?",
+	"site-description": "Wie hoch bin ich über Normal-Null? Finde die Höhenlage deines derzeitigen Standorts oder jedes Punktes auf der Erde.",
+	"site-mobile-app-title": "Höhenlage",
+	"source": {
+		"web": {
+			"description": "Laut des Internets",
+			"toggle": "Internet benutzen"
+		},
+		"phone": {
+			"description": "Laut deines Telefons",
+			"toggle": "Telefon benutzen"
+		}
+	},
+	"units": {
+    	"feet-default": "false",
+		"hide-selection": "true",
+		"feet": "ft",
+		"meters": "m"
+	},
+	"location-format": "{value} {units}",
+	"change-location": "Standort ändern",
+	"address": {
+		"label": "Standort",
+		"placeholder": "Deinen Standort eingeben",
+		"cancel": "Abbrechen"
+	},
+	"sponsored-by": "Gesponsert von",
+	"brought-to-you-by": "Für dich präsentiert von <a href='http://belabor.org/'>belabor.org</a>",
+	"hide-altimeters": "true"
+}
