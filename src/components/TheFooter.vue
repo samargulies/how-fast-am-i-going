@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <div class="section altimeter-section">
-    <h2 data-t="sponsored-by">{{ $t('sponsored-by') }}</h2>
+    <!-- <h2>{{ $t('sponsored-by') }}</h2> -->
     <p class="subheading"></p>
 
     <div class="altimeters altimeters--sponsored">

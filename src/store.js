@@ -37,6 +37,7 @@ export default new Vuex.Store({
           elevation: location.coords.altitude,
           source: 'phone',
         });
+        dispatch('setLoading', false);
       } else if (state.location.latitude !== previousLocation.latitude
         || state.location.longitude !== previousLocation.longitude) {
         dispatch('fetchElevation');
