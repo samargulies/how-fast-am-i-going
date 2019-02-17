@@ -34,12 +34,13 @@
               :input-attrs="{
                 placeholder: $t('address.placeholder'),
                 id: 'address',
+                autocomplete: 'off'
               }" />
-          <input id="cancel-search"
-            type="button"
+          <a id="cancel-search"
             class="button"
-            @click.prevent="toggleOpen"
-            :value="$t('address.cancel')">
+            @click.prevent="toggleOpen">
+            {{ $t('address.cancel') }}
+          </a>
         </div>
       </div>
     </transition>

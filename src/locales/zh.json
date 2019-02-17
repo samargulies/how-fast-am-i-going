@@ -26,6 +26,6 @@
 		"cancel": "キャンセル"
 	},
 	"sponsored-by": "スポンサーは",
-	"brought-to-you-by": "<a href='http://belabor.org/'>belabor.org</a>の提供です",
+	"brought-to-you-by": "{0}の提供です",
 	"hide-altimeters": "true"
 }

@@ -6,17 +6,26 @@ body {
 	background: #FFFEF2;
 	font-size: 16px;
 	line-height: 1.4;
-  	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	text-align: center;
+	max-width: 50rem;
+	margin: 0 auto;
 }
 
 h1,
 h2,
 h3,
-.subheading {
+.subheading,
+h1 a {
 	font-size: 1.5rem;
 	color: #FC7A24;
 	margin: 0 0 1em;
+	text-decoration: none;
+}
+
+h1 a:hover,
+h1 a:focus {
+	color: #999;
 }
 
 h2 {
@@ -32,7 +41,16 @@ h3 {
 	font-size: 1.25rem;
 }
 
-/*  */
+a {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+
+	&:hover, &:focus {
+			color: #FC7A24;
+	}
+}
 
 #elevation,
 .metadata {
@@ -41,25 +59,21 @@ h3 {
 }
 
 #location-prompt {
-	padding: 10px 0;
-    text-align: center;
-    font-size: 1.5em;
-    margin-bottom: 1.5rem;
-
-
-	.address-container {
-		margin: 0 auto;
-	}
 
 	.address-search {
-		margin: 0 auto;
-		width: 10em;
-		max-width: 80%;
+		margin: 2em 0;
+		display: flex;
+		justify-content: center;
+    align-items: flex-start;
+		text-align: center;
 	}
 
 	#address {
-		border: 3px solid #ccc;
-		width: 100%;
+		font-size: 1.5em;
+		font-size: 1.25rem;
+		padding: 0.25em 0.5em;
+		width: 17em;
+		border: 2px solid #ccc;
 		padding: 4px 8px;
 		&:focus, &:active {
 			border-color: #999
@@ -233,16 +247,6 @@ h3 {
 	cursor: pointer;
 }
 
-/*
-#choose-units {
-	display: none;
-}
-
-.elevation__active #choose-units {
-	display: unset;
-}
-*/
-
 #choose-units .units {
 	color: #999;	
 	transition: background .5s ease, color .5s ease;
@@ -257,10 +261,8 @@ h3 {
 	color: #666;
 }
 
-.altimeter-section {
-	margin-top: 3em;
-    padding-top: 3em;
-    border-top: 1px solid #aaa;
+.section {
+	margin-bottom: 4em;
 }
 
 .altimeters {
@@ -292,7 +294,7 @@ h3 {
 }
 
 .altimeter a {
-    padding: 1em;
+  padding: 1em;
 	text-decoration: none;
 	color: #000;
 	display: block;
@@ -328,8 +330,11 @@ h3 {
 }
 
 .languages a {
-    color: #888;
-    text-decoration: none;
+		color: #888;
+		
+		&:hover, &:active {
+			color: #FC7A24;
+		}
 }
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
@@ -343,10 +348,40 @@ h3 {
 .clearfix { zoom: 1; }
 
 .section--atlas {
+
+	max-width: 80rem;
+	margin: 0 auto;
+
+	.country {
+    margin: 2em 0;
+	}
+	.states {
+		display: grid;
+		grid-auto-flow: row dense;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+		justify-content: center;
+		grid-gap: 2rem;
+	}
+	h3.state__name {
+		font-size: 1em;
+		color: black;
+		margin: 2em 0 1em;
+	}
+	.no-states {
+		width: 50rem;
+		max-width: 100%;
+		margin: 0 auto;
+	}
 	.city {
-			display: inline-block;
+			display: inline;
 			padding: 0 0.25em;
-			line-height: 1.4;
+			line-height: 1.6;
+			div {
+				display: inline;
+			}
+	}
+	a {
+		color: #999;
 	}
 }
 

@@ -26,6 +26,6 @@
 		"cancel": "Annuler"
 	},
 	"sponsored-by": "Sponsorisé par",
-	"brought-to-you-by": "Fourni par <a href='http://belabor.org/'>belabor.org</a>",
+	"brought-to-you-by": "Fourni par {0}",
 	"hide-altimeters": "true"
 }

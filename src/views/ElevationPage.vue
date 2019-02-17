@@ -1,11 +1,15 @@
 <template>
-  <div class="elevation-page">
+  <div :class="[online ? 'online' : 'offline','elevation-page']">
     <div class="ad">
         <Adsense
         ad-client="ca-pub-6102117487539042"
         ad-slot="6966721074" />
     </div>
-    <h1>{{ $t('site-title') }}</h1>
+    <h1>
+      <router-link :to="{name: 'home'}">
+        {{ $t('site-title') }}
+      </router-link>
+    </h1>
     <ElevationReading />
     <SetLocation />
     <TheFooter/>
@@ -31,6 +35,11 @@ export default {
     latitude: { type: String },
     longitude: { type: String },
   },
+  data() {
+    return {
+      online: navigator.onLine,
+    };
+  },
   methods: {
     updateLocation() {
       console.log('updateLocation');
@@ -43,6 +52,9 @@ export default {
       });
       this.$store.dispatch('fetchElevation');
     },
+    updateOnlineStatus() {
+      this.online = navigator.onLine;
+    },
   },
   created() {
     this.$store.dispatch('setUseFeet', this.$t('units.feet-default') === 'true');
@@ -51,6 +63,8 @@ export default {
     } else {
       this.$store.dispatch('getUserLocation');
     }
+    window.addEventListener('online', this.updateOnlineStatus);
+    window.addEventListener('offline', this.updateOnlineStatus);
   },
   watch: {
     longitude() {

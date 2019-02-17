@@ -1,16 +1,17 @@
+import punycode from 'punycode';
 
 export function parseUrlTitle(text) {
   if (!text) {
     return text;
   }
-  return text.replace(/--/g, ', ').replace(/-/g, ' ');
+  return punycode.decode(text).replace(/--/g, ', ').replace(/-/g, ' ');
 }
 
 export function encodeUrlTitle(text) {
   if (!text) {
     return text;
   }
-  return text.replace(/, /g, '--').replace(/\W/g, '-');
+  return punycode.encode(text).replace(/,\W/g, '--').replace(/\W/g, '-');
 }
 
 export function metersToFeet(meters) {

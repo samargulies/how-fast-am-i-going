@@ -5,7 +5,7 @@
       <div class="double-bounce2"></div>
     </div>
     <div v-else>
-      <i18n path="location-format" tag="div" id="elevation">
+      <i18n path="location-format" tag="div" id="elevation" v-if="elevation.value">
         <span place="value">{{ displayElevation }}</span>
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>

@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import ElevationPage from './views/ElevationPage.vue';
-import AtlasPage from './views/AtlasPage.vue';
 import i18n from '@/i18n';
+
+const AtlasPage = () => import('./views/AtlasPage.vue');
 
 Vue.use(Router);
 
@@ -19,7 +20,7 @@ const router = new Router({
     //   redirect: to => `/${to.params.pathMatch}`,
     // },
     {
-      path: '/:lang?',
+      path: '/:lang(\\w{2})?',
       component: {
         template: '<router-view />',
       },
@@ -46,9 +47,19 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const lang = to.params.lang || 'en';
+  const lang = to.params.lang || process.env.VUE_APP_I18N_LOCALE;
   i18n.locale = lang;
   next();
+});
+
+router.afterEach(() => {
+  document.title = i18n.t('site-title');
+  document.head.querySelector('meta[property="og:title"]')
+    .setAttribute('content', i18n.t('site-title'));
+  document.head.querySelector('meta[name="description"]')
+    .setAttribute('content', i18n.t('site-description'));
+  document.head.querySelector('meta[property="og:description"]')
+    .setAttribute('content', i18n.t('site-description'));
 });
 
 export default router;
