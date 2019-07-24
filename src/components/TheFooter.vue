@@ -32,12 +32,13 @@
   <div class="section section--about">
     <h2 class="section__title">What is this?</h2>
     <p>
-      Find the elevation of your current location, or any point on Earth.
+      This site was designed to help you find the elevation of your current location, or any point on Earth.
       When viewed from a phone that supports elevation readings,
       the reading will come directly from your device altitude reading and will update
       automatically as you move. It will even work when your phone is offline.
-      From a computer your elevation is loaded from the internet based on your location.
+      From a computer your elevation is loaded from our API based on your location.
     </p>
+    <p><router-link :to="pathForLocale({path: '/api'})">Powered by the What is My Elevation API</router-link></p>
     <i18n path="brought-to-you-by" tag="p">
       <a href="https://belabor.org/">belabor.org</a>
     </i18n>
@@ -47,6 +48,7 @@
       <ul>
         <li><router-link :to="pathForLocale({path: '/'})">Home</router-link></li>
         <li><router-link :to="pathForLocale({path: '/atlas'})">Atlas</router-link></li>
+        <li><router-link :to="pathForLocale({path: '/api'})">API</router-link></li>
         <li><a href="https://snowfall.guide/">Snowfall Guide</a></li>
       </ul>
     </nav>

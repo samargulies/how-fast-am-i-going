@@ -4,6 +4,7 @@ import ElevationPage from './views/ElevationPage.vue';
 import i18n from '@/i18n';
 
 const AtlasPage = () => import('./views/AtlasPage.vue');
+const ApiPage = () => import('./views/ApiPage.vue');
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ const router = new Router({
           path: 'atlas',
           name: 'atlas',
           component: AtlasPage,
+        },
+        {
+          path: 'api',
+          name: 'api',
+          component: ApiPage,
         },
       ],
     },
