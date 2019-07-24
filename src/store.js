@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { getElevation } from '@/bingMaps';
+import * as api from '@/bingMaps';
+// import api from '@/api';
 
 Vue.use(Vuex);
 
@@ -15,9 +16,14 @@ export default new Vuex.Store({
     watchId: null,
   },
   actions: {
-    getUserLocation({ commit, dispatch }) {
+    getUserLocation({ state, commit, dispatch }) {
       const watchId = navigator.geolocation.watchPosition(
-        location => dispatch('setUserLocation', location),
+        (location) => {
+          // only update location if the watch is still active
+          if (state.watchId) {
+            dispatch('setUserLocation', location);
+          }
+        },
         error => dispatch('locationError', error),
         { enableHighAccuracy: true },
       );
@@ -60,7 +66,7 @@ export default new Vuex.Store({
       console.log('fetchElevation');
       dispatch('stopWatchingUserLocation');
       dispatch('setLoading', true);
-      return getElevation({
+      return api.getElevation({
         latitude: state.location.latitude,
         longitude: state.location.longitude,
       }).then((elevation) => {
