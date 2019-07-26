@@ -50,6 +50,7 @@
         <li><router-link :to="pathForLocale({path: '/atlas'})">Atlas</router-link></li>
         <li><router-link :to="pathForLocale({path: '/api'})">API</router-link></li>
         <li><a href="https://snowfall.guide/">Snowfall Guide</a></li>
+        <li><a href="http://visited.earth/">Visited Earth</a></li>
       </ul>
     </nav>
   </div>
