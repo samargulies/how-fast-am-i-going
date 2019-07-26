@@ -50,7 +50,9 @@ export default {
         longitude: parseFloat(this.longitude),
         title,
       });
-      this.$store.dispatch('fetchElevation');
+      this.$store.dispatch('fetchElevation').then(() => {
+        this.$store.dispatch('setLocationOpen', false);
+      });
     },
     updateOnlineStatus() {
       this.online = navigator.onLine;

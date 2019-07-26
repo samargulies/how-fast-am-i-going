@@ -72,7 +72,6 @@ export default new Vuex.Store({
       }).then((elevation) => {
         dispatch('updateElevation', { elevation, source: 'web' });
         dispatch('setLoading', false);
-        dispatch('setLocationOpen', false);
       }).catch((error) => {
         console.warn(error);
         dispatch('setLocationOpen', true);
