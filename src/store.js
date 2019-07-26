@@ -29,7 +29,7 @@ export default new Vuex.Store({
       );
       commit('setItem', { item: 'watchId', value: watchId });
     },
-    setUserLocation({ state, dispatch }, location) {
+    setUserLocation({ state, dispatch, commit }, location) {
       console.log('setUserLocation', { location });
       const previousLocation = state.location;
       dispatch('updateLocation', {
@@ -38,7 +38,7 @@ export default new Vuex.Store({
         accuracy: location.coords.accuracy,
       });
       if (location.coords.altitude) {
-        dispatch('updateSupportsElevation', true);
+        commit('setSupportsElevation', true);
         dispatch('updateElevation', {
           elevation: location.coords.altitude,
           source: 'phone',
