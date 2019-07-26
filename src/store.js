@@ -65,11 +65,18 @@ export default new Vuex.Store({
       }
       console.log('fetchElevation');
       dispatch('stopWatchingUserLocation');
-      dispatch('setLoading', true);
+      let loaded = false;
+      // delay showing the loading animation in case the response is super fast
+      setTimeout(() => {
+        if (!loaded) {
+          dispatch('setLoading', true);
+        }
+      }, 200);
       return api.getElevation({
         latitude: state.location.latitude,
         longitude: state.location.longitude,
       }).then((elevation) => {
+        loaded = true;
         dispatch('updateElevation', { elevation, source: 'web' });
         dispatch('setLoading', false);
       }).catch((error) => {
