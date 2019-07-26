@@ -55,9 +55,10 @@ export default {
         return;
       }
       if (this.elevation.source === 'phone') {
-        this.$store.dispatch('getUserLocation');
-      } else {
         this.$store.dispatch('fetchElevation');
+
+      } else {
+        this.$store.dispatch('getUserLocation');
       }
     },
   },
