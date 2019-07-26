@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="58px" height="48px" viewBox="0 0 58 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>Browserpin</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Browserpin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g transform="translate(1.000000, 1.000000)" stroke="#535353" stroke-width="2">
+            <rect id="Rectangle-435" x="0" y="8" width="56" height="38"></rect>
+            <rect id="Rectangle-436" fill="#FFD6BB" fill-rule="nonzero" x="0" y="0" width="56" height="8"></rect>
+            <circle id="Oval-475" cx="4" cy="4" r="1"></circle>
+            <circle id="Oval-476" cx="9" cy="4" r="1"></circle>
+            <circle id="Oval-477" cx="14" cy="4" r="1"></circle>
+            <path d="M28,39 C27.9705627,39 37,28.9705627 37,24 C37,19.0294373 32.9705627,15 28,15 C23.0294373,15 19,19.0294373 19,24 C19,28.9705627 28.0294373,39 28,39 Z M28,26 C29.6568542,26 31,24.6568542 31,23 C31,21.3431458 29.6568542,20 28,20 C26.3431458,20 25,21.3431458 25,23 C25,24.6568542 26.3431458,26 28,26 Z" id="Oval-483" fill="#FFD6BB" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>
