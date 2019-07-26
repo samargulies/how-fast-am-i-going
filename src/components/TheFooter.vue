@@ -29,7 +29,7 @@
     </ul>
   </div>
 
-  <div class="section section--about">
+  <div class="section section--about" v-if="includeAbout">
     <h2 class="section__title">What is this?</h2>
     <p>
       This site was designed to help you find the elevation of your current location, or any point on Earth.
@@ -61,6 +61,12 @@ import Adsense from '@/components/Adsense.vue';
 
 export default {
   components: { Adsense },
+  props: {
+    includeAbout: {
+      type: Boolean,
+      default: true,
+    },
+  },
   computed: {
     showAltimeters() {
       return !this.$t('hide-altimeters');

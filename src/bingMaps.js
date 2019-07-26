@@ -15,7 +15,7 @@ export function getLocation({ latitude, longitude, lang = 'en-US' }) {
         console.error(error.message);
         reject(error);
       } else {
-        console.log(data);
+        // console.log(data);
         resolve(data.resourceSets[0].resources[0].address.formattedAddress);
       }
     });
@@ -31,7 +31,7 @@ export function getElevation({ latitude, longitude }) {
         console.error(error.message);
         reject(error);
       } else {
-        console.log(data);
+        // console.log(data);
         resolve(data.resourceSets[0].resources[0].elevations[0]);
       }
     });
@@ -47,7 +47,7 @@ export function getAutosuggestions({ query, lang = 'en-US' }) {
         console.error(error.message);
         reject(error);
       } else {
-        console.log(data);
+        // console.log(data);
         resolve(data.resourceSets[0].resources);
       }
     });

@@ -76,6 +76,9 @@ export default {
   methods: {
     setLocation() {
       this.autosuggestions = [];
+      if (!this.item) {
+        return;
+      }
       this.$router.push({
         name: 'location',
         params: {

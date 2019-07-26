@@ -19,12 +19,10 @@ export default {
     },
     adFormat: {
       type: String,
-      required: false,
       default: 'auto',
     },
     adStyle: {
       type: String,
-      required: false,
       default: 'display: block',
     },
   },
