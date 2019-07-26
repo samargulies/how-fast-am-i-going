@@ -5,12 +5,12 @@
       <div class="double-bounce2"></div>
     </div>
     <div v-else>
-      <i18n path="location-format" tag="div" id="elevation" v-if="elevation.value">
+      <i18n path="location-format" tag="div" id="elevation" v-if="elevation.value !== null">
         <span place="value">{{ displayElevation }}</span>
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>
       <div class="metadata">
-        <div id="elevation-source" v-if="supportsElevation">
+        <div id="elevation-source" v-if="supportsElevation && !location.title">
           <div class="source--phone" v-if="elevation.source === 'phone'">
             <span>{{ $t('source.phone.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--web">
@@ -39,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['useFeet', 'elevation', 'loading', 'supportsElevation']),
+    ...mapState(['useFeet', 'elevation', 'loading', 'supportsElevation', 'location']),
     displayElevation() {
       const { value } = this.elevation;
       const elevation = round(this.useFeet ? metersToFeet(value) : value, 0);
