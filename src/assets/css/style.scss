@@ -208,6 +208,7 @@ a {
 #elevation {
 	font-size: 95px;
 	font-family: var(--clarendon);
+	font-display: auto;
 	line-height: 1;
 	text-align: center;
 }
@@ -424,13 +425,15 @@ a {
 
 		.section__title {
 			font-family: var(--clarendon);
+			font-display: auto;
 			font-size: 2.5rem;
+			line-height: 1.2;
 			font-weight: 500;
 			color: black;
 		}
 	}
 	.text-block {
-		width: 25rem;
+		max-width: 25rem;
 		margin: 0 auto;
 		text-align: left;
 	}
@@ -484,6 +487,9 @@ a {
 }
 
 @media (max-width: 30rem) {
+	.page--api .section--api-intro .section__title {
+    font-size: 1.6rem;
+}
 	.section--features {
 		grid-template-columns: 1fr;
 	}

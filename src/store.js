@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import * as api from '@/bingMaps';
-// import api from '@/api';
+// import * as api from '@/bingMaps';
+import api from '@/api';
 
 Vue.use(Vuex);
 
