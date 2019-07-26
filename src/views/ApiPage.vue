@@ -1,7 +1,7 @@
 <template>
   <div class="main page--api">
     <div class="section">
-      <h1 class="section__title">What is my elevation <span class="api">API</span></h1>
+      <h1 class="section__title">What is my elevation <span class="subpage">API</span></h1>
 
         <div class="section section--api-intro">
           <img src="/img/globe.svg" />
