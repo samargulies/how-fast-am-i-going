@@ -128,7 +128,8 @@ a {
 .offline #change-location,
 .offline #toggle-web-elevation,
 .offline #location-prompt,
-.offline .altimeter-section {
+.offline .altimeter-section,
+.offline .section--navigation {
 	display: none;
 }
 
@@ -485,6 +486,9 @@ a {
 }
 
 @media (max-width: 30rem) {
+	.settings {
+		font-size: 1.375em;
+	}
 	.page--api .section--api-intro .section__title {
     font-size: 1.6rem;
 }
