@@ -10,9 +10,9 @@
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>
       <div class="metadata">
-        <div class="watching" v-if="watchId && Number.isFinite(elevation.value)">
+        <!-- <div class="watching" v-if="watchId && Number.isFinite(elevation.value)">
           Watching for updates
-        </div>
+        </div> -->
         <div id="elevation-source" v-if="supportsElevation && !location.title">
           <div class="source source--phone" v-if="elevation.source === 'phone'">
             <span class="accuracy" v-if="Number.isFinite(elevation.accuracy)">
