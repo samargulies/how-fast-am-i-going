@@ -10,6 +10,7 @@
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>
       <div class="metadata">
+        <div class="watching" v-if="watchId">Watching for updates</div>
         <div id="elevation-source" v-if="supportsElevation && !location.title">
           <div class="source source--phone" v-if="elevation.source === 'phone'">
             <span>{{ $t('source.phone.description') }}</span>
@@ -24,7 +25,6 @@
             </a>
           </div>
         </div>
-        <div class="watching" v-if="watchId">Watching for updates</div>
       </div>
     </div>
   </div>
