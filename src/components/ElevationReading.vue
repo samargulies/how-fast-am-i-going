@@ -15,10 +15,10 @@
         </div>
         <div id="elevation-source" v-if="supportsElevation && !location.title">
           <div class="source source--phone" v-if="elevation.source === 'phone'">
-            <span>{{ $t('source.phone.description') }}</span>
             <span class="accuracy" v-if="Number.isFinite(elevation.accuracy)">
               ± {{elevationAccuracy}} {{ $t(useFeet ? 'units.feet' : 'units.meters') }}
             </span>
+            <span>{{ $t('source.phone.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--web">
               {{ $t('source.web.toggle') }}
             </a>
