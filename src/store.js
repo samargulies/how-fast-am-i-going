@@ -45,7 +45,7 @@ export default new Vuex.Store({
         commit('setElevation', {
           elevation: location.coords.altitude,
           source: 'phone',
-          accuracy: location.altitudeAccuracy,
+          accuracy: location.coords.altitudeAccuracy,
         });
         dispatch('setLoading', false);
       } else if (state.location.latitude !== previousLocation.latitude
