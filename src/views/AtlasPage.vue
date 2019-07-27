@@ -28,7 +28,7 @@
         <div v-else class="cities no-states">
           <div v-for="(cities, state) in states" :key="state" class="city">
             <div v-for="city in cities"
-              :key="`${city.lat}${city.lng}`">
+              :key="`${city.city}${city.lat}${city.lng}`">
                 <router-link :to="{name: 'location', params: {
                     latitude: `${city.lat}`,
                     longitude: `${city.lng}`,

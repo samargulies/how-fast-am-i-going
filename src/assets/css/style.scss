@@ -5,11 +5,22 @@
 :root {
 	--clarendon: "clarendon-text-pro", "Superclarendon-Regular", "Rockwell", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	--system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	--background: #FFFEF2;
+	--text: #000;
+	--brand: #FC7A24;
+	--loader: #333;
+	--dark-grey: #444;
+	--light-grey: #888;
+	--link: #000;
+	--dilute-brand: #FFD6BB;
+	--autocomplete-background: #fff;
+	--autocomplete-border: #aaa;
+	--autocomplete-active-background: #eee;
 }
 
-
 body {
-	background: #FFFEF2;
+	background: var(--background);
+	color: var(--text);
 	font-size: 16px;
 	line-height: 1.4;
   font-family: var(--system);
@@ -26,7 +37,7 @@ h3,
 .subheading,
 h1 a {
 	font-size: 1.5rem;
-	color: #FC7A24;
+	color: var(--brand);
 	margin: 0 0 1em;
 	text-decoration: none;
 }
@@ -49,7 +60,7 @@ h3 {
 }
 
 .section__title .subpage {
-	color: black;
+	color: color(--text);
 }
 
 .subheading {
@@ -58,13 +69,13 @@ h3 {
 }
 
 a {
-	color: black;
+	color: var(--link);
 	font-weight: bold;
 	text-decoration: none;
 	cursor: pointer;
 
 	&:hover, &:focus {
-			color: #FC7A24;
+			color: var(--brand);
 	}
 }
 
@@ -89,7 +100,6 @@ a {
 		font-size: 1.25rem;
 		padding: 0.25em 0.5em;
 		border: 2px solid #ccc;
-		padding: 4px 8px;
 		width: 100%;
 		&:focus, &:active {
 			border-color: #999
@@ -107,7 +117,7 @@ a {
 	}
 
 	.v-autocomplete-list {
-		border: 2px solid #aaa;
+		border: 2px solid var(--autocomplete-border);
 		border-top: 0;
 	}
 
@@ -116,23 +126,15 @@ a {
 		text-align: left;
 		padding: 4px 8px;
 		cursor:pointer;
-		background: #fff;
+		color: var(--text);
+		background: var(--autocomplete-background);
 
 		&:hover, &:focus, &.v-autocomplete-item-active {
-			background: #eee;
+			background: var(--autocomplete-active-background);
 			cursor: pointer;
 		}
 	}
 }
-
-.offline #change-location,
-.offline #toggle-web-elevation,
-.offline #location-prompt,
-.offline .altimeter-section,
-.offline .section--navigation {
-	display: none;
-}
-
 
 .map-container {
 	display: none;
@@ -164,7 +166,7 @@ a {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #333;
+  background-color: var(--loader);
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -203,13 +205,13 @@ a {
 	margin-bottom: 1rem;
 	font-weight: 400;
 	font-size: 1.375rem;
-	color: #444;
+	color: var(--dark-grey);
 }
 
 #location .value {
 	font-size: 2rem;
-    font-weight: 300;
-    line-height: 1.4;
+  font-weight: 300;
+  line-height: 1.4;
 }
 
 #location .coordinates {
@@ -232,7 +234,7 @@ a {
 }
 .watching {
 	color: #007FFF;
-	font-size: 0.875em;
+	font-size: 0.75em;
 }
 
 .watching:before {
@@ -254,7 +256,7 @@ a {
 .button:visited {
 	white-space: nowrap;
 	text-decoration: none;
-	color: #000;
+	color: var(--text);
 	padding: 4px 8px;
 	font-weight: 600;
 }
@@ -271,7 +273,7 @@ a {
 	margin: 0 6px;
 } 
 #choose-units .units-selected {
-	color: #000;
+	color: var(--text);
 }
 
 #choose-units .units:hover,
@@ -348,22 +350,12 @@ a {
 }
 
 .languages a {
-		color: #888;
+		color: var(--light-grey);
 		
 		&:hover, &:active {
-			color: #FC7A24;
+			color: var(--brand);
 		}
 }
-
-.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
-.hidden, [data-hide="true"] { display: none; }
-.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
-.invisible { visibility: hidden; }
-.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
-.clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
 
 .section--atlas {
 
@@ -382,7 +374,7 @@ a {
 	}
 	h3.state__name {
 		font-size: 1em;
-		color: black;
+		color: var(--text);
 		margin: 2em 0 1em;
 	}
 	.no-states {
@@ -399,7 +391,7 @@ a {
 			}
 	}
 	a {
-		color: #999;
+		color: var(--light-grey);
 	}
 }
 
@@ -426,7 +418,7 @@ a {
 			font-size: 2.5rem;
 			line-height: 1.2;
 			font-weight: 500;
-			color: black;
+			color: var(--text);
 		}
 	}
 	.text-block {
@@ -436,7 +428,7 @@ a {
 	}
 	.button {
 		display: inline-block;
-		background: #FFD6BB;
+		background: var(--dilute-brand);
 		border: 2px solid #535353;
 		border-radius: 7px;
 		font-size: 1.25rem;
@@ -469,8 +461,7 @@ a {
 		font-family: var(--clarendon);
 		font-size: 1.5em;
 		font-weight: 500;
-		color: black;
-		
+		color: var(--text);
 		grid-area: title;
 	}
 	&__image {
@@ -483,15 +474,49 @@ a {
 	}
 }
 
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
 @media (max-width: 30rem) {
 	.settings {
 		font-size: 1.375em;
 	}
 	.page--api .section--api-intro .section__title {
     font-size: 1.6rem;
-	}
+	} 
 	.section--features {
 		grid-template-columns: 1fr;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #000;
+		--text: #FFFEF2;
+		--loader: #fafafa;
+		--dark-grey: var(--dilute-brand);
+		--light-grey: #eee;
+		--link: #fff;
+		--autocomplete-background: #333;
+		--autocomplete-border: #aaa;
+		--autocomplete-active-background: #666;
+	}
+	h3.state__name {
+		color: var(--dark-grey);
+	}
+	.feature__image, .section--api-intro img {
+		background-color: #fff;
+		border-radius: 1em;
+		padding: 1em;
+	}
+}
+
+.offline {
+	#change-location,
+	#toggle-web-elevation,
+	#location-prompt,
+	.altimeter-section,
+	.section--navigation {
+		display: none;
 	}
 }
 
