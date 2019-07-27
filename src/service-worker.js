@@ -7,6 +7,11 @@ if (workbox) {
   );
 
   workbox.routing.registerRoute(
+    new RegExp('https://use.typekit.net'),
+    workbox.strategies.cacheFirst(),
+  );
+
+  workbox.routing.registerRoute(
     new RegExp('https://dev.virtualearth.net'),
     workbox.strategies.networkFirst({
       cacheName: 'api-bing',
