@@ -27,7 +27,7 @@ export default new Vuex.Store({
         error => dispatch('locationError', error),
         {
           enableHighAccuracy: true,
-          timeout: 30,
+          timeout: 30 * 1000,
         },
       );
       commit('setItem', { item: 'watchId', value: watchId });
