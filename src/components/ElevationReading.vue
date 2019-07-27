@@ -11,26 +11,27 @@
       </i18n>
       <div class="metadata">
         <div id="elevation-source" v-if="supportsElevation && !location.title">
-          <div class="source--phone" v-if="elevation.source === 'phone'">
+          <div class="source source--phone" v-if="elevation.source === 'phone'">
             <span>{{ $t('source.phone.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--web">
               {{ $t('source.web.toggle') }}
             </a>
           </div>
-          <div class="source--web" v-else>
+          <div class="source source--web" v-else>
             <span>{{ $t('source.web.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--phone">
               {{ $t('source.phone.toggle') }}
             </a>
           </div>
         </div>
+        <div class="watching" v-if="watchId">Watching for updates</div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { round, metersToFeet } from '@/helpers';
 import { mapState } from 'vuex';
+import { round, metersToFeet } from '@/helpers';
 
 export default {
   data() {
@@ -39,7 +40,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['useFeet', 'elevation', 'loading', 'supportsElevation', 'location']),
+    ...mapState(['useFeet', 'elevation', 'loading', 'supportsElevation', 'location', 'watchId']),
     displayElevation() {
       const { value } = this.elevation;
       const elevation = round(this.useFeet ? metersToFeet(value) : value, 0);
@@ -56,7 +57,6 @@ export default {
       }
       if (this.elevation.source === 'phone') {
         this.$store.dispatch('fetchElevation');
-
       } else {
         this.$store.dispatch('getUserLocation');
       }
