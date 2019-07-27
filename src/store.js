@@ -32,7 +32,7 @@ export default new Vuex.Store({
       );
       commit('setItem', { item: 'watchId', value: watchId });
     },
-    setUserLocation({ state, dispatch }, location) {
+    setUserLocation({ state, dispatch, commit }, location) {
       console.log('setUserLocation', { location });
       const previousLocation = state.location;
       dispatch('updateLocation', {
@@ -42,9 +42,10 @@ export default new Vuex.Store({
       });
       if (location.coords.altitude) {
         dispatch('setSupportsElevation', true);
-        dispatch('updateElevation', {
+        commit('setElevation', {
           elevation: location.coords.altitude,
           source: 'phone',
+          accuracy: location.altitudeAccuracy,
         });
         dispatch('setLoading', false);
       } else if (state.location.latitude !== previousLocation.latitude
@@ -61,7 +62,7 @@ export default new Vuex.Store({
       navigator.geolocation.clearWatch(state.watchId);
       commit('setItem', { item: 'watchId', value: null });
     },
-    fetchElevation({ state, dispatch }) {
+    fetchElevation({ state, dispatch, commit }) {
       if (!navigator.onLine) {
         console.log('offline, not fetching elevation');
         return false;
@@ -80,7 +81,7 @@ export default new Vuex.Store({
         longitude: state.location.longitude,
       }).then((elevation) => {
         loaded = true;
-        dispatch('updateElevation', { elevation, source: 'web' });
+        commit('setElevation', { elevation, source: 'web' });
         dispatch('setLoading', false);
       }).catch((error) => {
         console.warn(error);
@@ -96,9 +97,6 @@ export default new Vuex.Store({
           latitude, longitude, accuracy, title,
         },
       });
-    },
-    updateElevation({ commit }, { elevation, source }) {
-      commit('setElevation', { elevation, source });
     },
     setLocationOpen({ commit }, isOpen) {
       commit('setItem', { item: 'setLocationOpen', value: isOpen });
@@ -118,9 +116,10 @@ export default new Vuex.Store({
     setItem(state, { item, value }) {
       Vue.set(state, item, value);
     },
-    setElevation(state, { elevation, source }) {
+    setElevation(state, { elevation, source, accuracy = null }) {
       Vue.set(state.elevation, 'value', elevation);
       Vue.set(state.elevation, 'source', source);
+      Vue.set(state.elevation, 'accuracy', accuracy);
     },
   },
 });

@@ -1,6 +1,6 @@
 <template>
   <div class="set-location">
-    <div class="metadata">
+    <div class="">
       <div id="location">
         <span class="value">{{ location.title }}</span>
         <div class="coordinates"></div>
@@ -49,9 +49,9 @@
 <script>
 import Vue from 'vue';
 import { mapState } from 'vuex';
+import Autocomplete from 'v-autocomplete';
 import { encodeUrlTitle } from '@/helpers';
 import { getAutosuggestions } from '@/bingMaps';
-import Autocomplete from 'v-autocomplete';
 
 export default {
   components: { Autocomplete },

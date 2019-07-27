@@ -10,13 +10,15 @@
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>
       <div class="metadata">
-        <div class="watching"
-          v-if="watchId && Number.isFinite(elevation.value)">
+        <div class="watching" v-if="watchId && Number.isFinite(elevation.value)">
           Watching for updates
         </div>
         <div id="elevation-source" v-if="supportsElevation && !location.title">
           <div class="source source--phone" v-if="elevation.source === 'phone'">
             <span>{{ $t('source.phone.description') }}</span>
+            <span class="accuracy" v-if="Number.isFinite(elevation.accuracy)">
+              ± {{elevationAccuracy}} {{ $t(useFeet ? 'units.feet' : 'units.meters') }}
+            </span>
             <a @click="toggleSource" class="button toggle-source--web">
               {{ $t('source.web.toggle') }}
             </a>
@@ -48,6 +50,14 @@ export default {
       const { value } = this.elevation;
       const elevation = round(this.useFeet ? metersToFeet(value) : value, 0);
       return elevation.toLocaleString(this.$t.locale, {
+        useGrouping: true,
+        maximumFractionDigits: 0,
+      });
+    },
+    elevationAccuracy() {
+      const { accuracy } = this.elevation;
+      const elevationAccuracy = round(this.useFeet ? metersToFeet(accuracy) : accuracy, 0);
+      return elevationAccuracy.toLocaleString(this.$t.locale, {
         useGrouping: true,
         maximumFractionDigits: 0,
       });
