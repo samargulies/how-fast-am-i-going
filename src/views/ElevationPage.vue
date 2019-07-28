@@ -21,14 +21,14 @@
 import { parseUrlTitle } from '@/helpers';
 import ElevationReading from '@/components/ElevationReading.vue';
 import SetLocation from '@/components/SetLocation.vue';
-import Adsense from '@/components/Adsense.vue';
+// import Adsense from '@/components/Adsense.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
 export default {
   components: {
     ElevationReading,
     SetLocation,
-    Adsense,
+    // Adsense,
     TheFooter,
   },
   props: {

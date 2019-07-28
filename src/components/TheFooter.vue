@@ -1,20 +1,5 @@
 <template>
   <div class="footer">
-    <div class="section altimeter-section">
-    <!-- <h2>{{ $t('sponsored-by') }}</h2> -->
-    <p class="subheading"></p>
-
-    <div class="altimeters altimeters--sponsored">
-
-        <div class="ad">
-          <Adsense
-            ad-client="ca-pub-6102117487539042"
-            ad-slot="1948746426" />
-        </div>
-
-    </div>
-  </div>
-
   <div class="section section--localizations">
     <ul class="languages">
       <li><router-link :to="pathForLocale({locale:'de'})">Deutsch</router-link></li>
@@ -67,11 +52,9 @@
 </div>
 </template>
 <script>
-import Adsense from '@/components/Adsense.vue';
 import config from '@/config';
 
 export default {
-  components: { Adsense },
   props: {
     includeAbout: {
       type: Boolean,
