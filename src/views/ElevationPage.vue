@@ -1,8 +1,8 @@
 <template>
   <div :class="[online ? 'online' : 'offline','elevation-page']">
-    <!-- <Adsense
+    <Adsense
       ad-client="ca-pub-6102117487539042"
-      ad-slot="6966721074" /> -->
+      ad-slot="6966721074" />
     <h1>
       <router-link :to="{name: 'home'}">
         {{ $t('site-title') }}
@@ -10,9 +10,9 @@
     </h1>
     <ElevationReading />
     <SetLocation />
-    <!-- <Adsense
+    <Adsense
       ad-client="ca-pub-6102117487539042"
-      ad-slot="1948746426" /> -->
+      ad-slot="1948746426" />
     <TheFooter/>
   </div>
 </template>
@@ -21,14 +21,14 @@
 import { parseUrlTitle } from '@/helpers';
 import ElevationReading from '@/components/ElevationReading.vue';
 import SetLocation from '@/components/SetLocation.vue';
-// import Adsense from '@/components/Adsense.vue';
+import Adsense from '@/components/Adsense.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
 export default {
   components: {
     ElevationReading,
     SetLocation,
-    // Adsense,
+    Adsense,
     TheFooter,
   },
   props: {
