@@ -21,7 +21,13 @@
     </noscript>
     <div id="app"></div>
     <% if (NODE_ENV === 'production') { %>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-6102117487539042",
+                enable_page_level_ads: true
+           });
+      </script>
     <% } %>
   </body>
 </html>
