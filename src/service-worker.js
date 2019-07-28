@@ -1,6 +1,8 @@
 if (workbox) {
   console.log('Workbox is loaded');
 
+  workbox.googleAnalytics.initialize();
+
   workbox.routing.registerRoute(
     new RegExp('/'),
     workbox.strategies.cacheFirst(),
