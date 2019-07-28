@@ -1,9 +1,12 @@
 <template>
-  <ins class="adsbygoogle"
-    :data-ad-client="adClient"
-    :data-ad-slot="adSlot"
-    :data-ad-format="adFormat"
-    :style="adStyle"></ins>
+  <div class="ad">
+    <ins class="adsbygoogle"
+      :style="adStyle"
+      :data-ad-client="adClient"
+      :data-ad-slot="adSlot"
+      :data-ad-format="adFormat"
+      data-full-width-responsive="true"></ins>
+  </div>
 </template>
 
 <script>

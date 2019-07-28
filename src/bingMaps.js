@@ -2,11 +2,12 @@ import jsonp from 'jsonp';
 
 const baseUrl = 'https://dev.virtualearth.net/REST/v1';
 const keys = process.env.VUE_APP_BING_API_KEYS.split(',');
+
 function getKey() {
   return keys[Math.floor(Math.random() * keys.length)];
 }
 
-export function getLocation({ latitude, longitude, lang = 'en-US' }) {
+function getLocation({ latitude, longitude, lang = 'en-US' }) {
   const key = getKey();
   const url = `${baseUrl}/Locations/${latitude},${longitude}?key=${key}&culture=${lang}`;
   return new Promise((resolve, reject) => {
@@ -22,7 +23,7 @@ export function getLocation({ latitude, longitude, lang = 'en-US' }) {
   });
 }
 
-export function getElevation({ latitude, longitude }) {
+function getElevation({ latitude, longitude }) {
   const key = getKey();
   const url = `${baseUrl}/Elevation/List/?key=${key}&points=${latitude},${longitude}`;
   return new Promise((resolve, reject) => {
@@ -38,7 +39,7 @@ export function getElevation({ latitude, longitude }) {
   });
 }
 
-export function getAutosuggestions({ query, lang = 'en-US' }) {
+function getAutosuggestions({ query, lang = 'en-US' }) {
   const key = getKey();
   const url = `${baseUrl}/Locations/?key=${key}&query=${query}&culture=${lang}`;
   return new Promise((resolve, reject) => {
@@ -53,3 +54,5 @@ export function getAutosuggestions({ query, lang = 'en-US' }) {
     });
   });
 }
+
+export default { getElevation, getLocation, getAutosuggestions };

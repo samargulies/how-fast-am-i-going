@@ -51,7 +51,7 @@ import Vue from 'vue';
 import { mapState } from 'vuex';
 import Autocomplete from 'v-autocomplete';
 import { encodeUrlTitle } from '@/helpers';
-import { getAutosuggestions } from '@/bingMaps';
+import bingMaps from '@/bingMaps';
 
 export default {
   components: { Autocomplete },
@@ -96,7 +96,7 @@ export default {
         this.autosuggestions = [];
         return;
       }
-      getAutosuggestions({
+      bingMaps.getAutosuggestions({
         query,
         latitude: this.$store.state.location.latitude,
         longitude: this.$store.state.location.longitude,

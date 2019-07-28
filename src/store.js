@@ -1,7 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import * as api from '@/bingMaps';
-import api from '@/api';
+
+import bingApi from '@/bingMaps';
+import customApi from '@/api';
+
+import config from '@/config';
+
+const api = config.ENABLE_CUSTOM_API ? customApi : bingApi;
 
 Vue.use(Vuex);
 
