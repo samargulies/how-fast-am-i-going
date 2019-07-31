@@ -1,4 +1,5 @@
 <template>
+<!-- eslint-disable max-len -->
   <div class="main page--api">
     <div class="section">
       <h1 class="section__title">What is my elevation <span class="subpage">API</span></h1>

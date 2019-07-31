@@ -5,6 +5,7 @@ import i18n from '@/i18n';
 
 const AtlasPage = () => import('./views/AtlasPage.vue');
 const ApiPage = () => import('./views/ApiPage.vue');
+const SharePage = () => import('./views/SharePage.vue');
 
 Vue.use(Router);
 
@@ -13,13 +14,13 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/en/*',
+      redirect: to => `/${to.params.pathMatch}`,
+    },
+    {
       path: '/lang/:lang.html',
       redirect: to => `/${to.params.lang}/`,
     },
-    // {
-    //   path: '/en/*',
-    //   redirect: to => `/${to.params.pathMatch}`,
-    // },
     {
       path: '/:lang(\\w{2})?',
       component: {
@@ -47,16 +48,21 @@ const router = new Router({
           name: 'api',
           component: ApiPage,
         },
+        {
+          path: 'location/:latitude,:longitude/:title?/:elevation/share',
+          name: 'share',
+          component: SharePage,
+          props: true,
+        },
       ],
     },
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition
-    } else {
-      return { x: 0, y: 0 }
+      return savedPosition;
     }
-  }
+    return { x: 0, y: 0 };
+  },
 });
 
 router.beforeEach((to, from, next) => {
