@@ -74,11 +74,6 @@ export default {
           name: 'Contour',
           value: 'samargulies/cjyopg6et4uui1cotgzof2j7n',
         },
-        bubble: {
-          id: 'bubble',
-          name: 'Bubble',
-          value: 'mapbox/cjyknt4bl00tf1cny916vrpid',
-        },
         terrain: {
           id: 'terrain',
           name: 'Terrain',

@@ -152,6 +152,7 @@ export default {
     },
     getBackgroundImage() {
       // get the image this way to avoid cross-domain canvas security restrictions
+      this.loading = true;
       axios.get(this.mapUrl, {
         responseType: 'blob',
       }).then((response) => {
@@ -159,6 +160,7 @@ export default {
         image.src = window.URL.createObjectURL(response.data);
         image.onload = () => {
           this.image = image;
+          this.loading = false;
         };
       });
     },
@@ -191,8 +193,9 @@ export default {
 }
 .konvajs-content, .konvajs-content canvas {
   width: auto !important;
-  height: 40vh !important;
-  position: inherit  !important;
+  height: 25vh !important;
+  height: calc(min(30vh, calc(80vw * 9 / 16))) !important;
+  position: inherit !important;
 }
 .konvajs-content canvas {
   margin: 0 auto !important;
