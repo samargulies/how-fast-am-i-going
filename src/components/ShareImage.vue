@@ -88,7 +88,7 @@ export default {
         width: this.width,
         text: 'whatismyelevation.com',
         align: 'center',
-        fontSize: 19,
+        fontSize: this.getRelativeSize(54),
         fontFamily: systemFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#DFDFDF' : '#8A8A8A',
         letterSpacing: 1.6,
@@ -101,7 +101,7 @@ export default {
         padding: this.width * 0.1,
         text: this.title,
         align: 'center',
-        fontSize: 40,
+        fontSize: this.getRelativeSize(114),
         fontFamily: systemFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
       };
@@ -112,7 +112,7 @@ export default {
         width: this.width,
         text: this.elevationFormatted,
         align: 'center',
-        fontSize: 164,
+        fontSize: this.getRelativeSize(467),
         fontFamily: clarendonFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
       };
@@ -123,7 +123,7 @@ export default {
         width: this.width,
         text: this.$t('site-title'),
         align: 'center',
-        fontSize: 35,
+        fontSize: this.getRelativeSize(100),
         fontFamily: systemFontFamily,
         fontStyle: 'bold',
         fill: '#FC7A24',
@@ -144,6 +144,12 @@ export default {
         url: this.dataUrl,
       });
     },
+    getRelativeSize(size) {
+      if (this.width < this.height) {
+        return size * this.width / 1280;
+      }
+      return size * this.height / 1280;
+    },
     getBackgroundImage() {
       // get the image this way to avoid cross-domain canvas security restrictions
       axios.get(this.mapUrl, {
@@ -151,8 +157,9 @@ export default {
       }).then((response) => {
         const image = new window.Image();
         image.src = window.URL.createObjectURL(response.data);
-        console.log('get image complete');
-        this.image = image;
+        image.onload = () => {
+          this.image = image;
+        };
       });
     },
     saveImage() {
@@ -175,13 +182,23 @@ export default {
 };
 </script>
 <style lang="scss">
+.share-preview {
+    position: sticky;
+    top: 0;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
+    padding: 1em;
+}
 .konvajs-content, .konvajs-content canvas {
   width: auto !important;
   height: 40vh !important;
-  position: inherit;
+  position: inherit  !important;
 }
 .konvajs-content canvas {
   margin: 0 auto !important;
-  border: 10px solid #eee !important;
+  box-shadow: 0 1px 13px #C7C7C7;
+}
+.share-actions {
+  padding: 1em 0 0;
 }
 </style>
