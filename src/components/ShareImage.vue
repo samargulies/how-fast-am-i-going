@@ -10,8 +10,8 @@
       </v-layer>
     </v-stage>
   <div class="share-actions">
-    <a @click="share" v-if="shareApi">Share</a>
-    <a @click="saveImage">Save Image</a>
+    <a @click="share" v-if="shareApi">{{ $t('share') }}</a>
+    <a @click="saveImage">{{ $t('save-image') }}</a>
   </div>
 </div>
 </template>
