@@ -54,8 +54,13 @@ export default {
       console.log(this.mapUrl);
       return image;
     },
+    useFeet() {
+      return this.$store.state.useFeet || this.$t('units.feet-default') === 'true';
+    },
     elevationFormatted() {
-      return this.elevation;
+      const formatted = this.$options.filters.numberFormatted(this.elevation, { useFeet: this.useFeet, locale: this.$t.locale });
+      const units = this.$t(this.useFeet ? 'units.feet' : 'units.meters');
+      return `${formatted} ${units}`;
     },
     stageConfig() {
       return {

@@ -6,7 +6,7 @@
     </div>
     <div v-else>
       <i18n path="location-format" tag="div" id="elevation" v-if="Number.isFinite(elevation.value)">
-        <span place="value">{{ displayElevation }}</span>
+        <span place="value">{{ elevation.value | numberFormatted({useFeet, locale: $t.locale}) }}</span>
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>
       <div class="metadata">
@@ -16,7 +16,7 @@
         <div id="elevation-source" v-if="supportsElevation && !location.title">
           <div class="source source--phone" v-if="elevation.source === 'phone'">
             <span class="accuracy" v-if="Number.isFinite(elevation.accuracy)">
-              ± {{elevationAccuracy}} {{ $t(useFeet ? 'units.feet' : 'units.meters') }}
+              ± {{ elevation.accuracy | numberFormatted({useFeet, locale: $t.locale}) }} {{ $t(useFeet ? 'units.feet' : 'units.meters') }}
             </span>
             <span>{{ $t('source.phone.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--web">
@@ -36,7 +36,6 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import { round, metersToFeet } from '@/helpers';
 
 export default {
   data() {
@@ -46,22 +45,6 @@ export default {
   },
   computed: {
     ...mapState(['useFeet', 'elevation', 'loading', 'supportsElevation', 'location', 'watchId']),
-    displayElevation() {
-      const { value } = this.elevation;
-      const elevation = round(this.useFeet ? metersToFeet(value) : value, 0);
-      return elevation.toLocaleString(this.$t.locale, {
-        useGrouping: true,
-        maximumFractionDigits: 0,
-      });
-    },
-    elevationAccuracy() {
-      const { accuracy } = this.elevation;
-      const elevationAccuracy = round(this.useFeet ? metersToFeet(accuracy) : accuracy, 0);
-      return elevationAccuracy.toLocaleString(this.$t.locale, {
-        useGrouping: true,
-        maximumFractionDigits: 0,
-      });
-    },
   },
   methods: {
     toggleSource() {
