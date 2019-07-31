@@ -4,4 +4,8 @@ https://whatismyelevation.netlify.com/* https://www.whatismyelevation.com/:splat
 # Redirect old language pages to new ones
 /lang/:lang/* /:lang/ 301
 
+# Redirect en pages to base
+/en/* /:splat 301
+
+
 /* /index.html 200

@@ -15,6 +15,8 @@
           </span>
         </a>
         <a id="change-location" class="button" @click="toggleOpen">{{ $t('change-location') }}</a>
+        <a v-if="Number.isFinite(elevation.value)"
+           class="button button--share" @click="share">{{ $t('share') }}</a>
       </div>
     </div>
 
@@ -62,7 +64,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['setLocationOpen', 'location', 'useFeet']),
+    ...mapState(['setLocationOpen', 'location', 'useFeet', 'elevation']),
     hideUnitSelection() {
       return this.$t('units.hide-selection') === 'true';
     },
@@ -115,6 +117,9 @@ export default {
     },
     toggleUnits() {
       this.$store.dispatch('setUseFeet', !this.useFeet);
+    },
+    share() {
+      this.$emit('share');
     },
   },
 };

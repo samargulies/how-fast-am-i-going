@@ -9,7 +9,7 @@
       </router-link>
     </h1>
     <ElevationReading />
-    <SetLocation />
+    <SetLocation @share="share" />
     <Adsense
       ad-client="ca-pub-6102117487539042"
       ad-slot="1948746426" />
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { parseUrlTitle } from '@/helpers';
 import ElevationReading from '@/components/ElevationReading.vue';
 import SetLocation from '@/components/SetLocation.vue';
@@ -41,15 +42,20 @@ export default {
       online: navigator.onLine,
     };
   },
+  computed: {
+    ...mapState(['elevation']),
+    formattedTitle() {
+      return parseUrlTitle(this.title);
+    },
+  },
   methods: {
     updateLocation() {
       console.log('updateLocation');
-      const title = parseUrlTitle(this.title);
-      document.title = `${this.$t('site-title')} • ${title}`;
+      document.title = `${this.$t('site-title')} • ${this.formattedTitle}`;
       this.$store.dispatch('updateLocation', {
         latitude: parseFloat(this.latitude),
         longitude: parseFloat(this.longitude),
-        title,
+        title: this.formattedTitle,
       });
       this.$store.dispatch('fetchElevation').then(() => {
         this.$store.dispatch('setLocationOpen', false);
@@ -57,6 +63,17 @@ export default {
     },
     updateOnlineStatus() {
       this.online = navigator.onLine;
+    },
+    share() {
+      this.$router.push({
+        name: 'share',
+        params: {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          title: this.title,
+          elevation: `${this.elevation.value}`,
+        },
+      });
     },
   },
   created() {
