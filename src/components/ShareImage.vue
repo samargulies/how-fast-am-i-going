@@ -186,7 +186,7 @@ export default {
       });
     },
     uploadImage() {
-      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => this.shareUrl);
+      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => response.data.url);
     },
     async saveImage() {
       const url = await this.uploadImage();
