@@ -186,7 +186,7 @@ export default {
       });
     },
     uploadImage() {
-      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => response.data.url);
+      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => this.shareUrl);
     },
     async saveImage() {
       const url = await this.uploadImage();
@@ -201,10 +201,16 @@ export default {
       if (typeof navigator.share === 'undefined') {
         return;
       }
-      const url = await this.uploadImage();
-      navigator.share({
-        text: `${this.$t('site-title')} ${this.elevationFormatted}`,
-        url,
+      this.saveImage().then((url) => {
+        const confirmed = confirm('Would you like to share this image?');
+        if (!confirmed) {
+          return;
+        }
+        navigator.share({
+          title: this.$t('site-title'),
+          text: `${this.$t('site-title')} ${this.elevationFormatted}`,
+          url,
+        });
       });
     },
   },
