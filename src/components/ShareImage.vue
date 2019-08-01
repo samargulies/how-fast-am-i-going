@@ -52,6 +52,10 @@ export default {
     background: { type: String },
     size: { type: Object },
     zoom: { type: Number },
+    useFeet: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     shareApi() {
@@ -66,9 +70,6 @@ export default {
     mapUrl() {
       const accessToken = process.env.VUE_APP_MAPBOX_TOKEN;
       return `https://api.mapbox.com/styles/v1/${this.background}/static/${this.longitude},${this.latitude},${this.zoom},0,0/${this.width}x${this.height}@2x?access_token=${accessToken}&logo=false`;
-    },
-    useFeet() {
-      return this.$store.state.useFeet || this.$t('units.feet-default') === 'true';
     },
     elevationFormatted() {
       const formatted = this.$options.filters.numberFormatted(this.elevation, {
@@ -147,16 +148,16 @@ export default {
         fontFamily: systemFontFamily,
         fontStyle: 'bold',
         fill: '#FC7A24',
-        shadowColor: '#000000',
+        shadowColor: this.background === 'mapbox/satellite-v9' ? '#000' : '#fff',
         shadowBlur: 4,
         shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.5 : 0,
       };
     },
-    dataUrl() {
-      return this.$refs.stage.getStage().toDataURL();
-    },
   },
   methods: {
+    getDataUrl() {
+      return this.$refs.stage.getStage().toDataURL();
+    },
     share() {
       if (typeof navigator.share === 'undefined') {
         return;
@@ -164,7 +165,7 @@ export default {
       navigator.share({
         title: this.$t('site-title'),
         text: this.elevationFormatted,
-        url: this.dataUrl,
+        url: this.getDataUrl(),
       });
     },
     getRelativeSize(size) {
@@ -195,12 +196,7 @@ export default {
       });
     },
     saveImage() {
-      const link = document.createElement('a');
-      // link.download = 'my-elevation.png';
-      link.href = this.dataUrl;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => console.log(response.data));
     },
   },
   watch: {
@@ -256,6 +252,10 @@ export default {
   box-shadow: 0 1px 13px #C7C7C7;
 }
 .share-actions {
-  padding: 1em 0 0;
+  margin: 1em 0 0;
+  a {
+    padding: 0.25em 1em;
+    display: inline-block;
+  }
 }
 </style>

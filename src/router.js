@@ -33,6 +33,12 @@ const router = new Router({
           component: ElevationPage,
         },
         {
+          path: 'location/:latitude,:longitude/:title?/:elevation/share',
+          name: 'share',
+          component: SharePage,
+          props: true,
+        },
+        {
           path: 'location/:latitude,:longitude/:title?',
           name: 'location',
           component: ElevationPage,
@@ -47,12 +53,6 @@ const router = new Router({
           path: 'api',
           name: 'api',
           component: ApiPage,
-        },
-        {
-          path: 'location/:latitude,:longitude/:title?/:elevation/share',
-          name: 'share',
-          component: SharePage,
-          props: true,
         },
       ],
     },

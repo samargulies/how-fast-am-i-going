@@ -29,5 +29,19 @@
 	"brought-to-you-by": "Brought to you by {0}",
 	"hide-altimeters": "false",
 	"share": "Share",
-	"save-image": "Save Image"
+	"save-image": "Save Image",
+	"title": "Title",
+	"show-title": "Show title",
+	"format": "Format",
+	"background": "Background",
+	"zoom": "Zoom",
+	"zoom-in": "Zoom in",
+	"zoom-out": "Zoom out",
+	"portrait": "Portrait",
+	"landscape": "Landscape",
+	"square": "Square",
+	"terrain": "Terrain",
+	"street": "Street",
+	"satellite": "Satellite"
+
 }

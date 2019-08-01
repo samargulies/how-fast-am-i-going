@@ -7,47 +7,50 @@
       :elevation="elevation"
       :background="backgrounds[settings.background].value"
       :zoom="settings.zoom"
-      :size="formats[settings.format]" />
+      :size="formats[settings.format]"
+      :useFeet="settings.useFeet" />
     <div class="share-settings">
       <div class="share-setting share-setting--title">
-          <h3 class="share-setting__title">Title</h3>
+          <h3 class="share-setting__title">{{ $t('title') }}</h3>
           <div class="share-setting__form">
-            <input class="share-setting__input share-setting__input--title" v-model="settings.title" />
-            <label class="share-setting__input share-setting__input--include-title" v-if="settings.title">
+            <input v-model="settings.title"
+              class="share-setting__input share-setting__input--title"/>
+            <label v-if="settings.title"
+              class="share-setting__input share-setting__input--include-title">
               <input type="checkbox" v-model="settings.includeTitle"/>
-              Show title
+              {{ $t('show-title') }}
             </label>
           </div>
       </div>
       <div class="share-setting share-setting--format">
-        <h3 class="share-setting__title">Format</h3>
+        <h3 class="share-setting__title">{{ $t('format') }}</h3>
         <div class="share-setting__form">
           <div :class="['share-setting__option', 'share-setting__option--format',
               format.id === settings.format ? 'share-setting__option--selected' : '']"
             v-for="format in formats"
             :key="format.id">
-            <a @click="settings.format = format.id">{{ format.name }}</a>
+            <a @click="settings.format = format.id">{{ $t(format.id) }}</a>
           </div>
         </div>
       </div>
       <div class="share-setting share-setting--background">
-        <h3 class="share-setting__title">Background</h3>
+        <h3 class="share-setting__title">{{ $t('background') }}</h3>
         <div class="share-setting__form">
           <div :class="['share-setting__option', 'share-setting__option--background',
               background.id === settings.background ? 'share-setting__option--selected' : '']"
             v-for="background in backgrounds"
             :key="background.id">
-            <a @click="settings.background = background.id">{{ background.name }}</a>
+            <a @click="settings.background = background.id">{{ $t(background.id)  }}</a>
           </div>
         </div>
       </div>
       <div class="share-setting share-setting--zoom">
-        <h3 class="share-setting__title">Zoom</h3>
+        <h3 class="share-setting__title">{{ $t('zoom') }}</h3>
         <div class="share-setting__form">
           <a class="share-setting__option share-setting__option--zoom"
-            @click="settings.zoom += 1">Zoom in</a>
+            @click="settings.zoom += 1">{{ $t('zoom-in') }}</a>
           <a class="share-setting__option share-setting__option--zoom"
-            @click="settings.zoom -= 1">Zoom out</a>
+            @click="settings.zoom -= 1">{{ $t('zoom-out') }}</a>
         </div>
       </div>
     </div>
@@ -73,19 +76,16 @@ export default {
       formats: {
         square: {
           id: 'square',
-          name: 'Square',
           width: 1280,
           height: 1280,
         },
         landscape: {
           id: 'landscape',
-          name: 'Landscape',
           width: 1280,
           height: 720,
         },
         portrait: {
           id: 'portrait',
-          name: 'Portrait',
           width: 720,
           height: 1280,
         },
@@ -93,38 +93,46 @@ export default {
       backgrounds: {
         terrain: {
           id: 'terrain',
-          name: 'Terrain',
           value: 'samargulies/cjyopg6et4uui1cotgzof2j7n',
         },
         street: {
           id: 'street',
-          name: 'Street',
           value: 'mapbox/outdoors-v11',
         },
         satellite: {
           id: 'satellite',
-          name: 'Satellite',
           value: 'mapbox/satellite-v9',
         },
       },
       settings: {
-        format: 'landscape',
-        background: 'terrain',
-        zoom: 14,
+        format: this.$route.query.format || 'landscape',
+        background: this.$route.query.background || 'terrain',
+        zoom: parseFloat(this.$route.query.zoom) || 14,
         title: parseUrlTitle(this.title),
-        includeTitle: true,
+        includeTitle: this.$route.query.includeTitle || true,
+        useFeet: this.$store.state.useFeet || this.$t('units.feet-default') === 'true',
       },
     };
   },
-  methods: {
-    share() {
-
-    },
-    saveImage() {
-
+  watch: {
+    settings: {
+      handler({
+        format, background, zoom, includeTitle, useFeet,
+      }) {
+        this.$router.replace({
+          query: {
+            format,
+            background,
+            zoom,
+            includeTitle,
+            useFeet,
+          },
+        });
+      },
+      deep: true,
+      immediate: true,
     },
   },
-  created() {},
 };
 </script>
 <style lang="scss">
@@ -132,7 +140,7 @@ export default {
   margin: 2rem 0;
 }
 .share-setting {
-  max-width: 20rem;
+  max-width: 23rem;
   margin: 0 auto 1.5rem;
 
   &__title {
