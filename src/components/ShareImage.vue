@@ -18,8 +18,9 @@
       </v-stage>
     </div>
   <div class="share-actions">
-    <a @click="share" v-if="shareApi">{{ $t('share') }}</a>
-    <a @click="saveImage">{{ $t('save-image') }}</a>
+    <a @click="uploadImage">Generate share image</a>
+    <a @click="share" v-if="shareImage && shareApi">{{ $t('share') }}</a>
+    <a v-if="shareImage" @click="saveImage">{{ $t('save-image') }}</a>
   </div>
 </div>
 </template>
@@ -36,6 +37,7 @@ export default {
       image: null,
       loading: true,
       loadingSlow: true,
+      shareImage: null,
     };
   },
   components: {
@@ -186,13 +188,12 @@ export default {
       });
     },
     uploadImage() {
-      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => response.data.url);
+      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then((response) => { this.shareImage = response.data.url; });
     },
     async saveImage() {
-      const url = await this.uploadImage();
       const link = document.createElement('a');
       link.target = '_blank';
-      link.href = url;
+      link.href = this.shareImage;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -201,16 +202,10 @@ export default {
       if (typeof navigator.share === 'undefined') {
         return;
       }
-      this.saveImage().then((url) => {
-        const confirmed = confirm('Would you like to share this image?');
-        if (!confirmed) {
-          return;
-        }
-        navigator.share({
-          title: this.$t('site-title'),
-          text: `${this.$t('site-title')} ${this.elevationFormatted}`,
-          url,
-        });
+      navigator.share({
+        title: this.$t('site-title'),
+        text: `${this.$t('site-title')} ${this.elevationFormatted}`,
+        url: this.shareImage,
       });
     },
   },
