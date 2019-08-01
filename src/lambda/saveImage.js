@@ -20,6 +20,6 @@ exports.handler = async (event) => {
   const { Location } = await s3.upload(params).promise();
   return {
     statusCode: 200,
-    body: JSON.stringify(Location),
+    body: JSON.stringify({ url: Location }),
   };
 };

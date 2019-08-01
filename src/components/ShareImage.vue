@@ -158,16 +158,6 @@ export default {
     getDataUrl() {
       return this.$refs.stage.getStage().toDataURL();
     },
-    share() {
-      if (typeof navigator.share === 'undefined') {
-        return;
-      }
-      navigator.share({
-        title: this.$t('site-title'),
-        text: this.elevationFormatted,
-        url: this.getDataUrl(),
-      });
-    },
     getRelativeSize(size) {
       if (this.width < this.height) {
         return size * this.width / 1280;
@@ -195,8 +185,27 @@ export default {
         };
       });
     },
-    saveImage() {
-      axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => console.log(response.data));
+    uploadImage() {
+      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => response.data.url);
+    },
+    async saveImage() {
+      const url = await this.uploadImage();
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    },
+    async share() {
+      if (typeof navigator.share === 'undefined') {
+        return;
+      }
+      const url = await this.uploadImage();
+      navigator.share({
+        text: `${this.$t('site-title')} ${this.elevationFormatted}`,
+        url,
+      });
     },
   },
   watch: {
