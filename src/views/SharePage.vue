@@ -69,14 +69,14 @@ export default {
         },
       },
       backgrounds: {
-        contour: {
-          id: 'contour',
-          name: 'Contour',
-          value: 'samargulies/cjyopg6et4uui1cotgzof2j7n',
-        },
         terrain: {
           id: 'terrain',
           name: 'Terrain',
+          value: 'samargulies/cjyopg6et4uui1cotgzof2j7n',
+        },
+        street: {
+          id: 'street',
+          name: 'Street',
           value: 'mapbox/outdoors-v11',
         },
         satellite: {
@@ -87,7 +87,7 @@ export default {
       },
       settings: {
         format: 'landscape',
-        background: 'contour',
+        background: 'terrain',
         zoom: 14,
         includeTitle: true,
       },

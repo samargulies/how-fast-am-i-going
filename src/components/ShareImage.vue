@@ -1,14 +1,20 @@
 <template>
   <div class="share-preview">
-    <v-stage :config="stageConfig" class="share-canvas" ref="stage">
-      <v-layer>
-        <v-image :config="imageConfig" />
-        <v-text :config="siteTitleConfig" />
-        <v-text :config="elevationTextConfig" />
-        <v-text :config="locationTextConfig" />
-        <v-text :config="sourceTextConfig" />
-      </v-layer>
-    </v-stage>
+    <div class="share-canvas__container">
+      <div v-if="loading" class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+      <v-stage v-else :config="stageConfig" class="share-canvas" ref="stage">
+        <v-layer>
+          <v-image :config="imageConfig" />
+          <v-text :config="siteTitleConfig" />
+          <v-text :config="elevationTextConfig" />
+          <v-text :config="locationTextConfig" />
+          <v-text :config="sourceTextConfig" />
+        </v-layer>
+      </v-stage>
+    </div>
   <div class="share-actions">
     <a @click="share" v-if="shareApi">{{ $t('share') }}</a>
     <a @click="saveImage">{{ $t('save-image') }}</a>
@@ -26,6 +32,7 @@ export default {
   data() {
     return {
       image: null,
+      loading: true,
     };
   },
   components: {
@@ -75,7 +82,6 @@ export default {
       };
     },
     imageConfig() {
-      console.log('recalc image config', this.image);
       return {
         width: this.width,
         height: this.height,
@@ -107,12 +113,13 @@ export default {
       };
     },
     elevationTextConfig() {
+      const fontSize = (this.width > this.height) ? 400 : 300;
       return {
-        y: this.height * 0.25,
+        y: this.height * 0.28,
         width: this.width,
         text: this.elevationFormatted,
         align: 'center',
-        fontSize: this.getRelativeSize(467),
+        fontSize: this.getRelativeSize(fontSize),
         fontFamily: clarendonFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
       };
@@ -196,6 +203,13 @@ export default {
   height: 25vh !important;
   height: calc(min(30vh, calc(80vw * 9 / 16))) !important;
   position: inherit !important;
+}
+.share-canvas__container {
+  min-height: 25vh;
+  min-height: calc(min(30vh, calc(80vw * 9 / 16)));
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .konvajs-content canvas {
   margin: 0 auto !important;
