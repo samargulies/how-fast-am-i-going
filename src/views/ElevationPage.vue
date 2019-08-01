@@ -43,7 +43,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['elevation']),
+    ...mapState(['elevation', 'location']),
     formattedTitle() {
       return parseUrlTitle(this.title);
     },
@@ -68,8 +68,8 @@ export default {
       this.$router.push({
         name: 'share',
         params: {
-          latitude: this.latitude,
-          longitude: this.longitude,
+          latitude: `${this.location.latitude}`,
+          longitude: `${this.location.longitude}`,
           title: this.title,
           elevation: `${this.elevation.value}`,
         },

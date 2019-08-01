@@ -94,7 +94,7 @@ export default new Vuex.Store({
       });
     },
     updateLocation({ commit }, {
-      latitude, longitude, accuracy = 100, title = '',
+      latitude, longitude, accuracy = 100, title = null,
     }) {
       commit('setItem', {
         item: 'location',

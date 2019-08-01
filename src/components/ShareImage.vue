@@ -1,17 +1,19 @@
 <template>
   <div class="share-preview">
-    <div class="share-canvas__container">
-      <div v-if="loading" class="spinner">
+    <div :class="['share-image', loading ? 'loading' : '']">
+      <div v-if="loadingSlow" class="spinner">
         <div class="double-bounce1"></div>
         <div class="double-bounce2"></div>
       </div>
-      <v-stage v-else :config="stageConfig" class="share-canvas" ref="stage">
+      <v-stage :config="stageConfig" class="share-image__canvas" ref="stage">
         <v-layer>
           <v-image :config="imageConfig" />
-          <v-text :config="siteTitleConfig" />
-          <v-text :config="elevationTextConfig" />
-          <v-text :config="locationTextConfig" />
-          <v-text :config="sourceTextConfig" />
+          <template v-if="!loading">
+            <v-text :config="siteTitleConfig" />
+            <v-text :config="elevationTextConfig" />
+            <v-text :config="locationTextConfig" />
+            <v-text :config="sourceTextConfig" />
+          </template>
         </v-layer>
       </v-stage>
     </div>
@@ -33,6 +35,7 @@ export default {
     return {
       image: null,
       loading: true,
+      loadingSlow: true,
     };
   },
   components: {
@@ -86,6 +89,7 @@ export default {
         width: this.width,
         height: this.height,
         image: this.image,
+        fill: '#fcefe1',
       };
     },
     sourceTextConfig() {
@@ -98,6 +102,9 @@ export default {
         fontFamily: systemFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#DFDFDF' : '#8A8A8A',
         letterSpacing: 1.6,
+        shadowColor: this.background === 'mapbox/satellite-v9' ? '#2C2C2C' : '#C7C7C7',
+        shadowBlur: 13,
+        shadowOffset: { x: 0, y: 1 },
       };
     },
     locationTextConfig() {
@@ -110,6 +117,9 @@ export default {
         fontSize: this.getRelativeSize(114),
         fontFamily: systemFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
+        shadowColor: '#000000',
+        shadowBlur: 4,
+        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.5 : 0,
       };
     },
     elevationTextConfig() {
@@ -122,6 +132,9 @@ export default {
         fontSize: this.getRelativeSize(fontSize),
         fontFamily: clarendonFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
+        shadowColor: this.background === 'mapbox/satellite-v9' ? '#000' : '#fff',
+        shadowBlur: 2,
+        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.2 : 1,
       };
     },
     siteTitleConfig() {
@@ -134,6 +147,9 @@ export default {
         fontFamily: systemFontFamily,
         fontStyle: 'bold',
         fill: '#FC7A24',
+        shadowColor: '#000000',
+        shadowBlur: 4,
+        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.5 : 0,
       };
     },
     dataUrl() {
@@ -160,6 +176,12 @@ export default {
     getBackgroundImage() {
       // get the image this way to avoid cross-domain canvas security restrictions
       this.loading = true;
+      // delay showing the loading animation in case the response is super fast
+      setTimeout(() => {
+        if (this.loading) {
+          this.loadingSlow = true;
+        }
+      }, 300);
       axios.get(this.mapUrl, {
         responseType: 'blob',
       }).then((response) => {
@@ -168,12 +190,13 @@ export default {
         image.onload = () => {
           this.image = image;
           this.loading = false;
+          this.loadingSlow = false;
         };
       });
     },
     saveImage() {
       const link = document.createElement('a');
-      link.download = 'my-elevation.png';
+      // link.download = 'my-elevation.png';
       link.href = this.dataUrl;
       document.body.appendChild(link);
       link.click();
@@ -183,6 +206,12 @@ export default {
   watch: {
     mapUrl() {
       this.getBackgroundImage();
+    },
+    width() {
+      this.image = null;
+    },
+    height() {
+      this.image = null;
     },
   },
   created() {
@@ -198,18 +227,29 @@ export default {
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
     padding: 1em;
 }
-.konvajs-content, .konvajs-content canvas {
-  width: auto !important;
-  height: 25vh !important;
-  height: calc(min(30vh, calc(80vw * 9 / 16))) !important;
-  position: inherit !important;
-}
-.share-canvas__container {
+.share-image {
   min-height: 25vh;
   min-height: calc(min(30vh, calc(80vw * 9 / 16)));
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .spinner {
+    position: absolute;
+  }
+}
+.share-image__canvas {
+  transition: opacity 0.5s ease;
+
+  .loading & {
+    opacity: 0.3;
+  }
+}
+.konvajs-content, .konvajs-content canvas {
+  width: auto !important;
+  height: 25vh !important;
+  height: calc(min(30vh, calc(80vw * 9 / 16))) !important;
+  position: inherit !important;
 }
 .konvajs-content canvas {
   margin: 0 auto !important;
