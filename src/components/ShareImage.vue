@@ -192,8 +192,9 @@ export default {
     },
     async saveImage() {
       const link = document.createElement('a');
-      link.target = '_blank';
+      // link.target = '_blank';
       link.href = this.shareImage;
+      link.download = 'elevation.png';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
