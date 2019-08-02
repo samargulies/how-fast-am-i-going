@@ -66,7 +66,7 @@ export default {
     },
     share() {
       this.$router.push({
-        name: 'share',
+        name: 'ShareCustomizer',
         params: {
           latitude: `${this.location.latitude}`,
           longitude: `${this.location.longitude}`,

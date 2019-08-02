@@ -35,13 +35,13 @@ const router = new Router({
         },
         {
           path: 'share/:id',
-          name: 'share',
+          name: 'shareViewer',
           component: ShareViewerPage,
           props: true,
         },
         {
           path: 'location/:latitude,:longitude/:title?/:elevation/share',
-          name: 'share',
+          name: 'ShareCustomizer',
           component: ShareCustomizerPage,
           props: true,
         },
