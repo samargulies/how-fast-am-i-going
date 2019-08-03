@@ -15,8 +15,6 @@
           </span>
         </a>
         <a id="change-location" class="button" @click="toggleOpen">{{ $t('change-location') }}</a>
-        <a v-if="Number.isFinite(elevation.value)"
-           class="button button--share" @click="share">{{ $t('share') }}</a>
       </div>
     </div>
 
@@ -117,9 +115,6 @@ export default {
     },
     toggleUnits() {
       this.$store.dispatch('setUseFeet', !this.useFeet);
-    },
-    share() {
-      this.$emit('share');
     },
   },
 };

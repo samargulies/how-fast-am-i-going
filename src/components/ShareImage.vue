@@ -60,9 +60,6 @@ export default {
     },
   },
   computed: {
-    shareApi() {
-      return typeof navigator.share !== 'undefined';
-    },
     width() {
       return this.size.width;
     },
@@ -261,12 +258,5 @@ export default {
 .konvajs-content canvas {
   margin: 0 auto !important;
   box-shadow: 0 1px 13px #C7C7C7;
-}
-.share-actions {
-  margin: 1em 0 0;
-  a {
-    padding: 0.25em 1em;
-    display: inline-block;
-  }
 }
 </style>
