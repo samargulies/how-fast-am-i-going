@@ -47,5 +47,9 @@ import TheFooter from '@/components/TheFooter.vue';
 
 export default {
   components: { TheFooter },
+  metaInfo: {
+    title: 'API',
+    titleTemplate: `%s | ${this.$t('site-title')}`,
+  },
 };
 </script>

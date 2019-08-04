@@ -52,6 +52,9 @@ import { encodeUrlTitle } from '@/helpers';
 
 export default {
   components: { TheFooter },
+  metaInfo: {
+    title: 'Atlas',
+  },
   data() {
     return {
       allCities: null,

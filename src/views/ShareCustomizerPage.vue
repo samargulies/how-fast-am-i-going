@@ -71,6 +71,11 @@ export default {
     longitude: { type: String },
     elevation: { type: String },
   },
+  metaInfo() {
+    return {
+      title: this.$t('share'),
+    };
+  },
   data() {
     return {
       formats: {

@@ -34,7 +34,6 @@ import SetLocation from '@/components/SetLocation.vue';
 import Adsense from '@/components/Adsense.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
-
 export default {
   components: {
     ElevationReading,
@@ -53,6 +52,11 @@ export default {
       shared: false,
     };
   },
+  metaInfo() {
+    return {
+      title: this.formattedTitle,
+    };
+  },
   computed: {
     ...mapState(['elevation', 'location']),
     formattedTitle() {
@@ -62,7 +66,6 @@ export default {
   methods: {
     updateLocation() {
       console.log('updateLocation');
-      document.title = `${this.$t('site-title')} • ${this.formattedTitle}`;
       this.$store.dispatch('updateLocation', {
         latitude: parseFloat(this.latitude),
         longitude: parseFloat(this.longitude),

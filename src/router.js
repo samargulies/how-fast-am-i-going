@@ -78,14 +78,4 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-router.afterEach(() => {
-  document.title = i18n.t('site-title');
-  document.head.querySelector('meta[property="og:title"]')
-    .setAttribute('content', i18n.t('site-title'));
-  document.head.querySelector('meta[name="description"]')
-    .setAttribute('content', i18n.t('site-description'));
-  document.head.querySelector('meta[property="og:description"]')
-    .setAttribute('content', i18n.t('site-description'));
-});
-
 export default router;

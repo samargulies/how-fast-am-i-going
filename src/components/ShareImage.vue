@@ -186,7 +186,7 @@ export default {
       });
     },
     uploadImage() {
-      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then((response) => { this.shareImage = response.data.url; });
+      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => response.data);
     },
     async saveImage() {
       const link = document.createElement('a');
@@ -207,8 +207,18 @@ export default {
       });
     },
     async shareToFacebook() {
-      await this.uploadImage();
-      window.location = `https://www.facebook.com/sharer.php?u=${this.shareImage}`;
+      const response = await this.uploadImage();
+      const route = this.$router.resolve({
+        name: 'shareViewer',
+        params: {
+          id: response.id,
+        },
+        query: {
+          ref: 'share',
+        },
+      });
+      const link = window.location.origin + route.href;
+      window.location = `https://www.facebook.com/sharer.php?u=${link}`;
     },
   },
   watch: {
