@@ -23,12 +23,9 @@ body {
 	color: var(--text);
 	font-size: 16px;
 	line-height: 1.4;
-  font-family: var(--system);
+	font-family: var(--system);
 	text-align: center;
-	max-width: 50rem;
-	width: 100%;
-	margin: 0 auto;
-	padding: 10px;
+	margin: 0;
 }
 
 h1,
@@ -76,6 +73,20 @@ a {
 
 	&:hover, &:focus {
 			color: var(--brand);
+	}
+}
+
+.page {
+	max-width: 50rem;
+	width: 100%;
+	margin: 0 auto;
+	padding: 10px;
+	&--share {
+		padding: 0;
+		max-width: none;
+		.share-settings {
+			padding: 0 10px;
+		}
 	}
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="share-page">
+  <div class="page page--share">
     <ShareImage
       :latitude="latitude"
       :longitude="longitude"

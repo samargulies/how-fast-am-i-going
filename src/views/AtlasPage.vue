@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="page page--atlas">
     <div class="section section--atlas">
       <h1 class="section__title">What is my elevation <span class="subpage">Atlas</span></h1>
       <div v-if="!allCities" class="spinner">

@@ -7,5 +7,7 @@ https://whatismyelevation.netlify.com/* https://www.whatismyelevation.com/:splat
 # Redirect en pages to base
 /en/* /:splat 301
 
+# Redirect short referrals to long ones
+/* ref=:ref /:splat?utm_source=:ref&utm_medium=:ref&utm_campaign=:ref 301
 
 /* /index.html 200

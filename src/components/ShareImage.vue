@@ -18,9 +18,9 @@
       </v-stage>
     </div>
   <div class="share-actions">
-    <a @click="uploadImage">Generate share image</a>
-    <a @click="share" v-if="shareImage && shareApi">{{ $t('share') }}</a>
-    <a v-if="shareImage" @click="saveImage">{{ $t('save-image') }}</a>
+    <!-- <a @click="uploadImage">Generate share image</a> -->
+    <!-- <a @click="share" v-if="shareImage && shareApi">{{ $t('share') }}</a> -->
+    <a @click="saveImage">{{ $t('save-image') }}</a>
   </div>
 </div>
 </template>
@@ -100,10 +100,10 @@ export default {
         align: 'center',
         fontSize: this.getRelativeSize(54),
         fontFamily: systemFontFamily,
-        fill: this.background === 'mapbox/satellite-v9' ? '#DFDFDF' : '#8A8A8A',
+        fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#8A8A8A',
         letterSpacing: 1.6,
         shadowColor: this.background === 'mapbox/satellite-v9' ? '#2C2C2C' : '#C7C7C7',
-        shadowBlur: 13,
+        shadowBlur: 2,
         shadowOffset: { x: 0, y: 1 },
       };
     },
@@ -119,7 +119,7 @@ export default {
         fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
         shadowColor: '#000000',
         shadowBlur: 4,
-        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.5 : 0,
+        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.7 : 0,
       };
     },
     elevationTextConfig() {
@@ -133,8 +133,8 @@ export default {
         fontFamily: clarendonFontFamily,
         fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
         shadowColor: this.background === 'mapbox/satellite-v9' ? '#000' : '#fff',
-        shadowBlur: 2,
-        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.2 : 1,
+        shadowBlur: 4,
+        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.7 : 1,
       };
     },
     siteTitleConfig() {
@@ -149,7 +149,7 @@ export default {
         fill: '#FC7A24',
         shadowColor: this.background === 'mapbox/satellite-v9' ? '#000' : '#fff',
         shadowBlur: 4,
-        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.5 : 0,
+        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.9 : 0,
       };
     },
   },
@@ -189,8 +189,7 @@ export default {
     },
     async saveImage() {
       const link = document.createElement('a');
-      // link.target = '_blank';
-      link.href = this.shareImage;
+      link.href = this.getDataUrl();
       link.download = 'elevation.png';
       document.body.appendChild(link);
       link.click();
@@ -254,6 +253,10 @@ export default {
   height: 25vh !important;
   height: calc(min(30vh, calc(80vw * 9 / 16))) !important;
   position: inherit !important;
+
+  @media (min-width: 40rem) {
+    height: 40vh !important;
+  }
 }
 .konvajs-content canvas {
   margin: 0 auto !important;
