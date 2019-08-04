@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const crypto = require('crypto');
+const { gzip } = require('node-gzip');
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.VUE_APP_AWS_ACCESS_KEY_ID,
@@ -9,12 +10,13 @@ const s3 = new AWS.S3({
 exports.handler = async (event) => {
   const base64Data = new Buffer.from(event.body.replace(/^data:image\/\w+;base64,/, ''), 'base64');
   const hash = crypto.createHash('sha1').update(base64Data).digest('hex');
+  const gzipData = await gzip(base64Data);
   const params = {
     Bucket: process.env.VUE_APP_AWS_BUCKET,
     Key: `${hash}.png`,
-    Body: base64Data,
+    Body: gzipData,
     ACL: 'public-read',
-    ContentEncoding: 'base64',
+    ContentEncoding: 'gzip',
     ContentType: 'image/png',
   };
   const { Location } = await s3.upload(params).promise();

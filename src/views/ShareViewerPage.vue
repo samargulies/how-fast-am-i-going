@@ -22,7 +22,6 @@ export default {
     return {
       meta: [
         { property: 'og:image', content: this.imageUrl },
-        { property: 'twitter:image', content: this.imageUrl },
       ],
     };
   },
