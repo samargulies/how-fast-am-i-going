@@ -87,7 +87,7 @@ export default {
         landscape: {
           id: 'landscape',
           width: 1280,
-          height: 720,
+          height: 672,
         },
         portrait: {
           id: 'portrait',
