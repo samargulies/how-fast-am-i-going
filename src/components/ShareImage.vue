@@ -21,6 +21,7 @@
     <!-- <a @click="uploadImage">Generate share image</a> -->
     <!-- <a @click="share" v-if="shareImage && shareApi">{{ $t('share') }}</a> -->
     <a @click="saveImage">{{ $t('save-image') }}</a>
+    <a @click="shareToFacebook">Facebook</a>
   </div>
 </div>
 </template>
@@ -204,6 +205,10 @@ export default {
         text: `${this.$t('site-title')} ${this.elevationFormatted}`,
         url: this.shareImage,
       });
+    },
+    async shareToFacebook() {
+      await this.uploadImage();
+      window.location = `https://www.facebook.com/sharer.php?u=${this.shareImage}`;
     },
   },
   watch: {
