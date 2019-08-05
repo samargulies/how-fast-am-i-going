@@ -1,6 +1,8 @@
 <template>
   <div class="page page--share">
     <div class="share-preview">
+      <router-link class="back-link" :to="{name:'location', params:{latitude, longitude, title}}">
+        &larr; Back to elevation</router-link>
       <ShareImage :settings="shareImageSettings" @update="updateShareImage"/>
       <div class="sharing">
         <a :href="shareImage" download="elevation.png"
@@ -169,11 +171,18 @@ export default {
 </script>
 <style lang="scss">
 .share-preview {
-    position: sticky;
-    top: 0;
-    background: #FFFFFF;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
-    padding: 1em;
+  position: sticky;
+  top: 0;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
+  padding: 1em;
+
+  .back-link {
+    margin-bottom: 1.5em;
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
 }
 .share-settings {
   margin: 2rem 0;
@@ -206,7 +215,7 @@ export default {
   &__form {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
   }
   a {
     border: 2px solid #E6DDD4;
@@ -215,7 +224,6 @@ export default {
     display: inline-block;
   }
   &__option {
-    margin: 0 1em;
     a {
       font-weight: 500;
     }
