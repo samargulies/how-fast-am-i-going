@@ -23,11 +23,15 @@ export function round(value, decimals) {
 }
 
 export function sendEvent(eventCategory, eventAction) {
-  if (typeof ga !== 'function') { return; }
-  // eslint-disable-next-line no-undef
-  ga('send', 'event', {
-    eventCategory,
-    eventAction,
-    transport: 'beacon',
-  });
+  if ('ga' in window) {
+    // eslint-disable-next-line no-undef
+    const tracker = ga.getAll()[0];
+    if (tracker) {
+      tracker.send('event', {
+        eventCategory,
+        eventAction,
+        transport: 'beacon',
+      });
+    }
+  }
 }
