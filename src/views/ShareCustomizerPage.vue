@@ -5,7 +5,7 @@
         {{ $t('back-to-elevation') }}</router-link>
       <ShareImage :settings="shareImageSettings" @update="updateShareImage"/>
       <div class="sharing">
-        <a :href="shareImage" download="elevation.png"
+        <a class="share-button share-button--download" :href="shareImage" download="elevation.png"
           @click="shareImageClick()">{{ $t('save-image') }}</a>
       </div>
     </div>
