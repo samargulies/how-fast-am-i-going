@@ -90,8 +90,7 @@ export default {
     async shareToFacebook() {
       sendEvent('share', 'facebook');
       const url = this.getShareUrl();
-      const redirect = encodeURIComponent(window.location.href);
-      window.open(`https://www.facebook.com/sharer.php?u=${url}&display=page&redirect_uri=${redirect}`, '_blank');
+      window.open(`https://www.facebook.com/sharer.php?u=${url}`, '_blank');
     },
     async shareToTwitter() {
       if (!this.hasElevationValue) { return; }
