@@ -58,6 +58,9 @@ const router = new Router({
     },
   ],
   scrollBehavior(to, from, savedPosition) {
+    if (to.name === from.name) {
+      return false;
+    }
     if (savedPosition) {
       return savedPosition;
     }

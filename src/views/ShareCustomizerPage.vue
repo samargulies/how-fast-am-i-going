@@ -2,7 +2,7 @@
   <div class="page page--share">
     <div class="share-preview">
       <router-link class="back-link" :to="{name:'location', params:{latitude, longitude, title}}">
-        &larr; Back to elevation</router-link>
+        {{ $t('back-to-elevation') }}</router-link>
       <ShareImage :settings="shareImageSettings" @update="updateShareImage"/>
       <div class="sharing">
         <a :href="shareImage" download="elevation.png"
