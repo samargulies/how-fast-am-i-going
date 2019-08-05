@@ -501,8 +501,10 @@ a {
 .sharing {
   margin: 1em 0 0;
   a {
-    padding: 0.25em 1em;
-    display: inline-block;
+    padding: 0.5em;
+		display: inline-block;
+		color: #535353;
+		font-weight: 600;
   }
 }
 
@@ -562,4 +564,18 @@ a {
   50% { 
 		opacity: 0.3
   }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -30%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fadeDown-enter-active {
+	animation: fadeInDown 1s both;
+	animation-delay: 0.2s;
 }

@@ -1,11 +1,10 @@
 <template>
   <div class="page page--share">
     <div class="share-preview">
-      <ShareImage :settings="shareImageSettings" @update="shareImage = arguments[0]"/>
+      <ShareImage :settings="shareImageSettings" @update="updateShareImage"/>
       <div class="sharing">
-        <a @click="saveImage">{{ $t('save-image') }}</a>
-        <a @click="shareToFacebook">Facebook</a>
-        <a @click="shareToTwitter">Twitter</a>
+        <a :href="shareImage" download="elevation.png"
+          @click="shareImageClick()">{{ $t('save-image') }}</a>
       </div>
     </div>
     <div class="share-settings">
@@ -135,44 +134,14 @@ export default {
     },
   },
   methods: {
+    shareImageClick() {
+      sendEvent('share', 'downloadImage');
+    },
+    updateShareImage(shareImage) {
+      this.shareImage = shareImage;
+    },
     uploadImage() {
       return axios.post('/.netlify/functions/saveImage', this.shareImage).then(response => response.data);
-    },
-    async saveImage() {
-      sendEvent('share', 'link');
-      const link = document.createElement('a');
-      link.href = this.shareImage;
-      link.download = 'elevation.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    },
-    getShareUrl(id) {
-      const route = this.$router.resolve({
-        name: 'location',
-        params: {
-          latitude: this.latitude,
-          longitude: this.longitude,
-          title: this.includeTitle ? this.title : null,
-        },
-        query: {
-          id,
-          ref: 'share',
-        },
-      });
-      return encodeURI(window.location.origin + route.href);
-    },
-    async shareToFacebook() {
-      sendEvent('share', 'link');
-      const response = await this.uploadImage();
-      const url = this.getShareUrl(response.id);
-      window.location = `https://www.facebook.com/sharer.php?u=${url}`;
-    },
-    async shareToTwitter() {
-      sendEvent('share', 'link');
-      const response = await this.uploadImage();
-      const url = this.getShareUrl(response.id);
-      window.location = `https://twitter.com/intent/tweet?url=${url}`;
     },
   },
   watch: {

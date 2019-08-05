@@ -29,7 +29,12 @@
 	"brought-to-you-by": "Brought to you by {0}",
 	"hide-altimeters": "false",
 	"share": "Share",
+	"share-image": "Share Image",
 	"save-image": "Save Image",
+	"share-link": "Share Link",
+	"facebook": "Facebook",
+	"twitter": "Twitter",
+	"share-promo": "<strong>New:</strong> Create a custom share image for Instagram or Facebook",
 	"title": "Title",
 	"show-title": "Show title",
 	"format": "Format",
@@ -43,5 +48,4 @@
 	"terrain": "Terrain",
 	"street": "Street",
 	"satellite": "Satellite"
-
 }

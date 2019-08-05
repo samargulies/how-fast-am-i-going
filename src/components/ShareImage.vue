@@ -163,11 +163,12 @@ export default {
           this.image = image;
           this.loading = false;
           this.loadingSlow = false;
+          this.update();
         };
       });
     },
     update() {
-      this.$emit('update', this.$refs.stage.getStage().toDataURL());
+      setTimeout(() => this.$emit('update', this.$refs.stage.getStage().toDataURL()), 10);
     },
   },
   watch: {
@@ -177,9 +178,6 @@ export default {
     mapUrl: {
       handler() { this.getBackgroundImage(); },
       immediate: true,
-    },
-    image() {
-      this.update();
     },
     width() {
       this.image = null;
