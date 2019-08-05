@@ -38,7 +38,6 @@ export default new Vuex.Store({
       commit('setItem', { item: 'watchId', value: watchId });
     },
     setUserLocation({ state, dispatch, commit }, location) {
-      console.log('setUserLocation', { location });
       const previousLocation = state.location;
       dispatch('updateLocation', {
         latitude: location.coords.latitude,
@@ -72,7 +71,6 @@ export default new Vuex.Store({
         console.log('offline, not fetching elevation');
         return false;
       }
-      console.log('fetchElevation');
       dispatch('stopWatchingUserLocation');
       let loaded = false;
       // delay showing the loading animation in case the response is super fast

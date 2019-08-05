@@ -1,14 +1,13 @@
 <template>
   <div class="page page--share">
-    <ShareImage
-      :latitude="latitude"
-      :longitude="longitude"
-      :title="settings.includeTitle ? settings.title : null"
-      :elevation="elevation"
-      :background="backgrounds[settings.background].value"
-      :zoom="settings.zoom"
-      :size="formats[settings.format]"
-      :useFeet="settings.useFeet" />
+    <div class="share-preview">
+      <ShareImage :settings="shareImageSettings" @update="shareImage = arguments[0]"/>
+      <div class="sharing">
+        <a @click="saveImage">{{ $t('save-image') }}</a>
+        <a @click="shareToFacebook">Facebook</a>
+        <a @click="shareToTwitter">Twitter</a>
+      </div>
+    </div>
     <div class="share-settings">
       <div class="share-setting share-setting--title">
           <h3 class="share-setting__title">{{ $t('title') }}</h3>
@@ -59,9 +58,10 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ShareImage from '@/components/ShareImage.vue';
 import TheFooter from '@/components/TheFooter.vue';
-import { parseUrlTitle } from '@/helpers';
+import { parseUrlTitle, encodeUrlTitle, sendEvent } from '@/helpers';
 
 export default {
   components: { ShareImage, TheFooter },
@@ -117,14 +117,73 @@ export default {
         includeTitle: this.$route.query.includeTitle || true,
         useFeet: this.$store.state.useFeet || this.$t('units.feet-default') === 'true',
       },
+      shareImage: null,
     };
+  },
+  computed: {
+    shareImageSettings() {
+      return {
+        latitude: this.latitude,
+        longitude: this.longitude,
+        title: this.settings.includeTitle ? this.settings.title : null,
+        elevation: this.elevation,
+        background: this.backgrounds[this.settings.background].value,
+        zoom: this.settings.zoom,
+        size: this.formats[this.settings.format],
+        useFeet: this.settings.useFeet,
+      };
+    },
+  },
+  methods: {
+    uploadImage() {
+      return axios.post('/.netlify/functions/saveImage', this.shareImage).then(response => response.data);
+    },
+    async saveImage() {
+      sendEvent('share', 'link');
+      const link = document.createElement('a');
+      link.href = this.shareImage;
+      link.download = 'elevation.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    },
+    getShareUrl(id) {
+      const route = this.$router.resolve({
+        name: 'location',
+        params: {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          title: this.includeTitle ? this.title : null,
+        },
+        query: {
+          id,
+          ref: 'share',
+        },
+      });
+      return encodeURI(window.location.origin + route.href);
+    },
+    async shareToFacebook() {
+      sendEvent('share', 'link');
+      const response = await this.uploadImage();
+      const url = this.getShareUrl(response.id);
+      window.location = `https://www.facebook.com/sharer.php?u=${url}`;
+    },
+    async shareToTwitter() {
+      sendEvent('share', 'link');
+      const response = await this.uploadImage();
+      const url = this.getShareUrl(response.id);
+      window.location = `https://twitter.com/intent/tweet?url=${url}`;
+    },
   },
   watch: {
     settings: {
       handler({
-        format, background, zoom, includeTitle, useFeet,
+        format, background, zoom, includeTitle, title, useFeet,
       }) {
         this.$router.replace({
+          params: {
+            title: encodeUrlTitle(title),
+          },
           query: {
             format,
             background,
@@ -135,12 +194,18 @@ export default {
         });
       },
       deep: true,
-      immediate: true,
     },
   },
 };
 </script>
 <style lang="scss">
+.share-preview {
+    position: sticky;
+    top: 0;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
+    padding: 1em;
+}
 .share-settings {
   margin: 2rem 0;
 }

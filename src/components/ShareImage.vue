@@ -1,29 +1,21 @@
 <template>
-  <div class="share-preview">
-    <div :class="['share-image', loading ? 'loading' : '']">
-      <div v-if="loadingSlow" class="spinner">
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-      </div>
-      <v-stage :config="stageConfig" class="share-image__canvas" ref="stage">
-        <v-layer>
-          <v-image :config="imageConfig" />
-          <template v-if="!loading">
-            <v-text :config="siteTitleConfig" />
-            <v-text :config="elevationTextConfig" />
-            <v-text :config="locationTextConfig" />
-            <v-text :config="sourceTextConfig" />
-          </template>
-        </v-layer>
-      </v-stage>
+  <div :class="['share-image', loading ? 'loading' : '']">
+    <div v-if="loadingSlow" class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
     </div>
-  <div class="share-actions">
-    <!-- <a @click="uploadImage">Generate share image</a> -->
-    <!-- <a @click="share" v-if="shareImage && shareApi">{{ $t('share') }}</a> -->
-    <a @click="saveImage">{{ $t('save-image') }}</a>
-    <a @click="shareToFacebook">Facebook</a>
+    <v-stage :config="stageConfig" class="share-image__canvas" ref="stage">
+      <v-layer>
+        <v-image :config="imageConfig" />
+        <template v-if="!loading">
+          <v-text :config="siteTitleConfig" />
+          <v-text :config="elevationTextConfig" />
+          <v-text :config="locationTextConfig" />
+          <v-text :config="sourceTextConfig" />
+        </template>
+      </v-layer>
+    </v-stage>
   </div>
-</div>
 </template>
 <script>
 import VueKonva from 'vue-konva';
@@ -38,7 +30,6 @@ export default {
       image: null,
       loading: true,
       loadingSlow: true,
-      shareImage: null,
     };
   },
   components: {
@@ -48,36 +39,29 @@ export default {
     'v-image': VueKonva.Image,
   },
   props: {
-    latitude: { type: String },
-    longitude: { type: String },
-    title: { type: String },
-    elevation: { type: String },
-    background: { type: String },
-    size: { type: Object },
-    zoom: { type: Number },
-    useFeet: {
-      type: Boolean,
-      default: true,
-    },
+    settings: { type: Object, required: true },
   },
   computed: {
     width() {
-      return this.size.width;
+      return this.settings.size.width;
     },
     height() {
-      return this.size.height;
+      return this.settings.size.height;
     },
     mapUrl() {
       const accessToken = process.env.VUE_APP_MAPBOX_TOKEN;
-      return `https://api.mapbox.com/styles/v1/${this.background}/static/${this.longitude},${this.latitude},${this.zoom},0,0/${this.width}x${this.height}@2x?access_token=${accessToken}&logo=false`;
+      return `https://api.mapbox.com/styles/v1/${this.settings.background}/static/${this.settings.longitude},${this.settings.latitude},${this.settings.zoom},0,0/${this.width}x${this.height}@2x?access_token=${accessToken}&logo=false`;
     },
     elevationFormatted() {
-      const formatted = this.$options.filters.numberFormatted(this.elevation, {
-        useFeet: this.useFeet,
+      const formatted = this.$options.filters.numberFormatted(this.settings.elevation, {
+        useFeet: this.settings.useFeet,
         locale: this.$t.locale,
       });
-      const units = this.$t(this.useFeet ? 'units.feet' : 'units.meters');
+      const units = this.$t(this.settings.useFeet ? 'units.feet' : 'units.meters');
       return `${formatted} ${units}`;
+    },
+    isSatellite() {
+      return this.settings.background === 'mapbox/satellite-v9';
     },
     stageConfig() {
       return {
@@ -101,9 +85,9 @@ export default {
         align: 'center',
         fontSize: this.getRelativeSize(54),
         fontFamily: systemFontFamily,
-        fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#8A8A8A',
+        fill: this.isSatellite ? '#fff' : '#8A8A8A',
         letterSpacing: 1.6,
-        shadowColor: this.background === 'mapbox/satellite-v9' ? '#2C2C2C' : '#C7C7C7',
+        shadowColor: this.isSatellite ? '#2C2C2C' : '#C7C7C7',
         shadowBlur: 2,
         shadowOffset: { x: 0, y: 1 },
       };
@@ -113,14 +97,14 @@ export default {
         y: this.height * 0.45,
         width: this.width,
         padding: this.width * 0.1,
-        text: this.title,
+        text: this.settings.title,
         align: 'center',
         fontSize: this.getRelativeSize(114),
         fontFamily: systemFontFamily,
-        fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
+        fill: this.isSatellite ? '#fff' : '#000',
         shadowColor: '#000000',
         shadowBlur: 4,
-        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.7 : 0,
+        shadowOpacity: this.isSatellite ? 0.7 : 0,
       };
     },
     elevationTextConfig() {
@@ -132,10 +116,10 @@ export default {
         align: 'center',
         fontSize: this.getRelativeSize(fontSize),
         fontFamily: clarendonFontFamily,
-        fill: this.background === 'mapbox/satellite-v9' ? '#fff' : '#000',
-        shadowColor: this.background === 'mapbox/satellite-v9' ? '#000' : '#fff',
+        fill: this.isSatellite ? '#fff' : '#000',
+        shadowColor: this.isSatellite ? '#000' : '#fff',
         shadowBlur: 4,
-        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.7 : 1,
+        shadowOpacity: this.isSatellite ? 0.7 : 1,
       };
     },
     siteTitleConfig() {
@@ -148,16 +132,13 @@ export default {
         fontFamily: systemFontFamily,
         fontStyle: 'bold',
         fill: '#FC7A24',
-        shadowColor: this.background === 'mapbox/satellite-v9' ? '#000' : '#fff',
+        shadowColor: this.isSatellite ? '#000' : '#fff',
         shadowBlur: 4,
-        shadowOpacity: this.background === 'mapbox/satellite-v9' ? 0.9 : 0,
+        shadowOpacity: this.isSatellite ? 0.9 : 0,
       };
     },
   },
   methods: {
-    getDataUrl() {
-      return this.$refs.stage.getStage().toDataURL();
-    },
     getRelativeSize(size) {
       if (this.width < this.height) {
         return size * this.width / 1280;
@@ -185,45 +166,20 @@ export default {
         };
       });
     },
-    uploadImage() {
-      return axios.post('/.netlify/functions/saveImage', this.getDataUrl()).then(response => response.data);
-    },
-    async saveImage() {
-      const link = document.createElement('a');
-      link.href = this.getDataUrl();
-      link.download = 'elevation.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    },
-    async share() {
-      if (typeof navigator.share === 'undefined') {
-        return;
-      }
-      navigator.share({
-        title: this.$t('site-title'),
-        text: `${this.$t('site-title')} ${this.elevationFormatted}`,
-        url: this.shareImage,
-      });
-    },
-    async shareToFacebook() {
-      const response = await this.uploadImage();
-      const route = this.$router.resolve({
-        name: 'shareViewer',
-        params: {
-          id: response.id,
-        },
-        query: {
-          ref: 'share',
-        },
-      });
-      const link = window.location.origin + route.href;
-      window.location = `https://www.facebook.com/sharer.php?u=${link}`;
+    update() {
+      this.$emit('update', this.$refs.stage.getStage().toDataURL());
     },
   },
   watch: {
-    mapUrl() {
-      this.getBackgroundImage();
+    settings() {
+      this.update();
+    },
+    mapUrl: {
+      handler() { this.getBackgroundImage(); },
+      immediate: true,
+    },
+    image() {
+      this.update();
     },
     width() {
       this.image = null;
@@ -232,19 +188,9 @@ export default {
       this.image = null;
     },
   },
-  created() {
-    this.getBackgroundImage();
-  },
 };
 </script>
 <style lang="scss">
-.share-preview {
-    position: sticky;
-    top: 0;
-    background: #FFFFFF;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
-    padding: 1em;
-}
 .share-image {
   min-height: 25vh;
   min-height: calc(min(30vh, calc(80vw * 9 / 16)));
@@ -275,6 +221,6 @@ export default {
 }
 .konvajs-content canvas {
   margin: 0 auto !important;
-  box-shadow: 0 1px 13px #C7C7C7;
+  box-shadow: 0 1px 7px #aaa;
 }
 </style>

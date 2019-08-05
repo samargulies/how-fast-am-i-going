@@ -6,7 +6,6 @@ import i18n from '@/i18n';
 const AtlasPage = () => import('./views/AtlasPage.vue');
 const ApiPage = () => import('./views/ApiPage.vue');
 const ShareCustomizerPage = () => import('./views/ShareCustomizerPage.vue');
-const ShareViewerPage = () => import('./views/ShareViewerPage.vue');
 
 Vue.use(Router);
 
@@ -32,12 +31,6 @@ const router = new Router({
           path: '',
           name: 'home',
           component: ElevationPage,
-        },
-        {
-          path: 'share/:id',
-          name: 'shareViewer',
-          component: ShareViewerPage,
-          props: true,
         },
         {
           path: 'location/:latitude,:longitude/:title?/:elevation/share',

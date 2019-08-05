@@ -21,3 +21,13 @@ export function metersToFeet(meters) {
 export function round(value, decimals) {
   return Number(`${Math.round(`${value}e${decimals}`)}e-${decimals}`);
 }
+
+export function sendEvent(eventCategory, eventAction) {
+  if (typeof ga !== 'function') { return; }
+  // eslint-disable-next-line no-undef
+  ga('send', 'event', {
+    eventCategory,
+    eventAction,
+    transport: 'beacon',
+  });
+}

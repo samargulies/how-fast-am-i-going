@@ -10,7 +10,7 @@
     </h1>
     <ElevationReading />
     <SetLocation />
-    <div class="share-actions">
+    <div class="sharing">
       <a class="share-action share-action--image" @click="shareImage">Share Image</a>
       <a :class="['share-action', 'share-action--url', shared ? 'shared' : '']"
         @click="shareLink"
@@ -28,7 +28,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { parseUrlTitle, round } from '@/helpers';
+import { parseUrlTitle, round, sendEvent } from '@/helpers';
 import ElevationReading from '@/components/ElevationReading.vue';
 import SetLocation from '@/components/SetLocation.vue';
 import Adsense from '@/components/Adsense.vue';
@@ -55,6 +55,9 @@ export default {
   metaInfo() {
     return {
       title: this.formattedTitle,
+      meta: [
+        { property: 'og:image', content: this.imageUrl },
+      ],
     };
   },
   computed: {
@@ -62,10 +65,16 @@ export default {
     formattedTitle() {
       return parseUrlTitle(this.title);
     },
+    imageUrl() {
+      if (!this.$route.query.id) {
+        return null;
+      }
+      const bucket = process.env.VUE_APP_AWS_BUCKET;
+      return `https://${bucket}.s3.amazonaws.com/${this.$route.query.id}.png`;
+    },
   },
   methods: {
     updateLocation() {
-      console.log('updateLocation');
       this.$store.dispatch('updateLocation', {
         latitude: parseFloat(this.latitude),
         longitude: parseFloat(this.longitude),
@@ -85,11 +94,12 @@ export default {
           latitude: `${round(this.location.latitude, 5)}`,
           longitude: `${round(this.location.longitude, 5)}`,
           title: this.title,
-          elevation: `${this.elevation.value}`,
+          elevation: `${round(this.elevation.value, 1)}`,
         },
       });
     },
     shareLink() {
+      sendEvent('share', 'link');
       const route = this.$router.resolve({
         name: 'location',
         params: {

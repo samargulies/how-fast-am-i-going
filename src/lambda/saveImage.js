@@ -9,7 +9,7 @@ const s3 = new AWS.S3({
 
 exports.handler = async (event) => {
   const base64Data = new Buffer.from(event.body.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-  const hash = crypto.createHash('sha1').update(base64Data).digest('hex');
+  const hash = crypto.createHash('sha1').update(base64Data).digest('hex').substring(0, 16);
   const gzipData = await gzip(base64Data);
   const params = {
     Bucket: process.env.VUE_APP_AWS_BUCKET,
