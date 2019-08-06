@@ -4,7 +4,7 @@
       ad-client="ca-pub-6102117487539042"
       ad-slot="6966721074" />
     <h1>
-      <router-link :to="{name: 'home'}">
+      <router-link :to="pathForLocale({path: '/'})">
         {{ $t('site-title') }}
       </router-link>
     </h1>
@@ -20,12 +20,13 @@
 
 <script>
 import { mapState } from 'vuex';
-import { parseUrlTitle } from '@/helpers';
+import { parseUrlTitle, pathForLocale } from '@/helpers';
 import ElevationReading from '@/components/ElevationReading.vue';
 import SetLocation from '@/components/SetLocation.vue';
 import Adsense from '@/components/Adsense.vue';
 import ShareActions from '@/components/ShareActions.vue';
 import TheFooter from '@/components/TheFooter.vue';
+
 
 export default {
   components: {
@@ -80,6 +81,7 @@ export default {
     updateOnlineStatus() {
       this.online = navigator.onLine;
     },
+    pathForLocale,
   },
   created() {
     this.$store.dispatch('setUseFeet', this.$t('units.feet-default') === 'true');

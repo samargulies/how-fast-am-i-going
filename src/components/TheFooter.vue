@@ -61,6 +61,7 @@
 </template>
 <script>
 import config from '@/config';
+import { pathForLocale } from '@/helpers';
 
 export default {
   props: {
@@ -84,9 +85,7 @@ export default {
     },
   },
   methods: {
-    pathForLocale({ path = this.$route.path, locale = this.$i18n.locale }) {
-      return path.replace(/^\/(\w{2}\/)*/, `/${locale}/`);
-    },
+    pathForLocale,
   },
 };
 </script>

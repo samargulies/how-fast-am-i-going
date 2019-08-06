@@ -36,7 +36,7 @@ export default {
     elevationFormatted() {
       const formatted = this.$options.filters.numberFormatted(this.elevation.value, {
         useFeet: this.useFeet,
-        locale: this.$t.locale,
+        locale: this.$i18n.locale,
       });
       const units = this.$t(this.useFeet ? 'units.feet' : 'units.meters');
       return `${formatted} ${units}`;
@@ -55,6 +55,7 @@ export default {
           longitude: `${round(this.location.longitude, 5)}`,
           title: encodeUrlTitle(this.location.title),
           elevation: `${round(this.elevation.value, 1)}`,
+          lang: this.$i18n.locale,
         },
       });
     },
@@ -65,6 +66,7 @@ export default {
           latitude: `${round(this.location.latitude, 5)}`,
           longitude: `${round(this.location.longitude, 5)}`,
           title: encodeUrlTitle(this.location.title),
+          lang: this.$i18n.locale,
         },
         query: {
           ref: 'share',

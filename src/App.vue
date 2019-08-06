@@ -16,6 +16,9 @@ export default {
         { property: 'og:description', content: this.$t('site-description') },
         { property: 'og:title', content: this.$t('site-title') },
       ],
+      htmlAttrs: {
+        lang: this.$i18n.locale,
+      },
       bodyAttrs: {
         class: [`color-scheme--${this.colorScheme}`],
       },

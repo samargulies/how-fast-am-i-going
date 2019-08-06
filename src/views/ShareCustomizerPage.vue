@@ -1,7 +1,7 @@
 <template>
   <div class="page page--share">
     <div class="share-preview">
-      <router-link class="back-link" :to="{name:'location', params:{latitude, longitude, title}}">
+      <router-link class="back-link" :to="{name:'location', params:{lang: $i18n.locale, latitude, longitude, title}}">
         {{ $t('back-to-elevation') }}</router-link>
       <ShareImage :settings="shareImageSettings" @update="updateShareImage"/>
       <div class="sharing">

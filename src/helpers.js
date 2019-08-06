@@ -35,3 +35,7 @@ export function sendEvent(eventCategory, eventAction) {
     }
   }
 }
+
+export function pathForLocale({ path = this.$route.path, locale = this.$i18n.locale }) {
+  return path.replace(/^\/(\w{2}\/)*/, `/${locale}/`);
+}

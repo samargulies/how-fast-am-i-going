@@ -55,7 +55,7 @@ export default {
     elevationFormatted() {
       const formatted = this.$options.filters.numberFormatted(this.settings.elevation, {
         useFeet: this.settings.useFeet,
-        locale: this.$t.locale,
+        locale: this.$i18n.locale,
       });
       const units = this.$t(this.settings.useFeet ? 'units.feet' : 'units.meters');
       return `${formatted} ${units}`;
@@ -219,6 +219,6 @@ export default {
 }
 .konvajs-content canvas {
   margin: 0 auto !important;
-  box-shadow: 0 1px 7px #aaa;
+  box-shadow: 0 1px 7px var(--share-shadow);
 }
 </style>
