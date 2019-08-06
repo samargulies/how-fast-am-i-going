@@ -6,7 +6,9 @@
     </div>
     <div v-else>
       <i18n path="location-format" tag="div" id="elevation" v-if="Number.isFinite(elevation.value)">
-        <span place="value">{{ elevation.value | numberFormatted({useFeet, locale: $t.locale}) }}</span>
+        <span place="value">
+          {{ elevation.value | numberFormatted({useFeet, locale: $t.locale}) }}
+        </span>
         <span place="units">{{ $t(useFeet ? 'units.feet' : 'units.meters') }}</span>
       </i18n>
       <div class="metadata">
@@ -16,7 +18,8 @@
         <div id="elevation-source" v-if="supportsElevation && !location.title">
           <div class="source source--phone" v-if="elevation.source === 'phone'">
             <span class="accuracy" v-if="Number.isFinite(elevation.accuracy)">
-              ± {{ elevation.accuracy | numberFormatted({useFeet, locale: $t.locale}) }} {{ $t(useFeet ? 'units.feet' : 'units.meters') }}
+              ± {{ elevation.accuracy | numberFormatted({useFeet, locale: $t.locale}) }}
+              {{ $t(useFeet ? 'units.feet' : 'units.meters') }}
             </span>
             <span>{{ $t('source.phone.description') }}</span>
             <a @click="toggleSource" class="button toggle-source--web">

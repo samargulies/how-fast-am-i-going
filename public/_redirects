@@ -1,6 +1,9 @@
 # Redirect default Netlify subdomain to primary domain
 https://whatismyelevation.netlify.com/* https://www.whatismyelevation.com/:splat 301!
 
+# Ensure cache.manifest is cleared
+/cache.manifest /404.html 404
+
 # Redirect old language pages to new ones
 /lang/:lang/* /:lang/ 301
 
