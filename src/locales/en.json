@@ -48,5 +48,8 @@
 	"square": "Square",
 	"terrain": "Terrain",
 	"street": "Street",
-	"satellite": "Satellite"
+	"satellite": "Satellite",
+	"color-scheme-light": "Light Mode",
+	"color-scheme-dark": "Dark Mode",
+	"color-scheme-auto": "Automatic"
 }

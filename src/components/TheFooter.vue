@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+<footer class="footer">
   <div class="section section--localizations">
     <ul class="languages">
       <li><router-link :to="pathForLocale({locale:'de'})">Deutsch</router-link></li>
@@ -48,8 +48,16 @@
       </ul>
     </nav>
   </div>
-
-</div>
+  <div class="app-settings">
+    <a v-for="colorScheme in colorSchemes"
+      :key="colorScheme"
+      :class="['setting-button', `setting-button--color-scheme-${colorScheme}`,
+        currentColorScheme === colorScheme ? 'active' : '' ]"
+      @click="$store.dispatch('setColorScheme', colorScheme);">
+      {{ $t(`color-scheme-${colorScheme}`)}}
+    </a>
+  </div>
+</footer>
 </template>
 <script>
 import config from '@/config';
@@ -62,6 +70,12 @@ export default {
     },
   },
   computed: {
+    colorSchemes() {
+      return ['light', 'dark', 'auto'];
+    },
+    currentColorScheme() {
+      return this.$store.state.colorScheme;
+    },
     enableCustomApi() {
       return config.ENABLE_CUSTOM_API;
     },

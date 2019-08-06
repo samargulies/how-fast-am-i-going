@@ -5,6 +5,7 @@ import bingApi from '@/bingMaps';
 import customApi from '@/api';
 
 import config from '@/config';
+import { round } from '@/helpers';
 
 const api = config.ENABLE_CUSTOM_API ? customApi : bingApi;
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     useFeet: true,
     supportsElevation: false,
     watchId: null,
+    colorScheme: localStorage.getItem('colorScheme') || 'auto',
   },
   actions: {
     getUserLocation({ state, commit, dispatch }) {
@@ -80,8 +82,8 @@ export default new Vuex.Store({
         }
       }, 200);
       return api.getElevation({
-        latitude: state.location.latitude,
-        longitude: state.location.longitude,
+        latitude: round(state.location.latitude, 5),
+        longitude: round(state.location.longitude, 5),
       }).then((elevation) => {
         loaded = true;
         commit('setElevation', { elevation, source: 'web' });
@@ -112,6 +114,10 @@ export default new Vuex.Store({
     },
     setSupportsElevation({ commit }, supportsElevation) {
       commit('setItem', { item: 'supportsElevation', value: supportsElevation });
+    },
+    setColorScheme({ commit }, colorScheme) {
+      localStorage.setItem('colorScheme', colorScheme);
+      commit('setItem', { item: 'colorScheme', value: colorScheme });
     },
 
   },

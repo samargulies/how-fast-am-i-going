@@ -173,7 +173,7 @@ export default {
 .share-preview {
   position: sticky;
   top: 0;
-  background: #FFFFFF;
+  background: var(--share-preview-background);
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
   padding: 1em;
 

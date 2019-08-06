@@ -5,6 +5,7 @@
 </template>
 <script>
 import '@/assets/css/style.scss';
+import { mapState } from 'vuex';
 
 export default {
   metaInfo() {
@@ -15,7 +16,13 @@ export default {
         { property: 'og:description', content: this.$t('site-description') },
         { property: 'og:title', content: this.$t('site-title') },
       ],
+      bodyAttrs: {
+        class: [`color-scheme--${this.colorScheme}`],
+      },
     };
+  },
+  computed: {
+    ...mapState(['colorScheme']),
   },
 };
 </script>
