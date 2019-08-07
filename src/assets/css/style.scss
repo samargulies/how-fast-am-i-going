@@ -503,13 +503,14 @@ a {
 }
 
 .sharing {
-  margin: 1em 0 0;
+  margin: 0.5em 0 0;
 }
 .share-button {
 	padding: 0.5em;
 	display: inline-block;
 	color: var(--grey);
 	font-weight: 600;
+	font-size: 0.875rem;
 }
 .sharing__button:not(.active) .share-button {
   opacity: 0.5;
