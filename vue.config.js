@@ -8,4 +8,10 @@ module.exports = {
     },
   },
   runtimeCompiler: true,
+  pwa: {
+    themeColor: '#FC7A24',
+    msTileColor: '#FC7A24',
+    assetsVersion: '1',
+    appleMobileWebAppCapable: 'yes',
+  },
 };

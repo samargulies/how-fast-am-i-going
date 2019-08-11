@@ -3,18 +3,18 @@
   "short_name": "Elevation",
   "icons": [
     {
-      "src": "./favicon-192x192.png",
+      "src": "./img/icons/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./favicon-512x512.png",
+      "src": "./img/icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#FC7A24",
   "theme_color": "#FC7A24"
 }
