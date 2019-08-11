@@ -4,6 +4,10 @@ https://whatismyelevation.netlify.com/* https://www.whatismyelevation.com/:splat
 # Ensure cache.manifest is cleared
 /cache.manifest /404.html 404
 
+# Properly mark old renderfiles as not found
+/js/* /404.html 404
+/css/* /404/html 404
+
 # Redirect old language pages to new ones
 /lang/:lang/* /:lang/ 301
 
