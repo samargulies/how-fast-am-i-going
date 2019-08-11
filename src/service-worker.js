@@ -3,7 +3,7 @@ if (workbox) {
 
   workbox.routing.registerRoute(
     new RegExp('/'),
-    workbox.strategies.cacheFirst(),
+    workbox.strategies.NetworkFirst(),
   );
 
   workbox.routing.registerRoute(
@@ -13,14 +13,14 @@ if (workbox) {
 
   workbox.routing.registerRoute(
     new RegExp('https://dev.virtualearth.net'),
-    workbox.strategies.networkFirst({
+    workbox.strategies.NetworkOnly({
       cacheName: 'api-bing',
     }),
   );
 
   workbox.routing.registerRoute(
     new RegExp('https://a1gehjprye.execute-api.us-east-1.amazonaws.com'),
-    workbox.strategies.networkFirst({
+    workbox.strategies.NetworkOnly({
       cacheName: 'api',
     }),
   );
