@@ -12,7 +12,7 @@ module.exports = {
     name: 'Elevation',
     themeColor: '#FC7A24',
     msTileColor: '#FC7A24',
-    assetsVersion: '1',
+    assetsVersion: '2',
     appleMobileWebAppCapable: 'yes',
   },
 };
