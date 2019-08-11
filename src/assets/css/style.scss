@@ -203,7 +203,7 @@ a {
 .slide-enter, .slide-leave-to { 
 	transform: scaleY(0);
 	opacity: 0; 
-	margin-top: -3em;
+	margin-top: -4.25em;
 }
 
 #elevation {
@@ -286,6 +286,7 @@ a {
 
 .settings {
 	font-size: 1.375em;
+	margin-bottom: 1em;
 }
 
 #choose-units .units {
@@ -333,7 +334,7 @@ a {
 .ad {
 		margin: 0.5em 0;
 		&--top {
-			margin-top: 0;
+			margin: 0 0 1em;
 		}
 }
 
@@ -542,7 +543,7 @@ a {
   &:before {
     mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 15 15' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.292 14.14c-3.87 0-7.068-3.2-7.068-7.069 0-3.876 3.192-7.075 7.061-7.075 3.87 0 7.075 3.2 7.075 7.075 0 3.87-3.199 7.069-7.068 7.069zm0-1.415a5.644 5.644 0 0 0 5.66-5.654 5.655 5.655 0 0 0-5.667-5.66 5.634 5.634 0 0 0-5.646 5.66 5.638 5.638 0 0 0 5.653 5.654zm0-2.113c-.185 0-.335-.075-.485-.232l-2.29-2.318a.572.572 0 0 1-.164-.416c0-.315.239-.547.567-.547.164 0 .314.068.41.177l.8.828.608.765-.061-1.401V4.132c0-.349.266-.595.615-.595.355 0 .615.246.615.595v3.336l-.061 1.408.615-.78.793-.82A.537.537 0 0 1 9.67 7.1c.321 0 .567.232.567.547 0 .17-.054.3-.17.417L7.783 10.38c-.15.157-.3.232-.492.232z' fill='%23000' fill-rule='nonzero'/%3E%3C/svg%3E");
     background-color: var(--text);
-    margin-top: -.1rem;
+    margin-top: -0.1rem;
     width: 1.25rem;
     height: 1.25rem;
   }
