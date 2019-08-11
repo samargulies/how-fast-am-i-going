@@ -8,14 +8,14 @@
         data-copy-text="Copied!">{{ $t('share-link') }}</a>
       <a class="share-button share-button--facebook" @click="shareToFacebook">
           {{ $t('facebook') }}</a>
-<!--      <a class="share-button share-button--twitter" @click="shareToTwitter">
-          {{ $t('twitter') }}</a> -->
+     <a class="share-button share-button--twitter" @click="shareToTwitter">
+          {{ $t('twitter') }}</a>
     </div>
-<!--    <transition name="fadeDown">
+   <transition name="fadeDown">
       <p class="sharing__promo"
         v-if="hasElevationValue"
         v-html="$t('share-promo')"></p>
-    </transition> -->
+    </transition>
   </div>
 </template>
 <script>

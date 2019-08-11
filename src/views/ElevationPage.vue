@@ -1,6 +1,7 @@
 <template>
   <div :class="[online ? 'online' : 'offline','page page--elevation']">
     <Adsense
+      class="ad--top"
       ad-client="ca-pub-6102117487539042"
       ad-slot="6966721074" />
     <h1>
@@ -10,10 +11,11 @@
     </h1>
     <ElevationReading />
     <SetLocation />
-    <ShareActions />
     <Adsense
+      class="ad--bottom"
       ad-client="ca-pub-6102117487539042"
       ad-slot="1948746426" />
+    <ShareActions />
     <TheFooter/>
   </div>
 </template>
