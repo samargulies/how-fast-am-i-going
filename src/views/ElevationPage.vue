@@ -11,10 +11,11 @@
     </h1>
     <ElevationReading />
     <SetLocation />
-    <Adsense
+    <!-- <Adsense
       class="ad--bottom"
       ad-client="ca-pub-6102117487539042"
-      ad-slot="1948746426" />
+      ad-slot="1948746426" /> -->
+    <MediaNetAd id="228472294" size="300x250" />
     <ShareActions />
     <TheFooter/>
   </div>
@@ -26,6 +27,7 @@ import { parseUrlTitle, pathForLocale } from '@/helpers';
 import ElevationReading from '@/components/ElevationReading.vue';
 import SetLocation from '@/components/SetLocation.vue';
 import Adsense from '@/components/Adsense.vue';
+import MediaNetAd from '@/components/MediaNetAd.vue';
 import ShareActions from '@/components/ShareActions.vue';
 import TheFooter from '@/components/TheFooter.vue';
 
@@ -35,6 +37,7 @@ export default {
     ElevationReading,
     SetLocation,
     Adsense,
+    MediaNetAd,
     TheFooter,
     ShareActions,
   },
