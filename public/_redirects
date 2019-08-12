@@ -17,4 +17,7 @@ https://whatismyelevation.netlify.com/* https://www.whatismyelevation.com/:splat
 # Redirect short referrals to long ones
 /* ref=:ref /:splat?utm_source=:ref&utm_medium=:ref&utm_campaign=:ref 301
 
+# Redirect old traffic to the root url
+/index.html / 200!
+
 /* /index.html 200
