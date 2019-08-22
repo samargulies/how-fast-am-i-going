@@ -1,23 +1,11 @@
-# Redirect default Netlify subdomain to primary domain
-https://whatismyelevation.netlify.com/* https://www.whatismyelevation.com/:splat 301!
-
-# Ensure cache.manifest is cleared
-/cache.manifest /404.html 404
-
 # Properly mark old renderfiles as not found
 /js/* /404.html 404
 /css/* /404/html 404
-
-# Redirect old language pages to new ones
-/lang/:lang/* /:lang/ 301
 
 # Redirect en pages to base
 /en/* /:splat 301
 
 # Redirect short referrals to long ones
 /* ref=:ref /:splat?utm_source=:ref&utm_medium=:ref&utm_campaign=:ref 301
-
-# Redirect old traffic to the root url
-/index.html / 301!
 
 /* /index.html 200
