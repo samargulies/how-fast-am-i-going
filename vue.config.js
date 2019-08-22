@@ -9,7 +9,7 @@ module.exports = {
   },
   runtimeCompiler: true,
   pwa: {
-    name: 'Elevation',
+    name: 'How Fast',
     themeColor: '#FC7A24',
     msTileColor: '#FC7A24',
     assetsVersion: '2',
