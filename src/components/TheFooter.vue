@@ -1,6 +1,6 @@
 <template>
 <footer class="footer">
-  <div class="section section--localizations">
+  <!-- <div class="section section--localizations">
     <ul class="languages">
       <li><router-link :to="pathForLocale({locale:'de'})">Deutsch</router-link></li>
       <li><router-link :to="pathForLocale({locale:'es'})">Español</router-link></li>
@@ -12,23 +12,13 @@
       <li><router-link :to="pathForLocale({locale:'ja'})">日本語</router-link></li>
       <li><router-link :to="pathForLocale({locale: 'zh'})">中文</router-link></li>
     </ul>
-  </div>
+  </div> -->
 
   <div class="section section--about" v-if="includeAbout">
     <h2 class="section__title">What is this?</h2>
     <div class="text-block">
       <p>
-        This site was designed to help you find the elevation of your current location,
-        or any point on Earth.
-        When viewed from a phone that supports elevation readings,
-        the reading will come directly from your device altitude reading and will update
-        automatically as you move. It will even work when your phone is offline.
-        From a computer your elevation is loaded from our API based on your location.
-      </p>
-      <p v-if="enableCustomApi">
-        <router-link :to="pathForLocale({path: '/api'})">
-          Powered by the What is My Elevation API
-        </router-link>
+        Find your current speed, average speed, and compass direction in mph or km/h with this online speedometer.
       </p>
       <i18n path="brought-to-you-by" tag="p">
         <a href="https://belabor.org/">belabor.org</a>
@@ -39,10 +29,7 @@
     <nav>
       <ul>
         <li><router-link :to="pathForLocale({path: '/'})">Home</router-link></li>
-        <li><router-link :to="pathForLocale({path: '/atlas'})">Atlas</router-link></li>
-        <li v-if="enableCustomApi">
-          <router-link :to="pathForLocale({path: '/api'})">API</router-link>
-        </li>
+        <li><a href="https://www.whatismyelevation.com/">What is My Elevation?</a></li>
         <li><a href="https://snowfall.guide/">Snowfall Guide</a></li>
         <li><a href="http://visited.earth/">Visited Earth</a></li>
       </ul>
@@ -60,7 +47,6 @@
 </footer>
 </template>
 <script>
-import config from '@/config';
 import { pathForLocale } from '@/helpers';
 
 export default {
@@ -76,9 +62,6 @@ export default {
     },
     currentColorScheme() {
       return this.$store.state.colorScheme;
-    },
-    enableCustomApi() {
-      return config.ENABLE_CUSTOM_API;
     },
     showAltimeters() {
       return !this.$t('hide-altimeters');

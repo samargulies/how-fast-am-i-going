@@ -1,22 +1,53 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { getSpeed, getBearing } from '@/helpers';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     loading: true,
-    location: {},
+    locations: [],
     useFeet: true,
     supportsLocation: false,
     watchId: null,
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
   },
+  getters: {
+    currentSpeed(state) {
+      if (state.locations.length > 1) {
+        return state.locations[state.locations.length - 1].speed;
+      }
+      return 0;
+    },
+    averageSpeed(state) {
+      if (state.locations.length < 2) {
+        return 0;
+      }
+      let totalDuration = 0;
+      const speeds = state.locations.reduce((a, b) => {
+        const duration = b.position.timestamp || 0 - a.position.timestamp || 0;
+        totalDuration += duration;
+        return (a.speed || 0 + b.speed || 0) * duration;
+      }, 0);
+      return speeds / totalDuration;
+    },
+    currentBearing(state) {
+      if (state.locations.length > 1) {
+        const locationA = state.locations[state.locations.length - 2];
+        const locationB = state.locations[state.locations.length - 1];
+        return getBearing(locationA.position, locationB.position);
+      }
+      return null;
+    },
+  },
   actions: {
     getUserLocation({ commit, dispatch }) {
       const watchId = navigator.geolocation.watchPosition(
         (location) => {
-          dispatch('setUserLocation', location);
+          commit('addLocation', location);
+          dispatch('setSupportsLocation', true);
+          dispatch('setLoading', false);
         },
         error => dispatch('locationError', error),
         {
@@ -25,13 +56,6 @@ export default new Vuex.Store({
         },
       );
       commit('setItem', { item: 'watchId', value: watchId });
-    },
-    setUserLocation({ dispatch, commit }, location) {
-      commit('setItem', { item: 'location', value: location });
-      if (location.coords.altitude) {
-        dispatch('setSupportsLocation', true);
-        dispatch('setLoading', false);
-      }
     },
     locationError({ commit, dispatch }, error) {
       console.warn('location access denied', error);
@@ -61,10 +85,14 @@ export default new Vuex.Store({
     setItem(state, { item, value }) {
       Vue.set(state, item, value);
     },
-    setElevation(state, { elevation, source, accuracy = null }) {
-      Vue.set(state.elevation, 'value', elevation);
-      Vue.set(state.elevation, 'source', source);
-      Vue.set(state.elevation, 'accuracy', accuracy);
+    addLocation(state, position) {
+      let speed = 0;
+      if (state.locations.length > 1) {
+        const lastLocation = state.locations[state.locations.length - 1];
+        speed = getSpeed(lastLocation.position, position);
+      }
+      console.log({ position, speed });
+      state.locations.push({ position, speed });
     },
   },
 });

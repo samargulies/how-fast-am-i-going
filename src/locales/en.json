@@ -1,6 +1,6 @@
 {
-	"site-title": "What is my elevation?",
-	"site-description": "Find the elevation of your current location, or any point on Earth.",
+	"site-title": "How fast am I going?",
+	"site-description": "Find your current speed in mph with this online speedometer",
 	"site-mobile-app-title": "Elevation",
 	"source": {
 		"web": {
@@ -16,7 +16,9 @@
     "feet-default": "true",
 		"hide-selection": "false",
 		"feet": "ft",
-		"meters": "m"
+		"meters": "m",
+		"mph": "mph",
+		"kmh": "km/h"
 	},
 	"location-format": "{value} {units}",
 	"change-location": "Change location",

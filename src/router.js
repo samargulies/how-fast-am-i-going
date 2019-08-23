@@ -1,11 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ElevationPage from './views/ElevationPage.vue';
+import SpeedPage from './views/SpeedPage.vue';
 import i18n from '@/i18n';
-
-const AtlasPage = () => import('./views/AtlasPage.vue');
-const ApiPage = () => import('./views/ApiPage.vue');
-const ShareCustomizerPage = () => import('./views/ShareCustomizerPage.vue');
 
 Vue.use(Router);
 
@@ -18,10 +14,6 @@ const router = new Router({
       redirect: to => `/${to.params.pathMatch}`,
     },
     {
-      path: '/lang/:lang.html',
-      redirect: to => `/${to.params.lang}/`,
-    },
-    {
       path: '/:lang(\\w{2})?',
       component: {
         template: '<router-view />',
@@ -30,29 +22,7 @@ const router = new Router({
         {
           path: '',
           name: 'home',
-          component: ElevationPage,
-        },
-        {
-          path: 'location/:latitude,:longitude/:title?/:elevation/share',
-          name: 'ShareCustomizer',
-          component: ShareCustomizerPage,
-          props: true,
-        },
-        {
-          path: 'location/:latitude,:longitude/:title?',
-          name: 'location',
-          component: ElevationPage,
-          props: true,
-        },
-        {
-          path: 'atlas',
-          name: 'atlas',
-          component: AtlasPage,
-        },
-        {
-          path: 'api',
-          name: 'api',
-          component: ApiPage,
+          component: SpeedPage,
         },
       ],
     },

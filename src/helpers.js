@@ -1,21 +1,23 @@
-import punycode from 'punycode';
+import { point, distance, bearing } from '@turf/turf';
 
-export function parseUrlTitle(text) {
-  if (!text) {
-    return text;
-  }
-  return punycode.decode(text).replace(/--/g, ', ').replace(/-/g, ' ');
+function positionAsPoint(position) {
+  return point([position.coords.longitude, position.coords.latitude]);
 }
 
-export function encodeUrlTitle(text) {
-  if (!text) {
-    return text;
-  }
-  return punycode.encode(text).replace(/,\W/g, '--').replace(/\W/g, '-');
+export function getSpeed(positionA, positionB) {
+  const length = distance(positionAsPoint(positionA), positionAsPoint(positionB));
+  const duration = positionB.timestamp - positionA.timestamp;
+  const durationInHours = duration / (1000 * 60 * 60);
+  console.log({ length, durationInHours });
+  return durationInHours === 0 ? 0 : length / durationInHours;
 }
 
-export function metersToFeet(meters) {
-  return 3.280839895 * meters;
+export function getBearing(positionA, positionB) {
+  return bearing(positionAsPoint(positionA), positionAsPoint(positionB));
+}
+
+export function kmhToMPH(speed) {
+  return 1.609344 * speed;
 }
 
 export function round(value, decimals) {
