@@ -35,18 +35,20 @@ export default new Vuex.Store({
       }
       return 0;
     },
-    averageSpeed(state, getters) {
-      return 0;
-      // if (getters.smoothedLocations.length < 2) {
-      //   return 0;
-      // }
-      // let totalDuration = 0;
-      // const speeds = getters.smoothedLocations.reduce((a, b) => {
-      //   const duration = b.timestamp || 0 - a.timestamp || 0;
-      //   totalDuration += duration;
-      //   return (a.speed || 0 + b.speed || 0) * duration;
-      // }, 0);
-      // return speeds / totalDuration;
+    averageSpeed(state) {
+      if (state.locations.length < 2) {
+        return 0;
+      }
+      let totalDuration = 0;
+      let totalSpeeds = 0;
+      state.locations.forEach((location, index) => {
+        if (index === 0) { return; }
+        const previousLocation = state.locations[index - 1];
+        const duration = location.timestamp - previousLocation.timestamp;
+        totalSpeeds += getSpeed(previousLocation, location) * duration;
+        totalDuration += duration;
+      });
+      return totalSpeeds / totalDuration;
     },
     currentBearing(state, getters) {
       if (getters.smoothedLocations.length > 1) {
