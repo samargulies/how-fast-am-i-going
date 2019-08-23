@@ -18,7 +18,8 @@
     <h2 class="section__title">What is this?</h2>
     <div class="text-block">
       <p>
-        Find your current speed, average speed, and compass direction in mph or km/h with this online speedometer.
+        Find your current speed, average speed, and compass direction in mph or km/h with
+        this online speedometer.
       </p>
       <i18n path="brought-to-you-by" tag="p">
         <a href="https://belabor.org/">belabor.org</a>
