@@ -5,9 +5,9 @@
 :root {
 	--clarendon: "clarendon-text-pro", "Superclarendon-Regular", "Rockwell", system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	--system: system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-	--background: #FFFEF2;
+	--background: #fffcfc;
 	--text: #000;
-	--brand: #FC7A24;
+	--brand: #f13a3a;
 	--loader: #333;
 	--dark-grey: #444;
 	--grey: #535353;
@@ -277,7 +277,7 @@ a {
 
 	@media (max-width: 640px) {
 			grid-template-columns: 1fr  1fr;
-			.reading.main-reading {
+			.reading.reading--speed {
 					grid-row: 1;
 					grid-column-end: span 2;
 			}

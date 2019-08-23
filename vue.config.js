@@ -10,9 +10,9 @@ module.exports = {
   runtimeCompiler: true,
   pwa: {
     name: 'How Fast',
-    themeColor: '#FC7A24',
-    msTileColor: '#FC7A24',
-    assetsVersion: '2',
+    themeColor: '#f13a3a',
+    msTileColor: '#f13a3a',
+    assetsVersion: '3',
     appleMobileWebAppCapable: 'yes',
   },
 };
