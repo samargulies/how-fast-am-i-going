@@ -6,7 +6,7 @@
     </div>
     <div v-else>
       <div class="topline-readings">
-        <div class="reading" reading--avg-speed>
+        <div class="reading reading--avg-speed">
           <div class="reading__value">
             <i18n path="location-format" tag="div" v-if="watchId">
               <span place="value">
