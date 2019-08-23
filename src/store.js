@@ -24,11 +24,14 @@ export default new Vuex.Store({
         timestamp: location.timestamp,
       }));
     },
-    currentSpeed(state, getters) {
-      if (getters.smoothedLocations.length > 1) {
-        const locationA = getters.smoothedLocations[getters.smoothedLocations.length - 2];
-        const locationB = state.locations[state.locations.length - 1];
-        return getSpeed(locationA, locationB);
+    currentSpeed(state) {
+      if (state.locations.length > 2) {
+        const locationA = state.locations[state.locations.length - 3];
+        const locationB = state.locations[state.locations.length - 2];
+        const locationC = state.locations[state.locations.length - 1];
+        const sampleA = getSpeed(locationA, locationC);
+        const sampleB = getSpeed(locationB, locationC);
+        return (sampleA + sampleB) / 2;
       }
       return 0;
     },
@@ -99,6 +102,7 @@ export default new Vuex.Store({
       Vue.set(state, item, value);
     },
     addLocation(state, location) {
+      console.log(location);
       state.locations.push(location);
     },
   },

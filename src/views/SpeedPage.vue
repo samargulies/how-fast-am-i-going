@@ -40,6 +40,12 @@ export default {
     this.$store.dispatch('getUserLocation');
     window.addEventListener('online', this.updateOnlineStatus);
     window.addEventListener('offline', this.updateOnlineStatus);
+    window.addEventListener('focus', () => {
+      this.$store.dispatch('getUserLocation');
+    });
+    window.addEventListener('blur', () => {
+      this.$store.dispatch('stopWatchingUserLocation');
+    });
   },
 };
 </script>
