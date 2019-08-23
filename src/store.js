@@ -27,7 +27,7 @@ export default new Vuex.Store({
     currentSpeed(state, getters) {
       if (getters.smoothedLocations.length > 1) {
         const locationA = getters.smoothedLocations[getters.smoothedLocations.length - 2];
-        const locationB = getters.smoothedLocations[getters.smoothedLocations.length - 1];
+        const locationB = state.locations[state.locations.length - 1];
         return getSpeed(locationA, locationB);
       }
       return 0;
