@@ -16,8 +16,8 @@ export default new Vuex.Store({
   },
   getters: {
     smoothedLocations(state) {
-      const filterLatitude = new KalmanFilter({ R: 0.01, Q: 20 });
-      const filterLongitude = new KalmanFilter({ R: 0.01, Q: 20 });
+      const filterLatitude = new KalmanFilter({ R: 0.001, Q: 0.0001 });
+      const filterLongitude = new KalmanFilter({ R: 0.001, Q: 0.0001 });
       return state.locations.map(location => ({
         latitude: filterLatitude.filter(location.coords.latitude),
         longitude: filterLongitude.filter(location.coords.longitude),
