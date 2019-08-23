@@ -13,7 +13,7 @@ export function getSpeed(positionA, positionB) {
 }
 
 export function getBearing(positionA, positionB) {
-  return bearing(positionAsPoint(positionA), positionAsPoint(positionB));
+  return bearing(positionAsPoint(positionB), positionAsPoint(positionA));
 }
 
 export function kmhToMPH(speed) {
