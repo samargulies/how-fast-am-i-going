@@ -35,11 +35,11 @@
           <div class="reading__label">Bearing</div>
         </div>
       </div>
-      <div class="metadata">
+      <!-- <div class="metadata">
         <div class="watching" v-if="watchId">
           Watching for updates
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

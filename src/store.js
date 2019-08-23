@@ -45,7 +45,7 @@ export default new Vuex.Store({
     getUserLocation({ commit, dispatch }) {
       const watchId = navigator.geolocation.watchPosition(
         (location) => {
-          commit('addLocation', location);
+          dispatch('setLocation', location);
           dispatch('setSupportsLocation', true);
           dispatch('setLoading', false);
         },
@@ -56,6 +56,21 @@ export default new Vuex.Store({
         },
       );
       commit('setItem', { item: 'watchId', value: watchId });
+    },
+    setLocation({ state, commit }, position) {
+      let speed = 0;
+      if (state.locations.length > 1) {
+        const lastLocation = state.locations[state.locations.length - 1];
+        const timeSinceLastUpdate = position.timestamp - lastLocation.position.timestamp;
+        if (timeSinceLastUpdate < 10 * 1000) {
+          // TODO: merge instead of ignoring
+          return;
+        }
+        speed = getSpeed(lastLocation.position, position);
+      }
+      const location = { position, speed };
+      console.log(location);
+      commit('addLocation', location);
     },
     locationError({ commit, dispatch }, error) {
       console.warn('location access denied', error);
@@ -85,14 +100,8 @@ export default new Vuex.Store({
     setItem(state, { item, value }) {
       Vue.set(state, item, value);
     },
-    addLocation(state, position) {
-      let speed = 0;
-      if (state.locations.length > 1) {
-        const lastLocation = state.locations[state.locations.length - 1];
-        speed = getSpeed(lastLocation.position, position);
-      }
-      console.log({ position, speed });
-      state.locations.push({ position, speed });
+    addLocation(state, location) {
+      state.locations.push(location);
     },
   },
 });
