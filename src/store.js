@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import KalmanFilter from 'kalmanjs';
 import { getSpeed, getBearing } from '@/helpers';
 
 Vue.use(Vuex);
@@ -14,29 +15,41 @@ export default new Vuex.Store({
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
   },
   getters: {
-    currentSpeed(state) {
-      if (state.locations.length > 1) {
-        return state.locations[state.locations.length - 1].speed;
+    smoothedLocations(state) {
+      const filterLatitude = new KalmanFilter({ R: 0.01, Q: 20 });
+      const filterLongitude = new KalmanFilter({ R: 0.01, Q: 20 });
+      return state.locations.map(location => ({
+        latitude: filterLatitude.filter(location.coords.latitude),
+        longitude: filterLongitude.filter(location.coords.longitude),
+        timestamp: location.timestamp,
+      }));
+    },
+    currentSpeed(state, getters) {
+      if (getters.smoothedLocations.length > 1) {
+        const locationA = getters.smoothedLocations[getters.smoothedLocations.length - 2];
+        const locationB = getters.smoothedLocations[getters.smoothedLocations.length - 1];
+        return getSpeed(locationA, locationB);
       }
       return 0;
     },
-    averageSpeed(state) {
-      if (state.locations.length < 2) {
-        return 0;
-      }
-      let totalDuration = 0;
-      const speeds = state.locations.reduce((a, b) => {
-        const duration = b.position.timestamp || 0 - a.position.timestamp || 0;
-        totalDuration += duration;
-        return (a.speed || 0 + b.speed || 0) * duration;
-      }, 0);
-      return speeds / totalDuration;
+    averageSpeed() {
+      return 0;
+      // if (state.locations.length < 2) {
+      //   return 0;
+      // }
+      // let totalDuration = 0;
+      // const speeds = state.locations.reduce((a, b) => {
+      //   const duration = b.position.timestamp || 0 - a.position.timestamp || 0;
+      //   totalDuration += duration;
+      //   return (a.speed || 0 + b.speed || 0) * duration;
+      // }, 0);
+      // return speeds / totalDuration;
     },
-    currentBearing(state) {
-      if (state.locations.length > 1) {
-        const locationA = state.locations[state.locations.length - 2];
-        const locationB = state.locations[state.locations.length - 1];
-        return getBearing(locationA.position, locationB.position);
+    currentBearing(state, getters) {
+      if (getters.smoothedLocations.length > 1) {
+        const locationA = getters.smoothedLocations[getters.smoothedLocations.length - 2];
+        const locationB = getters.smoothedLocations[getters.smoothedLocations.length - 1];
+        return getBearing(locationA, locationB);
       }
       return null;
     },
@@ -45,7 +58,7 @@ export default new Vuex.Store({
     getUserLocation({ commit, dispatch }) {
       const watchId = navigator.geolocation.watchPosition(
         (location) => {
-          dispatch('setLocation', location);
+          commit('addLocation', location);
           dispatch('setSupportsLocation', true);
           dispatch('setLoading', false);
         },
@@ -56,21 +69,6 @@ export default new Vuex.Store({
         },
       );
       commit('setItem', { item: 'watchId', value: watchId });
-    },
-    setLocation({ state, commit }, position) {
-      let speed = 0;
-      if (state.locations.length > 1) {
-        const lastLocation = state.locations[state.locations.length - 1];
-        const timeSinceLastUpdate = position.timestamp - lastLocation.position.timestamp;
-        if (timeSinceLastUpdate < 10 * 1000) {
-          // TODO: merge instead of ignoring
-          return;
-        }
-        speed = getSpeed(lastLocation.position, position);
-      }
-      const location = { position, speed };
-      console.log(location);
-      commit('addLocation', location);
     },
     locationError({ commit, dispatch }, error) {
       console.warn('location access denied', error);

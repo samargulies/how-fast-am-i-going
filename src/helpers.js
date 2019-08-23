@@ -1,7 +1,7 @@
 import { point, distance, bearing } from '@turf/turf';
 
 function positionAsPoint(position) {
-  return point([position.coords.longitude, position.coords.latitude]);
+  return point([position.longitude, position.latitude]);
 }
 
 export function getSpeed(positionA, positionB) {
