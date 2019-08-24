@@ -5,38 +5,38 @@
       <div class="double-bounce2"></div>
     </div>
     <div v-else>
-      <div class="topline-readings">
+      <div :class="['topline-readings', watchId ? 'watching' : 'not-watching']">
         <div class="reading reading--avg-speed">
           <div class="reading__value">
-            <i18n path="location-format" tag="div" v-if="watchId">
+            <i18n path="location-format" tag="div">
               <span place="value">
-                {{ averageSpeed | numberFormatted({useFeet, locale: $t.locale}) }}
+                {{ averageSpeed | numberFormatted({units, locale: $t.locale}) }}
               </span>
-              <span place="units">{{ $t(useFeet ? 'units.mph' : 'units.kmh') }}</span>
+              <span place="units">{{ $t(`units.${units}`) }}</span>
             </i18n>
           </div>
           <div class="reading__label">Average Speed</div>
         </div>
         <div class="reading reading--speed">
           <div class="reading__value">
-            <i18n path="location-format" tag="div" v-if="watchId">
+            <i18n path="location-format" tag="div">
               <span place="value">
-                {{ currentSpeed | numberFormatted({useFeet, locale: $t.locale}) }}
+                {{ currentSpeed | numberFormatted({units, locale: $t.locale}) }}
               </span>
-              <span place="units">{{ $t(useFeet ? 'units.mph' : 'units.kmh') }}</span>
+              <span place="units">{{ $t(`units.${units}`) }}</span>
             </i18n>
           </div>
           <div class="reading__label">Current Speed</div>
         </div>
         <div class="reading">
-          <div class="reading__value" v-if="watchId && currentBearing !== null">
+          <div class="reading__value" v-if="currentBearing !== null">
             {{ currentBearing | bearingFormatted }}
           </div>
           <div class="reading__label">Bearing</div>
         </div>
       </div>
       <!-- <div class="metadata">
-        <div class="watching" v-if="watchId">
+        <div class="watching-indicator" v-if="watchId">
           Watching for updates
         </div>
       </div> -->
@@ -53,7 +53,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['useFeet', 'loading', 'watchId']),
+    ...mapState(['units', 'loading', 'watchId']),
     ...mapGetters(['currentBearing', 'currentSpeed', 'averageSpeed']),
   },
 };

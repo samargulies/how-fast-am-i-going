@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import { round, kmhToMPH } from '@/helpers';
+import { round, convertSpeed } from '@/helpers';
 
-Vue.filter('numberFormatted', (number, { useFeet, locale }) => {
-  const value = useFeet ? 0.621371 * number : number;
-  return round(value, 0).toLocaleString(locale, {
+Vue.filter('numberFormatted', (number, { units, locale }) => {
+  const speed = convertSpeed(number, units);
+  return round(speed, 0).toLocaleString(locale, {
     useGrouping: true,
     maximumFractionDigits: 0,
   });

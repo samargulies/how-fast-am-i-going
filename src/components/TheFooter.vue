@@ -18,8 +18,7 @@
     <h2 class="section__title">What is this?</h2>
     <div class="text-block">
       <p>
-        Find your current speed, average speed, and compass direction in mph or km/h with
-        this online speedometer.
+        This site was designed to find your current speed, average speed, and compass direction in miles per hour, kilometers per hour, or knots. To use this online speedometer, visit this page on a GPS enabled device and your speed will update automatically as you move. It will even work when your phone is offline. You can use this to see how fast you are travelling while walking, biking, driving, boating, or on a train.
       </p>
       <i18n path="brought-to-you-by" tag="p">
         <a href="https://belabor.org/">belabor.org</a>

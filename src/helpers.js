@@ -4,8 +4,12 @@ function locationAsPoint(location) {
   return point([location.coords.longitude, location.coords.latitude]);
 }
 
+export function getDistance(locationA, locationB) {
+  return distance(locationAsPoint(locationA), locationAsPoint(locationB));
+}
+
 export function getSpeed(locationA, locationB) {
-  const length = distance(locationAsPoint(locationA), locationAsPoint(locationB));
+  const length = getDistance(locationA, locationB);
   const duration = locationB.timestamp - locationA.timestamp;
   const durationInHours = duration / (1000 * 60 * 60);
   // console.log({ length, durationInHours });
@@ -16,8 +20,13 @@ export function getBearing(locationA, locationB) {
   return bearing(locationAsPoint(locationB), locationAsPoint(locationA));
 }
 
-export function kmhToMPH(speed) {
-  return 0.621371 * speed;
+export function convertSpeed(speed, units) {
+  if (units === 'mph') {
+    return 0.621371 * speed;
+  } if (units === 'kn') {
+    return 1.852 * speed;
+  }
+  return speed;
 }
 
 export function round(value, decimals) {

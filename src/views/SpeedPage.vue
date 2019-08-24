@@ -36,7 +36,7 @@ export default {
     pathForLocale,
   },
   created() {
-    this.$store.dispatch('setUseFeet', this.$t('units.feet-default') === 'true');
+    this.$store.dispatch('setUnits', this.$t('units.default-units'));
     this.$store.dispatch('getUserLocation');
     window.addEventListener('online', this.updateOnlineStatus);
     window.addEventListener('offline', this.updateOnlineStatus);

@@ -248,12 +248,12 @@ a {
 	background-repeat: no-repeat;
 	background-color: var(--dark-grey);
 }
-.watching {
+.watching-indicator {
 	color: #007FFF;
 	font-size: 0.75em;
 }
 
-.watching:before {
+.watching-indicator:before {
 	content: "";
 	width: 0.75rem;
 	height: 0.75rem;
@@ -296,19 +296,22 @@ a {
 					}
 			}
 			&__label {
-					font-size: 1.25em;
+					font-size: 1rem;
 					color: var(--grey);
 					font-weight: 600;
-					margin-bottom: 5px;
+					margin-bottom: 0.5em;
 			}
 			&.reading--speed {
 					font-size: 1.8rem;
 					.reading__label {
-							font-size: 1em;
+							font-size: 1.25rem;
 							margin-bottom: 0;
 					}
 			}
 	}
+}
+.not-watching .reading__value {
+	color: var(--light-grey);
 }
 
 .button,
@@ -331,6 +334,9 @@ a {
 	margin-bottom: 1em;
 }
 
+#choose-units {
+	margin: 1em 0;
+}
 #choose-units .units {
 	color: #999;	
 	transition: background-color .5s ease, color .5s ease;

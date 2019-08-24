@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import KalmanFilter from 'kalmanjs';
-import { getSpeed, getBearing } from '@/helpers';
+import { getSpeed, getBearing, getDistance } from '@/helpers';
 
 Vue.use(Vuex);
 
@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     loading: true,
     locations: [],
-    useFeet: true,
+    units: 'kmh',
     supportsLocation: false,
     watchId: null,
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
@@ -38,6 +38,20 @@ export default new Vuex.Store({
       return speed;
     },
     averageSpeed(state) {
+      if (state.locations.length < 2) {
+        return 0;
+      }
+      let totalDistance = 0;
+      state.locations.forEach((location, index) => {
+        if (index === 0) { return; }
+        const previousLocation = state.locations[index - 1];
+        totalDistance += getDistance(previousLocation, location);
+      });
+      const totalDuration = (state.locations[state.locations.length].timestamp - state.locations[0].timestamp) / (1000 * 60 * 60);
+      console.log({ totalDistance, totalDuration });
+      return totalDistance / totalDuration;
+    },
+    averageSpeedDeprecated(state) {
       if (state.locations.length < 3) {
         return 0;
       }
@@ -90,8 +104,8 @@ export default new Vuex.Store({
     setLoading({ commit }, isLoading) {
       commit('setItem', { item: 'loading', value: isLoading });
     },
-    setUseFeet({ commit }, isFeet) {
-      commit('setItem', { item: 'useFeet', value: isFeet });
+    setUnits({ commit }, units) {
+      commit('setItem', { item: 'units', value: units });
     },
     setSupportsLocation({ commit }, supportsLocation) {
       commit('setItem', { item: 'supportsLocation', value: supportsLocation });

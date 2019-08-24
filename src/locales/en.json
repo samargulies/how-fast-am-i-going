@@ -1,24 +1,13 @@
 {
 	"site-title": "How fast am I going?",
 	"site-description": "Find your current speed in mph with this online speedometer",
-	"site-mobile-app-title": "Elevation",
-	"source": {
-		"web": {
-			"description": "According to the web",
-			"toggle": "Use web"
-		},
-		"phone": {
-			"description": "According to your phone",
-			"toggle": "Use phone"
-		}
-	},
+	"site-mobile-app-title": "How Fast?",
 	"units": {
-    "feet-default": "true",
+		"default-units": "mph",
 		"hide-selection": "false",
-		"feet": "ft",
-		"meters": "m",
 		"mph": "mph",
-		"kmh": "km/h"
+		"kmh": "km/h",
+		"kn": "knots"
 	},
 	"location-format": "{value} {units}",
 	"change-location": "Change location",
