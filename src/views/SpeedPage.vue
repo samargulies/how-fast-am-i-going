@@ -7,11 +7,15 @@
     </h1>
     <DataReadings />
     <Settings />
+    <TrendChart class="speed-chart" v-if="speedReadings.length > 2"
+      :datasets="[{data: speedReadings, smooth: true, fill: true}]"
+      :interactive="true" />
     <TheFooter/>
   </div>
 </template>
 
 <script>
+import TrendChart from 'vue-trend-chart';
 import { pathForLocale } from '@/helpers';
 import DataReadings from '@/components/DataReadings.vue';
 import Settings from '@/components/Settings.vue';
@@ -23,11 +27,17 @@ export default {
     DataReadings,
     Settings,
     TheFooter,
+    TrendChart,
   },
   data() {
     return {
       online: navigator.onLine,
     };
+  },
+  computed: {
+    speedReadings() {
+      return this.$store.getters.speedReadings;
+    },
   },
   methods: {
     updateOnlineStatus() {
