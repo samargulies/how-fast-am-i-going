@@ -50,3 +50,12 @@ export function sendEvent(eventCategory, eventAction) {
 export function pathForLocale({ path = this.$route.path, locale = this.$i18n.locale }) {
   return path.replace(/^\/(\w{2}\/)*/, `/${locale}/`);
 }
+
+function getMean(data) {
+  return data.reduce((a, b) => Number(a) + Number(b), 0) / data.length;
+}
+
+export function standardDeviation(data) {
+  const m = getMean(data);
+  return Math.sqrt(data.reduce((sq, n) => sq + ((n - m) ** 2), 0) / (data.length - 1));
+}

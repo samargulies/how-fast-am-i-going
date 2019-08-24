@@ -35,6 +35,10 @@
           <div class="reading__label">Bearing</div>
         </div>
       </div>
+      <div>
+        <p>Accuracy: {{ accuracy }}</p>
+        <p>STD Dev: {{ standardDeviation }}</p>
+      </div>
       <!-- <div class="metadata">
         <div class="watching-indicator" v-if="watchId">
           Watching for updates
@@ -53,8 +57,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(['units', 'loading', 'watchId']),
-    ...mapGetters(['currentBearing', 'currentSpeed', 'averageSpeed']),
+    ...mapState(['units', 'locations', 'loading', 'watchId']),
+    ...mapGetters(['currentBearing', 'currentSpeed', 'averageSpeed', 'standardDeviation']),
+    accuracy() {
+      if (this.locations.length === 0) { return null; }
+      return this.locations[this.locations.length - 1].coords.accuracy;
+    },
   },
 };
 </script>

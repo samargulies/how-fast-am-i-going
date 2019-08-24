@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import KalmanFilter from 'kalmanjs';
-import { getSpeed, getBearing, getDistance } from '@/helpers';
+import {
+  getSpeed, getBearing, getDistance, standardDeviation,
+} from '@/helpers';
 
 Vue.use(Vuex);
 
@@ -12,17 +13,27 @@ export default new Vuex.Store({
     units: 'kmh',
     supportsLocation: false,
     watchId: null,
+    locationHasSteadied: false,
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
   },
   getters: {
-    smoothedLocations(state) {
-      const filterLatitude = new KalmanFilter();
-      const filterLongitude = new KalmanFilter();
-      return state.locations.slice(-10).map(location => ({
-        latitude: filterLatitude.filter(location.coords.latitude),
-        longitude: filterLongitude.filter(location.coords.longitude),
-        timestamp: location.timestamp,
-      }));
+    standardDeviation(state, getters) {
+      if (getters.speedReadings.length === 0) {
+        return 0;
+      }
+      return standardDeviation(getters.speedReadings);
+    },
+    speedReadings(state) {
+      if (state.locations.length < 2) {
+        return [];
+      }
+      const readings = [];
+      state.locations.forEach((location, index) => {
+        if (index === 0) { return; }
+        const previousLocation = state.locations[index - 1];
+        readings.push(getSpeed(previousLocation, location));
+      });
+      return readings;
     },
     currentSpeed(state) {
       if (state.locations.length < 3) {
@@ -31,10 +42,10 @@ export default new Vuex.Store({
       const locationA = state.locations[state.locations.length - 3];
       const locationB = state.locations[state.locations.length - 2];
       const locationC = state.locations[state.locations.length - 1];
+      console.log(locationC.coords.accuracy);
       const sampleA = getSpeed(locationA, locationC);
       const sampleB = getSpeed(locationB, locationC);
       const speed = (sampleA + sampleB) / 2;
-      console.log({ speed });
       return speed;
     },
     averageSpeed(state) {
@@ -48,32 +59,20 @@ export default new Vuex.Store({
         totalDistance += getDistance(previousLocation, location);
       });
       const totalDuration = (state.locations[state.locations.length - 1].timestamp - state.locations[0].timestamp) / (1000 * 60 * 60);
-      console.log({ totalDistance, totalDuration });
+      // console.log({ totalDistance, totalDuration });
       return totalDistance / totalDuration;
     },
-    averageSpeedDeprecated(state) {
-      if (state.locations.length < 3) {
-        return 0;
-      }
-      let totalDuration = 0;
-      let totalSpeeds = 0;
-      state.locations.forEach((location, index) => {
-        if (index === 0) { return; }
-        const previousLocation = state.locations[index - 1];
-        const duration = location.timestamp - previousLocation.timestamp;
-        totalSpeeds += getSpeed(previousLocation, location) * duration;
-        totalDuration += duration;
-      });
-      // console.log({ totalSpeeds, totalDuration });
-      return totalSpeeds / totalDuration;
-    },
     currentBearing(state) {
-      if (state.locations.length < 2) {
+      if (state.locations.length < 3) {
         return null;
       }
-      const locationA = state.locations[state.locations.length - 2];
-      const locationB = state.locations[state.locations.length - 1];
-      return getBearing(locationA, locationB);
+      const locationA = state.locations[state.locations.length - 3];
+      const locationB = state.locations[state.locations.length - 2];
+      const locationC = state.locations[state.locations.length - 1];
+      const sampleA = getBearing(locationA, locationC);
+      const sampleB = getBearing(locationB, locationC);
+      const bearing = (sampleA + sampleB) / 2;
+      return bearing;
     },
   },
   actions: {
@@ -95,6 +94,7 @@ export default new Vuex.Store({
         },
       );
       commit('setItem', { item: 'watchId', value: watchId });
+      commit('setItem', { item: 'locationHasSteadied', value: false });
     },
     locationError({ commit, dispatch }, error) {
       console.warn('location access denied', error);
