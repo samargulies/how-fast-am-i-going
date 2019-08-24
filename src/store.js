@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {
-  getSpeed, getBearing, getDistance, standardDeviation,
+  getSpeed, getBearing, getDistance, standardDeviation, convertSpeed,
 } from '@/helpers';
 
 Vue.use(Vuex);
@@ -14,14 +14,21 @@ export default new Vuex.Store({
     supportsLocation: false,
     watchId: null,
     locationHasSteadied: false,
+    tempLocations: [],
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
   },
   getters: {
-    standardDeviation(state, getters) {
-      if (getters.speedReadings.length === 0) {
-        return 0;
+    standardDeviation(state) {
+      if (state.tempLocations.length < 3) {
+        return Number.MAX_SAFE_INTEGER;
       }
-      return standardDeviation(getters.speedReadings);
+      const readings = [];
+      state.tempLocations.slice(-5).forEach((location, index) => {
+        if (index === 0) { return; }
+        const previousLocation = state.tempLocations[index - 1];
+        readings.push(getSpeed(previousLocation, location));
+      });
+      return standardDeviation(readings);
     },
     speedReadings(state) {
       if (state.locations.length < 2) {
@@ -31,7 +38,7 @@ export default new Vuex.Store({
       state.locations.forEach((location, index) => {
         if (index === 0) { return; }
         const previousLocation = state.locations[index - 1];
-        readings.push(getSpeed(previousLocation, location));
+        readings.push(convertSpeed(getSpeed(previousLocation, location), state.units));
       });
       return readings;
     },
@@ -42,7 +49,7 @@ export default new Vuex.Store({
       const locationA = state.locations[state.locations.length - 3];
       const locationB = state.locations[state.locations.length - 2];
       const locationC = state.locations[state.locations.length - 1];
-      console.log(locationC.coords.accuracy);
+      // console.log(locationC.coords.accuracy);
       const sampleA = getSpeed(locationA, locationC);
       const sampleB = getSpeed(locationB, locationC);
       const speed = (sampleA + sampleB) / 2;
@@ -83,7 +90,7 @@ export default new Vuex.Store({
       }
       const watchId = navigator.geolocation.watchPosition(
         (location) => {
-          commit('addLocation', location);
+          dispatch('setLocation', location);
           dispatch('setSupportsLocation', true);
           dispatch('setLoading', false);
         },
@@ -96,6 +103,18 @@ export default new Vuex.Store({
       commit('setItem', { item: 'watchId', value: watchId });
       commit('setItem', { item: 'locationHasSteadied', value: false });
     },
+    setLocation({ state, commit, getters }, location) {
+      if (state.locationHasSteadied) {
+        commit('addLocation', location);
+        return;
+      }
+      commit('addTempLocation', location);
+      if (getters.standardDeviation < 10) {
+        commit('setItem', { item: 'locationHasSteadied', value: true });
+        commit('setItem', { item: 'tempLocations', value: [] });
+        commit('addLocation', location);
+      }
+    },
     locationError({ commit, dispatch }, error) {
       console.warn('location access denied', error);
       commit('setItem', { item: 'loading', value: false });
@@ -104,6 +123,9 @@ export default new Vuex.Store({
     stopWatchingUserLocation({ state, commit }) {
       navigator.geolocation.clearWatch(state.watchId);
       commit('setItem', { item: 'watchId', value: null });
+    },
+    clearLocations({ commit }) {
+      commit('setItem', { item: 'locations', value: [] });
     },
     setLoading({ commit }, isLoading) {
       commit('setItem', { item: 'loading', value: isLoading });
@@ -128,6 +150,12 @@ export default new Vuex.Store({
       // console.log(location);
       if (location.coords.longitude && location.coords.latitude) {
         state.locations.push(location);
+      }
+    },
+    addTempLocation(state, location) {
+      // console.log(location);
+      if (location.coords.longitude && location.coords.latitude) {
+        state.tempLocations.push(location);
       }
     },
   },

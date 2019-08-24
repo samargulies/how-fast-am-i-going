@@ -1,6 +1,6 @@
 <template>
   <div class="elevation-reading">
-    <div v-if="loading" class="spinner">
+    <div v-if="loading || !locationHasSteadied" class="spinner">
       <div class="double-bounce1"></div>
       <div class="double-bounce2"></div>
     </div>
@@ -35,10 +35,6 @@
           <div class="reading__label">Bearing</div>
         </div>
       </div>
-      <div>
-        <p>Accuracy: {{ accuracy }}</p>
-        <p>STD Dev: {{ standardDeviation }}</p>
-      </div>
       <!-- <div class="metadata">
         <div class="watching-indicator" v-if="watchId">
           Watching for updates
@@ -57,12 +53,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(['units', 'locations', 'loading', 'watchId']),
-    ...mapGetters(['currentBearing', 'currentSpeed', 'averageSpeed', 'standardDeviation']),
-    accuracy() {
-      if (this.locations.length === 0) { return null; }
-      return this.locations[this.locations.length - 1].coords.accuracy;
-    },
+    ...mapState(['units', 'loading', 'watchId', 'locationHasSteadied']),
+    ...mapGetters(['currentBearing', 'currentSpeed', 'averageSpeed']),
   },
 };
 </script>
