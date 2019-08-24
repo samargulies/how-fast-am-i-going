@@ -1,23 +1,23 @@
 import { point, distance, bearing } from '@turf/turf';
 
-function positionAsPoint(position) {
-  return point([position.longitude, position.latitude]);
+function locationAsPoint(location) {
+  return point([location.coords.longitude, location.coords.latitude]);
 }
 
-export function getSpeed(positionA, positionB) {
-  const length = distance(positionAsPoint(positionA), positionAsPoint(positionB));
-  const duration = positionB.timestamp - positionA.timestamp;
+export function getSpeed(locationA, locationB) {
+  const length = distance(locationAsPoint(locationA), locationAsPoint(locationB));
+  const duration = locationB.timestamp - locationA.timestamp;
   const durationInHours = duration / (1000 * 60 * 60);
-  console.log({ length, durationInHours });
+  // console.log({ length, durationInHours });
   return durationInHours === 0 ? 0 : length / durationInHours;
 }
 
-export function getBearing(positionA, positionB) {
-  return bearing(positionAsPoint(positionB), positionAsPoint(positionA));
+export function getBearing(locationA, locationB) {
+  return bearing(locationAsPoint(locationB), locationAsPoint(locationA));
 }
 
 export function kmhToMPH(speed) {
-  return 1.609344 * speed;
+  return 0.621371 * speed;
 }
 
 export function round(value, decimals) {

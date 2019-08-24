@@ -11,9 +11,13 @@ Vue.use(VueMeta);
 
 Vue.config.productionTip = false;
 
-new Vue({
+const app = new Vue({
   router,
   store,
   i18n,
   render: h => h(App),
 }).$mount('#app');
+
+if (process.env.NODE_ENV !== 'production') {
+  window.$vm = app;
+}

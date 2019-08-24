@@ -25,18 +25,20 @@ export default new Vuex.Store({
       }));
     },
     currentSpeed(state) {
-      if (state.locations.length > 2) {
-        const locationA = state.locations[state.locations.length - 3];
-        const locationB = state.locations[state.locations.length - 2];
-        const locationC = state.locations[state.locations.length - 1];
-        const sampleA = getSpeed(locationA, locationC);
-        const sampleB = getSpeed(locationB, locationC);
-        return (sampleA + sampleB) / 2;
+      if (state.locations.length < 3) {
+        return 0;
       }
-      return 0;
+      const locationA = state.locations[state.locations.length - 3];
+      const locationB = state.locations[state.locations.length - 2];
+      const locationC = state.locations[state.locations.length - 1];
+      const sampleA = getSpeed(locationA, locationC);
+      const sampleB = getSpeed(locationB, locationC);
+      const speed = (sampleA + sampleB) / 2;
+      console.log({ speed });
+      return speed;
     },
     averageSpeed(state) {
-      if (state.locations.length < 2) {
+      if (state.locations.length < 3) {
         return 0;
       }
       let totalDuration = 0;
@@ -48,15 +50,16 @@ export default new Vuex.Store({
         totalSpeeds += getSpeed(previousLocation, location) * duration;
         totalDuration += duration;
       });
+      // console.log({ totalSpeeds, totalDuration });
       return totalSpeeds / totalDuration;
     },
-    currentBearing(state, getters) {
-      if (getters.smoothedLocations.length > 1) {
-        const locationA = getters.smoothedLocations[getters.smoothedLocations.length - 2];
-        const locationB = getters.smoothedLocations[getters.smoothedLocations.length - 1];
-        return getBearing(locationA, locationB);
+    currentBearing(state) {
+      if (state.locations.length < 2) {
+        return null;
       }
-      return null;
+      const locationA = state.locations[state.locations.length - 2];
+      const locationB = state.locations[state.locations.length - 1];
+      return getBearing(locationA, locationB);
     },
   },
   actions: {
@@ -104,8 +107,10 @@ export default new Vuex.Store({
       Vue.set(state, item, value);
     },
     addLocation(state, location) {
-      console.log(location);
-      state.locations.push(location);
+      // console.log(location);
+      if (location.coords.longitude && location.coords.latitude) {
+        state.locations.push(location);
+      }
     },
   },
 });
