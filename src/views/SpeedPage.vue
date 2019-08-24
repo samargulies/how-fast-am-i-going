@@ -41,9 +41,11 @@ export default {
     window.addEventListener('online', this.updateOnlineStatus);
     window.addEventListener('offline', this.updateOnlineStatus);
     window.addEventListener('focus', () => {
+      console.log('focus');
       this.$store.dispatch('getUserLocation');
     });
     window.addEventListener('blur', () => {
+      console.log('blur');
       this.$store.dispatch('stopWatchingUserLocation');
     });
   },

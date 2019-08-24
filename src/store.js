@@ -47,7 +47,7 @@ export default new Vuex.Store({
         const previousLocation = state.locations[index - 1];
         totalDistance += getDistance(previousLocation, location);
       });
-      const totalDuration = (state.locations[state.locations.length].timestamp - state.locations[0].timestamp) / (1000 * 60 * 60);
+      const totalDuration = (state.locations[state.locations.length - 1].timestamp - state.locations[0].timestamp) / (1000 * 60 * 60);
       console.log({ totalDistance, totalDuration });
       return totalDistance / totalDuration;
     },
@@ -77,7 +77,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getUserLocation({ commit, dispatch }) {
+    getUserLocation({ state, commit, dispatch }) {
+      if (state.watchId !== null) {
+        console.log('existing watch');
+        dispatch('stopWatchingUserLocation');
+      }
       const watchId = navigator.geolocation.watchPosition(
         (location) => {
           commit('addLocation', location);
