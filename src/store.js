@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import i18n from '@/i18n';
 import {
   getSpeed, getBearing, getDistance, standardDeviation, convertSpeed,
 } from '@/helpers';
@@ -10,7 +11,7 @@ export default new Vuex.Store({
   state: {
     loading: true,
     locations: [],
-    units: 'kmh',
+    units: localStorage.getItem('units') || i18n.t('units.default-units'),
     supportsLocation: false,
     watchId: null,
     locationHasSteadied: false,
@@ -23,7 +24,7 @@ export default new Vuex.Store({
         return Number.MAX_SAFE_INTEGER;
       }
       const readings = [];
-      state.tempLocations.slice(-5).forEach((location, index) => {
+      state.tempLocations.slice(-6).forEach((location, index) => {
         if (index === 0) { return; }
         const previousLocation = state.tempLocations[index - 1];
         readings.push(getSpeed(previousLocation, location));
@@ -59,13 +60,19 @@ export default new Vuex.Store({
       if (state.locations.length < 2) {
         return 0;
       }
+      const totalDuration = (state.locations[state.locations.length - 1].timestamp
+        - state.locations[0].timestamp) / (1000 * 60 * 60);
+
+      if (totalDuration === 0) {
+        return 0;
+      }
+
       let totalDistance = 0;
       state.locations.forEach((location, index) => {
         if (index === 0) { return; }
         const previousLocation = state.locations[index - 1];
         totalDistance += getDistance(previousLocation, location);
       });
-      const totalDuration = (state.locations[state.locations.length - 1].timestamp - state.locations[0].timestamp) / (1000 * 60 * 60);
       // console.log({ totalDistance, totalDuration });
       return totalDistance / totalDuration;
     },
@@ -104,15 +111,23 @@ export default new Vuex.Store({
       commit('setItem', { item: 'locationHasSteadied', value: false });
     },
     setLocation({ state, commit, getters }, location) {
+      const lastLocation = state.locations[state.locations.length - 1];
       if (state.locationHasSteadied) {
         commit('addLocation', location);
         return;
       }
       commit('addTempLocation', location);
-      if (getters.standardDeviation < 5) {
+      let shortPause = false;
+      if (lastLocation) {
+        shortPause = (location.timestamp - lastLocation.timestamp) < 30 * 1000;
+      }
+      if (getters.standardDeviation < 5 || state.tempLocations > 9 || shortPause) {
+        if (state.tempLocations.length > 1) {
+          commit('addLocation', state.tempLocations[state.tempLocations.length - 2]);
+        }
+        commit('addLocation', location);
         commit('setItem', { item: 'locationHasSteadied', value: true });
         commit('setItem', { item: 'tempLocations', value: [] });
-        commit('addLocation', location);
       }
     },
     locationError({ commit, dispatch }, error) {
@@ -131,6 +146,7 @@ export default new Vuex.Store({
       commit('setItem', { item: 'loading', value: isLoading });
     },
     setUnits({ commit }, units) {
+      localStorage.setItem('units', units);
       commit('setItem', { item: 'units', value: units });
     },
     setSupportsLocation({ commit }, supportsLocation) {

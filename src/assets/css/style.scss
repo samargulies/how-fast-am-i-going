@@ -314,17 +314,6 @@ a {
 	color: var(--light-grey);
 }
 
-.speed-chart {
-	.stroke {
-		stroke: var(--brand);
-		stroke-width: 2;
-	}
-	.fill {
-		fill: var(--brand);
-		fill-opacity: 0.5;
-	}
-}
-
 .button,
 .button:visited {
 	white-space: nowrap;

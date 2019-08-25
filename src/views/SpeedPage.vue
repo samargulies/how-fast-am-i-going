@@ -7,15 +7,12 @@
     </h1>
     <DataReadings />
     <Settings />
-    <TrendChart class="speed-chart" v-if="speedReadings.length > 2"
-      :datasets="[{data: speedReadings, smooth: true, fill: true}]"
-      :interactive="true" />
+    <SpeedChart />
     <TheFooter/>
   </div>
 </template>
-
 <script>
-import TrendChart from 'vue-trend-chart';
+import SpeedChart from '@/components/SpeedChart.vue';
 import { pathForLocale } from '@/helpers';
 import DataReadings from '@/components/DataReadings.vue';
 import Settings from '@/components/Settings.vue';
@@ -27,17 +24,12 @@ export default {
     DataReadings,
     Settings,
     TheFooter,
-    TrendChart,
+    SpeedChart,
   },
   data() {
     return {
       online: navigator.onLine,
     };
-  },
-  computed: {
-    speedReadings() {
-      return this.$store.getters.speedReadings;
-    },
   },
   methods: {
     updateOnlineStatus() {
@@ -46,7 +38,6 @@ export default {
     pathForLocale,
   },
   created() {
-    this.$store.dispatch('setUnits', this.$t('units.default-units'));
     this.$store.dispatch('getUserLocation');
     window.addEventListener('online', this.updateOnlineStatus);
     window.addEventListener('offline', this.updateOnlineStatus);

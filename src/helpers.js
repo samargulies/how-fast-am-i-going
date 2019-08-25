@@ -24,7 +24,7 @@ export function convertSpeed(speed, units) {
   if (units === 'mph') {
     return 0.621371 * speed;
   } if (units === 'kn') {
-    return 1.852 * speed;
+    return speed / 1.852;
   }
   return speed;
 }
