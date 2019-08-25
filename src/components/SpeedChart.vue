@@ -1,16 +1,23 @@
 <template>
   <transition name="slide">
-    <div class="speed-chart" v-if="speedReadings.length > 2">
-      <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id="fillColor" x1="1" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#f13a3a"></stop>
-            <stop offset="100%" stop-color="rgba(241, 58, 58, 0)"></stop>
-          </linearGradient>
-        </defs>
-      </svg>
-      <TrendChart :datasets="dataSets" :min="0" />
-      <a class="button" @click.prevent="clearLocations">Reset</a>
+    <div>
+      <div class="speed-chart"  v-if="speedReadings.length > 2">
+        <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="fillColor" x1="1" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#f13a3a"></stop>
+              <stop offset="100%" stop-color="rgba(241, 58, 58, 0)"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+        <TrendChart :min="0"
+          :datasets="[{
+            data: speedReadings,
+            smooth: true,
+            fill: true,
+            }]" />
+        <a class="button" @click.prevent="clearLocations">Reset</a>
+    </div>
     </div>
   </transition>
 </template>
@@ -25,13 +32,6 @@ export default {
   computed: {
     ...mapState(['units']),
     ...mapGetters(['speedReadings']),
-    dataSets() {
-      return [{
-        data: this.speedReadings,
-        smooth: true,
-        fill: true,
-      }];
-    },
   },
   methods: {
     clearLocations() {
@@ -41,7 +41,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.speed-chart {
+.speed-chart .vtc {
   .stroke {
     stroke: var(--brand);
     stroke-width: 2;

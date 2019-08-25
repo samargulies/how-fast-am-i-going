@@ -5,17 +5,17 @@
         <div class="coordinates"></div>
       </div>
       <div class="settings">
-        <div id="choose-units" class="button" v-if="!hideUnitSelection">
+        <div id="choose-units" v-if="!hideUnitSelection">
           <a @click="setUnits('mph')"
-            :class="['units', 'units--mph', units === 'mph' ? 'units-selected' : '']">
+            :class="['button', 'units', 'units--mph', units === 'mph' ? 'units-selected' : '']">
             {{ $t('units.mph') }}
           </a>
           <a @click="setUnits('kmh')"
-            :class="['units', 'units--kmh', units === 'kmh' ? 'units-selected' : '']">
+            :class="['button', 'units', 'units--kmh', units === 'kmh' ? 'units-selected' : '']">
             {{ $t('units.kmh') }}
           </a>
           <a @click="setUnits('kn')"
-            :class="['units', 'units--kn', units === 'kn' ? 'units-selected' : '']">
+            :class="['button', 'units', 'units--kn', units === 'kn' ? 'units-selected' : '']">
             {{ $t('units.kn') }}
           </a>
         </div>

@@ -33,7 +33,7 @@ export default new Vuex.Store({
     },
     speedReadings(state) {
       if (state.locations.length < 2) {
-        return [];
+        return [0];
       }
       const readings = [];
       state.locations.forEach((location, index) => {
