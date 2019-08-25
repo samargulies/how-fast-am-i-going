@@ -109,7 +109,7 @@ export default new Vuex.Store({
         return;
       }
       commit('addTempLocation', location);
-      if (getters.standardDeviation < 10) {
+      if (getters.standardDeviation < 5) {
         commit('setItem', { item: 'locationHasSteadied', value: true });
         commit('setItem', { item: 'tempLocations', value: [] });
         commit('addLocation', location);
