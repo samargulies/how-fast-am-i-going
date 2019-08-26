@@ -1,6 +1,6 @@
 {
-  "name": "What is my elevation?",
-  "short_name": "Elevation",
+  "name": "How fast am I going?",
+  "short_name": "How Fast",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

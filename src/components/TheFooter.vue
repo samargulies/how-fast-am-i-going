@@ -13,7 +13,6 @@
       <li><router-link :to="pathForLocale({locale: 'zh'})">中文</router-link></li>
     </ul>
   </div> -->
-
   <div class="section section--about" v-if="includeAbout">
     <h2 class="section__title">What is this?</h2>
     <div class="text-block">
@@ -29,7 +28,7 @@
     <nav>
       <ul>
         <li><router-link :to="pathForLocale({path: '/'})">Home</router-link></li>
-        <li><a href="https://www.whatismyelevation.com/">What is My Elevation?</a></li>
+        <li><a href="https://www.whatismyelevation.com/">What is my elevation?</a></li>
         <li><a href="https://snowfall.guide/">Snowfall Guide</a></li>
         <li><a href="http://visited.earth/">Visited Earth</a></li>
       </ul>
