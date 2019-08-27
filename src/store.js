@@ -18,10 +18,14 @@ export default new Vuex.Store({
   },
   getters: {
     speedReadings(state) {
-      if (state.locations.length < 4) {
+      const { length } = state.locations;
+      if (length < 10) {
         return [0];
       }
-      return chunk(state.locations, 10).map(averageOfSpeeds);
+      // trim off any incomplete chunks
+      const locations = state.locations.slice(0, length - (length % 5));
+      // chunk and return the average
+      return chunk(locations, 5).map(averageOfSpeeds);
     },
     currentSpeed(state) {
       if (state.locations.length < 3) {
