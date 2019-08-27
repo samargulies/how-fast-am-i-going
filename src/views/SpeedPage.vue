@@ -12,6 +12,7 @@
   </div>
 </template>
 <script>
+import { setTimeout } from 'timers';
 import SpeedChart from '@/components/SpeedChart.vue';
 import { pathForLocale } from '@/helpers';
 import DataReadings from '@/components/DataReadings.vue';
@@ -29,6 +30,7 @@ export default {
   data() {
     return {
       online: navigator.onLine,
+      hasFocus: true,
     };
   },
   methods: {
@@ -42,12 +44,16 @@ export default {
     window.addEventListener('online', this.updateOnlineStatus);
     window.addEventListener('offline', this.updateOnlineStatus);
     window.addEventListener('focus', () => {
-      console.log('focus');
+      this.hasFocus = true;
       this.$store.dispatch('getUserLocation');
     });
     window.addEventListener('blur', () => {
-      console.log('blur');
-      this.$store.dispatch('stopWatchingUserLocation');
+      this.hasFocus = false;
+      setTimeout(() => {
+        if (!this.hasFocus) {
+          this.$store.dispatch('stopWatchingUserLocation');
+        }
+      }, 30 * 1000);
     });
   },
 };

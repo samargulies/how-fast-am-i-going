@@ -1,6 +1,6 @@
 <template>
   <div class="elevation-reading">
-    <div v-if="loading || !locationHasSteadied" class="spinner">
+    <div v-if="loading" class="spinner">
       <div class="double-bounce1"></div>
       <div class="double-bounce2"></div>
     </div>
