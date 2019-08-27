@@ -14,7 +14,6 @@ export default new Vuex.Store({
     units: localStorage.getItem('units') || i18n.t('units.default-units'),
     supportsLocation: true,
     watchId: null,
-    locationHasSteadied: true,
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
   },
   getters: {
@@ -31,17 +30,18 @@ export default new Vuex.Store({
       return readings;
     },
     currentSpeed(state) {
-      if (state.locations.length < 3) {
+      if (state.locations.length < 2) {
         return 0;
       }
-      const locationA = state.locations[state.locations.length - 3];
-      const locationB = state.locations[state.locations.length - 2];
-      const locationC = state.locations[state.locations.length - 1];
-      // console.log(locationC.coords.accuracy);
-      const sampleA = getSpeed(locationA, locationC);
-      const sampleB = getSpeed(locationB, locationC);
-      const speed = (sampleA + sampleB) / 2;
-      return speed;
+      let speed = 0;
+      let numSamples = 0;
+      const samples = state.locations.slice(-4);
+      const lastLocation = samples.pop();
+      samples.forEach((location) => {
+        speed += getSpeed(location, lastLocation);
+        numSamples += 1;
+      });
+      return speed / numSamples;
     },
     averageSpeed(state, getters) {
       if (state.locations.length < 4) {
