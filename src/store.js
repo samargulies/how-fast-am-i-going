@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import i18n from '@/i18n';
 import {
-  getSpeed, getBearing, getDistance, convertSpeed,
+  getSpeed, getBearing, getDistance, chunk, averageOfSpeeds,
 } from '@/helpers';
 
 Vue.use(Vuex);
@@ -18,19 +18,13 @@ export default new Vuex.Store({
   },
   getters: {
     speedReadings(state) {
-      if (state.locations.length < 2) {
+      if (state.locations.length < 4) {
         return [0];
       }
-      const readings = [];
-      state.locations.forEach((location, index) => {
-        if (index === 0) { return; }
-        const previousLocation = state.locations[index - 1];
-        readings.push(convertSpeed(getSpeed(previousLocation, location), state.units));
-      });
-      return readings;
+      return chunk(state.locations, 10).map(averageOfSpeeds);
     },
     currentSpeed(state) {
-      if (state.locations.length < 2) {
+      if (state.locations.length < 3) {
         return 0;
       }
       let speed = 0;

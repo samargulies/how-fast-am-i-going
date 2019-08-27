@@ -50,3 +50,29 @@ export function sendEvent(eventCategory, eventAction) {
 export function pathForLocale({ path = this.$route.path, locale = this.$i18n.locale }) {
   return path.replace(/^\/(\w{2}\/)*/, `/${locale}/`);
 }
+
+export function chunk(array, size) {
+  if (!array) return [];
+  const firstChunk = array.slice(0, size); // create the first chunk of the given array
+  if (!firstChunk.length) {
+    return array; // this is the base case to terminal the recursive
+  }
+  return [firstChunk].concat(chunk(array.slice(size, array.length), size));
+}
+
+export function averageOfSpeeds(locations) {
+  if (locations.length < 2) {
+    return 0;
+  }
+  let speed = 0;
+  let numSamples = 0;
+  locations.forEach((location, index) => {
+    if (locations.length - 1 === index) {
+      return;
+    }
+    const nextLocation = locations[index + 1];
+    speed += getSpeed(location, nextLocation);
+    numSamples += 1;
+  });
+  return speed / numSamples;
+}
