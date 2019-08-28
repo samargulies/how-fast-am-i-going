@@ -75,7 +75,7 @@ export default new Vuex.Store({
       navigator.geolocation.clearWatch(state.watchId);
       commit('setItem', { item: 'watchId', value: null });
     },
-    clearLocations({ state, commit }) {
+    clearLocations({ commit }) {
       commit('setItem', { item: 'locations', value: [] });
     },
     setLoading({ state, commit }, isLoading) {
