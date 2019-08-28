@@ -31,10 +31,10 @@
         <div class="reading__label">Current Speed</div>
       </div>
       <div class="reading">
-        <div class="reading__value" v-if="currentBearing !== null">
-          {{ currentBearing | bearingFormatted }}
+        <div class="reading__value" v-if="currentHeading !== null">
+          {{ currentHeading | headingFormatted }}
         </div>
-        <div class="reading__label">Bearing</div>
+        <div class="reading__label">Heading</div>
       </div>
     </div>
     <!-- <div class="metadata">
@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     ...mapState(['units', 'loading', 'watchId', 'supportsLocation']),
-    ...mapGetters(['currentBearing', 'currentSpeed', 'averageSpeed']),
+    ...mapGetters(['currentHeading', 'currentSpeed', 'averageSpeed']),
   },
 };
 </script>

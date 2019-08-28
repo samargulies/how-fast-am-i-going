@@ -1,9 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import i18n from '@/i18n';
-import {
-  getSpeed, getBearing, getDistance, chunk, averageOfSpeeds,
-} from '@/helpers';
 
 Vue.use(Vuex);
 
@@ -17,61 +14,31 @@ export default new Vuex.Store({
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
   },
   getters: {
+    firstLocation(state) {
+      return state.locations[0];
+    },
+    latestLocation(state) {
+      return state.locations[state.locations.length - 1];
+    },
     speedReadings(state) {
-      const { length } = state.locations;
-      if (length < 10) {
-        return [0];
-      }
-      // trim off any incomplete chunks
-      const locations = state.locations.slice(0, length - (length % 5));
-      // chunk and return the average
-      return chunk(locations, 5).map(averageOfSpeeds);
+      return state.locations.map(location => location.coords.speed || 0);
     },
-    currentSpeed(state) {
-      if (state.locations.length < 3) {
-        return 0;
-      }
-      let speed = 0;
-      let numSamples = 0;
-      const samples = state.locations.slice(-4);
-      const lastLocation = samples.pop();
-      samples.forEach((location) => {
-        speed += getSpeed(location, lastLocation);
-        numSamples += 1;
+    currentSpeed(state, getters) {
+      return getters.latestLocation.coords.speed || 0;
+    },
+    averageSpeed(state) {
+      let readings = 0;
+      let totalSpeed = 0;
+      state.locations.forEach((location) => {
+        if (location.coords.speed) {
+          totalSpeed += location.coords.speed;
+          readings += 1;
+        }
       });
-      return speed / numSamples;
+      return (totalSpeed / readings) || 0;
     },
-    averageSpeed(state, getters) {
-      if (state.locations.length < 4) {
-        return getters.currentSpeed;
-      }
-      const totalDuration = (state.locations[state.locations.length - 1].timestamp
-        - state.locations[0].timestamp) / (1000 * 60 * 60);
-
-      if (totalDuration === 0) {
-        return 0;
-      }
-
-      let totalDistance = 0;
-      state.locations.forEach((location, index) => {
-        if (index === 0) { return; }
-        const previousLocation = state.locations[index - 1];
-        totalDistance += getDistance(previousLocation, location);
-      });
-      // console.log({ totalDistance, totalDuration });
-      return totalDistance / totalDuration;
-    },
-    currentBearing(state) {
-      if (state.locations.length < 3) {
-        return null;
-      }
-      const locationA = state.locations[state.locations.length - 3];
-      const locationB = state.locations[state.locations.length - 2];
-      const locationC = state.locations[state.locations.length - 1];
-      const sampleA = getBearing(locationA, locationC);
-      const sampleB = getBearing(locationB, locationC);
-      const bearing = (sampleA + sampleB) / 2;
-      return bearing;
+    currentHeading(state, getters) {
+      return getters.latestLocation.coords.heading;
     },
   },
   actions: {
@@ -80,30 +47,23 @@ export default new Vuex.Store({
         console.log('existing watch');
         dispatch('stopWatchingUserLocation');
       }
-      const watchId = setInterval(() => {
-        navigator.geolocation.getCurrentPosition((location) => {
-          dispatch('setLocation', location);
-        },
-        error => dispatch('locationError', error),
-        {
-          enableHighAccuracy: true,
-          timeout: 30 * 1000,
-        });
-      }, 500);
+      const watchId = navigator.geolocation.watchPosition((location) => {
+        dispatch('setLocation', location);
+      },
+      error => dispatch('locationError', error),
+      {
+        enableHighAccuracy: true,
+        timeout: 30 * 1000,
+      });
       commit('setItem', { item: 'watchId', value: watchId });
     },
-    setLocation({ state, commit, dispatch }, location) {
-      dispatch('setSupportsLocation', true);
+    setLocation({ commit, dispatch }, location) {
+      console.log(location.coords.heading, location.coords.speed);
+      if (location.coords.speed !== null) {
+        dispatch('setSupportsLocation', true);
+      }
       dispatch('setLoading', false);
-      if (state.locations.length === 0) {
-        commit('addLocation', location);
-        return;
-      }
-      const previousLocation = state.locations[state.locations.length - 1];
-      const timeInterval = location.timestamp - previousLocation.timestamp;
-      if (timeInterval < 1000) {
-        return;
-      }
+
       commit('addLocation', location);
     },
     locationError({ dispatch }, error) {
@@ -116,7 +76,7 @@ export default new Vuex.Store({
       commit('setItem', { item: 'watchId', value: null });
     },
     clearLocations({ state, commit }) {
-      commit('setItem', { item: 'locations', value: state.locations.slice(-1) });
+      commit('setItem', { item: 'locations', value: [] });
     },
     setLoading({ state, commit }, isLoading) {
       if (isLoading !== state.loading) {

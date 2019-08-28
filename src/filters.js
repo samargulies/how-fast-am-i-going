@@ -9,7 +9,7 @@ Vue.filter('numberFormatted', (number, { units, locale }) => {
   });
 });
 
-Vue.filter('bearingFormatted', (number) => {
+Vue.filter('headingFormatted', (number) => {
   const conversion = [
     'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW',
   ];
