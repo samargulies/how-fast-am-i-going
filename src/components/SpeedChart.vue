@@ -10,7 +10,9 @@
             </linearGradient>
           </defs>
         </svg>
-        <TrendChart :min="0"
+        <TrendChart
+          :min="0"
+          :max="maxReading"
           :datasets="[{
             data: speedReadings,
             smooth: true,
@@ -32,6 +34,11 @@ export default {
   computed: {
     ...mapState(['units']),
     ...mapGetters(['speedReadings']),
+    maxReading() {
+      const max = Math.max(...this.speedReadings);
+      // max sure the y axis is at least 0-10
+      return max > 10 ? max : 10;
+    },
   },
   methods: {
     clearLocations() {
