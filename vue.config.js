@@ -14,6 +14,7 @@ module.exports = {
     msTileColor: '#f13a3a',
     assetsVersion: '3',
     appleMobileWebAppCapable: 'yes',
+    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
       exclude: [/_redirects/, /ads.txt/],
