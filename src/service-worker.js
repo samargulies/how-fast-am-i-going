@@ -3,24 +3,24 @@ if (workbox) {
 
   workbox.routing.registerRoute(
     new RegExp('/.*'),
-    workbox.strategies.NetworkFirst(),
+    new workbox.strategies.StaleWhileRevalidate(),
   );
 
   workbox.routing.registerRoute(
     new RegExp('https://use.typekit.net'),
-    workbox.strategies.cacheFirst(),
+    new workbox.strategies.StaleWhileRevalidate(),
   );
 
   workbox.routing.registerRoute(
     new RegExp('https://dev.virtualearth.net'),
-    workbox.strategies.NetworkOnly({
+    new workbox.strategies.NetworkOnly({
       cacheName: 'api-bing',
     }),
   );
 
   workbox.routing.registerRoute(
     new RegExp('https://a1gehjprye.execute-api.us-east-1.amazonaws.com'),
-    workbox.strategies.NetworkOnly({
+    new workbox.strategies.NetworkOnly({
       cacheName: 'api',
     }),
   );
