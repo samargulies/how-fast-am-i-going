@@ -2,7 +2,7 @@ if (workbox) {
   console.log('Workbox is loaded');
 
   workbox.routing.registerRoute(
-    new RegExp('/'),
+    new RegExp('/.*'),
     workbox.strategies.NetworkFirst(),
   );
 
@@ -26,7 +26,7 @@ if (workbox) {
   );
 
   workbox.precaching.precacheAndRoute(self.__precacheManifest, {
-    ignoreURLParametersMatching: [/_redirects/],
+    ignoreURLParametersMatching: [/_redirects/, /ads.txt/],
   });
 } else {
   console.log('Workbox didn\'t load');
