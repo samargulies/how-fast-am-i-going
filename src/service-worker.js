@@ -26,7 +26,7 @@ if (workbox) {
   );
 
   workbox.precaching.precacheAndRoute(self.__precacheManifest, {
-    ignoreURLParametersMatching: [/_redirects/, /ads.txt/],
+    ignoreURLParametersMatching: [/_redirects/, /ads\.txt/],
   });
 } else {
   console.log('Workbox didn\'t load');
