@@ -58,7 +58,6 @@ export default new Vuex.Store({
       commit('setItem', { item: 'watchId', value: watchId });
     },
     setLocation({ commit, dispatch }, location) {
-      console.log(location.coords.heading, location.coords.speed);
       if (location.coords.speed !== null) {
         dispatch('setSupportsLocation', true);
       }

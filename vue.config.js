@@ -17,7 +17,7 @@ module.exports = {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
-      exclude: [/_redirects/, /ads.txt/],
+      exclude: [/_redirects/, /ads\.txt/, /\.map$/, /manifest\.json$/],
     },
   },
 };
