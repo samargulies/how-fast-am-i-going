@@ -5,43 +5,46 @@
       <div class="double-bounce2"></div>
     </div>
     <div v-else-if="!supportsLocation" class="location-error">
-      <p>An error occurred loading your current location.</p>
+      <p>{{ $t('location-read-error') }}</p>
     </div>
     <div v-else :class="['topline-readings', watchId ? 'watching' : 'not-watching']">
       <div class="reading reading--avg-speed">
         <div class="reading__value">
           <i18n path="location-format" tag="div">
-            <span place="value">
-              {{ averageSpeed | numberFormatted({units, locale: $t.locale}) }}
-            </span>
-            <span place="units">{{ $t(`units.${units}`) }}</span>
+            <template v-slot:value>
+              <span>
+                {{ averageSpeed | numberFormatted({units, locale: $t.locale}) }}
+              </span>
+            </template>
+            <template v-slot:units>
+              <span>{{ $t(`units.${units}`) }}</span>
+            </template>
           </i18n>
         </div>
-        <div class="reading__label">Average Speed</div>
+        <div class="reading__label">{{ $t('avg-speed') }}</div>
       </div>
       <div class="reading reading--speed">
         <div class="reading__value">
           <i18n path="location-format" tag="div">
-            <span place="value">
-              {{ currentSpeed | numberFormatted({units, locale: $t.locale}) }}
-            </span>
-            <span place="units">{{ $t(`units.${units}`) }}</span>
+            <template v-slot:value>
+              <span>
+                {{ currentSpeed | numberFormatted({units, locale: $t.locale}) }}
+              </span>
+            </template>
+            <template v-slot:units>
+              <span>{{ $t(`units.${units}`) }}</span>
+            </template>
           </i18n>
         </div>
-        <div class="reading__label">Current Speed</div>
+        <div class="reading__label">{{ $t('current-speed') }}</div>
       </div>
       <div class="reading">
         <div class="reading__value" v-if="currentHeading !== null">
           {{ currentHeading | headingFormatted }}
         </div>
-        <div class="reading__label">Heading</div>
+        <div class="reading__label">{{ $t('heading') }}</div>
       </div>
     </div>
-    <!-- <div class="metadata">
-      <div class="watching-indicator" v-if="watchId">
-        Watching for updates
-      </div>
-    </div> -->
   </div>
 </template>
 <script>

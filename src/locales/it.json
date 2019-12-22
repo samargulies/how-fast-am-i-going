@@ -1,31 +1,48 @@
 {
-	"site-title": "Qual è la mia altitudine?",
-	"site-description": "Trova l'altitudine della tua posizione attuale o di qualsiasi punto della Terra.",
-	"site-mobile-app-title": "Altitudine",
-	"source": {
-		"web": {
-			"description": "Da internet",
-			"toggle": "Usa internet"
-		},
-		"phone": {
-			"description": "Dal tuo smartphone",
-			"toggle": "Usa smartphone"
-		}
-	},
+	"site-title": "Quanto vado veloce?",
+	"site-description": "Trova la tua velocità attuale in km / ho nodi con questa app per tachimetro online",
+	"site-mobile-app-title": "Quanto velocemente?",
 	"units": {
-    	"feet-default": "false",
+		"default-units": "kmh",
 		"hide-selection": "true",
-		"feet": "ft",
-		"meters": "m"
-	},
-	"location-format": "{value} {units}",
-	"change-location": "Cambia posizione",
-	"address": {
-		"label": "Posizione",
-		"placeholder": "Inserisci posizione",
-		"cancel": "Annulla"
+		"mph": "mph",
+		"kmh": "km/h",
+		"kn": "nodi"
 	},
 	"sponsored-by": "Sponsorizzato da",
 	"brought-to-you-by": "Offerto da {0}",
-	"hide-altimeters": "true"
+	"reset": "Reset",
+	"avg-speed": "Velocità media",
+	"current-speed": "Velocità attuale",
+	"heading": "Intestazione",
+	"location-read-error": "Si è verificato un errore durante il caricamento della posizione corrente.",
+	"color-scheme-light": " Modalità luce",
+	"color-scheme-dark": "Modalità scura",
+	"color-scheme-auto": "Automatica",
+	"what-is-this.heading": "Cos'è questo?",
+	"what-is-this.p1": "Questo sito è stato progettato per trovare la velocità attuale, la velocità media e la direzione della bussola in miglia orarie, chilometri orari o nodi. Per utilizzare questo tachimetro online, visita questa pagina su un dispositivo abilitato GPS e la tua velocità si aggiornerà automaticamente mentre ti sposti. Funzionerà anche quando il telefono è offline. Puoi usarlo per vedere quanto sei veloce mentre cammini, vai in bicicletta, guidi, vai in barca o su un treno.",
+	"how-we-calc-speed.heading": "Come calcoliamo la tua velocità",
+	"how-we-calc-speed.p1": "Usiamo la lettura della velocità indicata dal tuo dispositivo GPS. Questo sito potrebbe non funzionare in modo affidabile su computer desktop senza sensore GPS o se non si consente a questo sito di accedere alla posizione corrente.",
+	"graph-speed.heading": "Rappresenta graficamente la tua velocità",
+	"graph-speed.p1": "Man mano che il sito Web raccoglie le letture della velocità, viene visualizzato un grafico che mostra la variazione della velocità nel tempo. È possibile fare clic sul pulsante di ripristino in qualsiasi momento per cancellare questo grafico e il calcolo della velocità media e riavviare da 0.",
+	"suggested-uses.heading": "Usi suggeriti",
+	"suggested-uses.p1": "Supponiamo che tu sia in un veicolo Uber, Lyft o altro rideshare. Ti viene in mente la domanda: \"A che velocità sta andando questo veicolo? \" Potrebbe essere una Ford, una BMW, una Subaru, una Toyota o qualsiasi altra delle varie auto conformi agli standard di Uber e Lyft. Forse stai andando a passo di lumaca a causa del traffico estremo sull'autostrada A1, o forse il tuo autista sta andando estremamente veloce e vuoi segnalarli ma temi di guardare il loro tachimetro. Non aver paura! Quanto velocemente sto andando è qui per aiutarti a scoprirlo.",
+	"suggested-uses.p2": "Man mano che il sito Web raccoglie le letture della velocità, viene visualizzato un grafico che mostra la variazione della velocità nel tempo. È possibile fare clic sul pulsante di ripristino in qualsiasi momento per cancellare questo grafico e il calcolo della velocità media e riavviare da 0.",
+	"suggested-uses.p3": "Che cosa succede se fai un piacevole giro in bicicletta? Stai andando a passo lento lungo il lago in modo da poter vedere il tramonto, ma all'improvviso i cieli grigi mostrano la loro brutta faccia e la pioggia e il tuono iniziano a piovere. Ti precipiti a casa e vuoi scoprire quanto stavi andando veloce. Apri semplicemente il tuo browser e scoprilo mentre corri verso casa per secchezza e calore!",
+	"suggested-uses.p4": "Un altro ottimo modo per usare Quanto sono veloce se sei su un motoscafo.",
+	"suggested-uses.p5": "Un viaggio in treno FRECCE da Milano a Napoli è un ottimo modo per trascorrere ore. La pittoresca campagna pastorale che offre il Midwest del Nord America non ha eguali. Ma cosa succede se si stanno ammirando gli alberi, la terra e le altre offerte naturali e si brama di scoprire quanto velocemente sta andando il treno? Prima di quanto vado veloce, dovresti alzarti e chiedere al direttore, che in genere si arrabbia molto. Ora puoi semplicemente aprire il tuo smartphone, andare online e scoprire la velocità del treno!",
+	"suggested-uses.p6": "Man mano che il sito Web raccoglie le letture della velocità, viene visualizzato un grafico che mostra la variazione della velocità nel tempo. È possibile fare clic sul pulsante di ripristino in qualsiasi momento per cancellare questo grafico e il calcolo della velocità media e riavviare da 0.",
+	"suggested-uses.p7": "Vroom Vroom! Il tuo motore fuoribordo alimentato a gas da 5 HP (15) Honda ti sta accelerando attraverso il lago locale in modo da poter pescare trote, ippoglosso e altri pesci. Ti stai stringendo la canna da pesca, pronto a catturare qualsiasi pesce esca, ma vuoi sapere quanto tempo ci vorrà per arrivare alla buca da pesca. Sai che ce n'è uno a circa 2 miglia di distanza. Se controlli la tua velocità online, puoi determinare quanto tempo ci vorrà per arrivarci. Una volta pescato, puoi consumare il pesce crudo o salarlo e fumarlo.",
+	"current-speed.heading": "Velocità attuale",
+	"current-speed.p1": "Per calcolare la tua velocità attuale o istantanea, prendi la distanza percorsa in un periodo di tempo molto breve. Un'auto che viaggia a 50 km / h in genere procede per meno di un'ora a velocità costante, ma se andasse a quella velocità per un'ora intera, viaggerebbe per 50 km. Se il veicolo continuasse a quella velocità per mezz'ora, coprirebbe metà di quella distanza (25 km).",
+	"avg-speed.heading": "Velocità media",
+	"avg-speed.p1": "Diversamente dalla velocità istantanea, la velocità media è definita come la distanza totale percorsa divisa per l'intervallo di tempo. Ad esempio, se si percorre una distanza di 80 chilometri in 1 ora, la velocità media è di 80 chilometri all'ora. Allo stesso modo, se si percorrono 320 chilometri in 4 ore, anche la velocità media è di 80 chilometri all'ora. Quando una distanza in chilometri (km) è divisa per un tempo in ore (h), il risultato è in chilometri orari (km / h).",
+	"avg-speed.p2": "",
+	"supported-speed.heading": "Unità di velocità supportate",
+	"supported-speed.p1": "Chilometri (o chilometri) all'ora: a livello internazionale, km / h è l'unità di velocità più comunemente usata sui segnali stradali e sui tachimetri. Altre abbreviazioni includono \"km / h\", \"kmph\" e \"km / hr\" come abbreviazioni inglesi.",
+	"supported-speed.p2": "Nodi: il nodo è un'unità di velocità pari a un miglio nautico all'ora, esattamente 1.852 km / h. In tutto il mondo, il nodo viene utilizzato in meteorologia e nella navigazione marittima e aerea, ad esempio una nave che viaggia a 1 nodo lungo un meridiano percorre circa un minuto di latitudine geografica in un'ora.",
+	"home": "Casa",
+	"what-is-my-elevation": "Qual è la mia altitudine?",
+	"snowfall-guide": "Totali neve",
+	"visited-earth": "Terra visitata"
 }

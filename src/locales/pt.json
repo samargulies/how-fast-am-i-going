@@ -1,31 +1,49 @@
 {
-	"site-title": "Qual é minha altitude?",
-	"site-description": "Qual é minha elevação? Encontre a elevação de sua localização atual ou de qualquer ponto na Terra.",
-	"site-mobile-app-title": "Elevação",
-	"source": {
-		"web": {
-			"description": "De acordo com a internet",
-			"toggle": "Usar a internet"
-		},
-		"phone": {
-			"description": "De acordo com seu telefone",
-			"toggle": "Usar telefone"
-		}
-	},
+	"site-title": "Quão rápido eu estou indo?",
+	"site-description": "Encontre sua velocidade atual em km / h com este aplicativo de velocímetro online",
+	"site-mobile-app-title": "Quão rápido?",
 	"units": {
-        "feet-default": "false",
+		"default-units": "kmh",
 		"hide-selection": "true",
-		"feet": "ft",
-		"meters": "m"
+		"mph": "mph",
+		"kmh": "km/h",
+		"kn": "nós"
 	},
 	"location-format": "{value} {units}",
-	"change-location": "Alterar localização",
-	"address": {
-		"label": "Localização",
-		"placeholder": "Insira sua localização",
-		"cancel": "Cancelar"
-	},
 	"sponsored-by": "Patrocinado por",
 	"brought-to-you-by": "Trazido a você por {0}",
-	"hide-altimeters": "true"
+	"reset": "Redefinir",
+	"avg-speed": "Velocidade média",
+	"current-speed": "Velocidade atual",
+	"heading": "Direção",
+	"location-read-error": "Ocorreu um erro ao carregar sua localização atual.",
+	"color-scheme-light": "Modo claro",
+	"color-scheme-dark": "Modo escuro",
+	"color-scheme-auto": "Automático",
+	"what-is-this.heading": "O que é isso?",
+	"what-is-this.p1": "Este site foi projetado para encontrar sua velocidade atual, velocidade média e direção da bússola em milhas por hora, quilômetros por hora ou nós. Para usar este velocímetro online, visite esta página em um dispositivo habilitado para GPS e sua velocidade será atualizada automaticamente conforme você se move. Até funcionará quando o telefone estiver offline. Você pode usar isso para ver a rapidez com que você viaja enquanto caminha, anda de bicicleta, dirige, canoa ou de trem.",
+	"how-we-calc-speed.heading": "Como calculamos sua velocidade",
+	"how-we-calc-speed.p1": "Usamos a leitura de velocidade relatada pelo GPS do seu dispositivo. Este site pode não funcionar de maneira confiável em computadores de mesa sem um sensor GPS ou se você não permitir que ele acesse sua localização atual.",
+	"graph-speed.heading": "Faça um gráfico da sua velocidade",
+	"graph-speed.p1": "À medida que o site coleta leituras de velocidade, exibimos um gráfico mostrando a alteração na sua velocidade ao longo do tempo. Você pode clicar no botão de redefinição a qualquer momento para limpar este gráfico e o cálculo da velocidade média e reiniciar a partir de 0.",
+	"suggested-uses.heading": "Usos sugeridos",
+	"suggested-uses.p1": "Vamos supor que você esteja em um Uber, Lyft ou outro veículo compartilhado. A pergunta surge em sua mente: \"Qual a velocidade do veículo?\" Pode ser um Ford, um BMW, um Subaru, um Toyota ou qualquer outro dos vários carros que cumpram os padrões da Uber e da Lyft. Talvez você esteja no ritmo de um caracol por causa do tráfego extremo na I-95, ou talvez seu motorista esteja indo muito rápido e você queira denunciá-los, mas tenha medo de olhar para o velocímetro. Não temas! O quão rápido estou indo está aqui para ajudá-lo a descobrir.",
+	"suggested-uses.p2": "À medida que o site coleta leituras de velocidade, exibimos um gráfico mostrando a alteração na sua velocidade ao longo do tempo. Você pode clicar no botão de redefinição a qualquer momento para limpar este gráfico e o cálculo da velocidade média e reiniciar a partir de 0.",
+	"suggested-uses.p3": "E se você estiver em um passeio de bicicleta? Você está caminhando lentamente ao longo do lago para poder ver o pôr do sol, mas de repente o céu cinza mostra sua cara feia e a chuva e o trovão começam a cair. Você corre para casa e quer descobrir o quão rápido estava indo. Basta abrir o navegador e descobrir como você corre para casa para secar e aquecer!",
+	"suggested-uses.p4": "Outra ótima maneira de usar o quão rápido estou indo é se você estiver em uma lancha.",
+	"suggested-uses.p5": "Uma viagem de trem da Amtrak da Filadélfia a Indianápolis é uma ótima maneira de passar 25 horas. A paisagem pastoral cênica que o Centro-Oeste da América do Norte oferece é incomparável. Mas e se você estiver admirando as árvores, a sujeira e as outras ofertas naturais e se sentir ansioso para descobrir a velocidade do trem? Antes de quão rápido estou indo, você teria que se levantar e perguntar ao condutor, que normalmente ficava com muita raiva. Agora você pode simplesmente abrir seu smartphone, ficar on-line e descobrir a velocidade do trem!",
+	"suggested-uses.p6": "À medida que o site coleta leituras de velocidade, exibimos um gráfico mostrando a alteração na sua velocidade ao longo do tempo. Você pode clicar no botão de redefinição a qualquer momento para limpar este gráfico e o cálculo da velocidade média e reiniciar a partir de 0.",
+	"suggested-uses.p7": "Vroom Vroom! O seu motor externo a gás de eixo de 5 HP Honda (15) está acelerando você através do lago local, para que você possa pescar trutas, alabote e outros peixes. Você está segurando sua vara de pescar, pronto para pescar qualquer peixe que morda a isca, mas você quer saber quanto tempo levará para chegar ao buraco da pesca. Você sabe que há uma cerca de 3 km de distância. Se você verificar sua velocidade on-line, poderá determinar quanto tempo levará para chegar lá. Uma vez capturado, você pode consumir o peixe cru ou com sal e fuma-lo.",
+	"current-speed.heading": "Velocidade atual",
+	"current-speed.p1": "Para calcular sua velocidade atual ou instantânea, você mede a distância percorrida em um período muito curto de tempo. Um carro viajando a 50 km / h geralmente dura menos de uma hora a uma velocidade constante, mas, se fosse nessa velocidade por uma hora inteira, percorreria 50 km. Se o veículo continuasse nessa velocidade por meia hora, cobriria metade dessa distância (25 km).",
+	"avg-speed.heading": "Velocidade média",
+	"avg-speed.p1": "Diferente da velocidade instantânea, a velocidade média é definida como a distância total percorrida dividida pelo intervalo de tempo. Por exemplo, se uma distância de 80 quilômetros é percorrida em 1 hora, a velocidade média é de 80 quilômetros por hora. Da mesma forma, se 320 quilômetros forem percorridos em 4 horas, a velocidade média também será de 80 quilômetros por hora. Quando uma distância em quilômetros (km) é dividida por um tempo em horas (h), o resultado é em quilômetros por hora (km / h).",
+	"avg-speed.p2": "",
+	"supported-speed.heading": "Unidades de velocidade suportadas",
+	"supported-speed.p1": "Quilômetros (ou Quilômetros) por hora: internacionalmente, km / h é a unidade de velocidade mais comumente usada em sinais de trânsito e velocímetros. Outras abreviações incluem \"km / h\", \"kmph\" e \"km / hr\" como abreviações em inglês.",
+	"supported-speed.p2": "Nós: o nó é uma unidade de velocidade igual a uma milha náutica por hora, exatamente 1.852 km / h. Em todo o mundo, o nó é usado na meteorologia e na navegação marítima e aérea - por exemplo, um navio que viaja a 1 nó ao longo de um meridiano viaja aproximadamente um minuto de latitude geográfica em uma hora.",
+	"home": "Casa",
+	"what-is-my-elevation": "Qual é minha altitude?",
+	"snowfall-guide": "totais de neve",
+	"visited-earth": "Terra visitada"
 }

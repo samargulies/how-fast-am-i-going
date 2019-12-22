@@ -5,8 +5,9 @@
         <div class="coordinates"></div>
       </div>
       <div class="settings">
-        <div id="choose-units" v-if="!hideUnitSelection">
+        <div id="choose-units">
           <a @click="setUnits('mph')"
+            v-if="!hideUnitSelection"
             :class="['button', 'units', 'units--mph', units === 'mph' ? 'units-selected' : '']">
             {{ $t('units.mph') }}
           </a>

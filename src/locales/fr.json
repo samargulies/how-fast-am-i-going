@@ -1,31 +1,49 @@
 {
-	"site-title": "À quelle altitude est-ce que je me trouve?",
-	"site-description": "Déterminez l'altitude à laquelle vous vous trouvez, ou l'altitude de n'importe quel point sur Terre.",
-	"site-mobile-app-title": "Altitude",
-	"source": {
-		"web": {
-			"description": "Selon internet",
-			"toggle": "Utiliser internet"
-		},
-		"phone": {
-			"description": "Selon votre téléphone",
-			"toggle": "Utiliser votre téléphone"
-		}
-	},
+	"site-title": "À quelle vitesse vais-je?",
+	"site-description": "Trouvez votre vitesse actuelle en mph ou km / h avec cette application d'indicateur de vitesse en ligne",
+	"site-mobile-app-title": "À Quelle Vitesse",
 	"units": {
 		"feet-default": "false",
 		"hide-selection": "true",
-		"feet": "ft",
-		"meters": "m"
+		"mph": "mph",
+		"kmh": "km/h",
+		"kn": "noeuds"
 	},
 	"location-format": "{value} {units}",
-	"change-location": "Changer la localisation",
-	"address": {
-		"label": "Localisation",
-		"placeholder": "Entrez votre localisation",
-		"cancel": "Annuler"
-	},
 	"sponsored-by": "Sponsorisé par",
 	"brought-to-you-by": "Fourni par {0}",
-	"hide-altimeters": "true"
+	"reset": "Réinitialiser",
+	"avg-speed": "Vitesse moyenne",
+	"current-speed": "Vitesse actuelle",
+	"heading": "Boussole",
+	"location-read-error": "Une erreur s'est produite lors du chargement de votre position actuelle.",
+	"color-scheme-light": " Mode Clair",
+	"color-scheme-dark": "Mode Sombre",
+	"color-scheme-auto": "Automatique",
+	"what-is-this.heading": "Qu'est-ce que c'est?",
+	"what-is-this.p1": "Ce site a été conçu pour trouver votre vitesse actuelle, votre vitesse moyenne et la direction de la boussole en miles par heure, kilomètres par heure ou nœuds. Pour utiliser cet indicateur de vitesse en ligne, visitez cette page sur un appareil compatible GPS et votre vitesse se mettra à jour automatiquement lorsque vous vous déplacerez. Cela fonctionnera même lorsque votre téléphone est hors ligne. Vous pouvez l'utiliser pour voir à quelle vitesse vous voyagez en marchant, en faisant du vélo, en conduisant, en naviguant ou en train.",
+	"how-we-calc-speed.heading": "Comment nous calculons votre vitesse",
+	"how-we-calc-speed.p1": "Nous utilisons la vitesse indiquée par le GPS de votre appareil. Ce site peut ne pas fonctionner de manière fiable sur des ordinateurs de bureau sans capteur GPS ou si vous n'autorisez pas ce site à accéder à votre position actuelle.",
+	"graph-speed.heading": "Représentez graphiquement votre vitesse",
+	"graph-speed.p1": "Au fur et à mesure que le site Web collecte des lectures de vitesse, nous affichons un graphique montrant l'évolution de votre vitesse au fil du temps. Vous pouvez cliquer sur le bouton de réinitialisation à tout moment pour effacer ce graphique et le calcul de la vitesse moyenne et recommencer à partir de 0.",
+	"suggested-uses.heading": "Utilisations suggérées",
+	"suggested-uses.p1": "Supposons que vous soyez dans un véhicule Uber, Lyft ou autre véhicule de covoiturage. La question vous vient à l'esprit: \"À quelle vitesse ce véhicule va-t-il?\" Il peut s'agir d'une Ford, d'une BMW, d'une Subaru, d'une Toyota ou de toute autre voiture conforme aux normes Uber et Lyft. Peut-être que vous allez à un rythme d'escargot en raison de la circulation extrême sur la A7, ou peut-être que votre chauffeur va extrêmement vite et que vous souhaitez les signaler, mais craignez de regarder leur compteur de vitesse. N'ayez crainte! La vitesse à laquelle je vais est là pour vous aider à le découvrir.",
+	"suggested-uses.p2": "Au fur et à mesure que le site Web collecte des lectures de vitesse, nous affichons un graphique montrant l'évolution de votre vitesse au fil du temps. Vous pouvez cliquer sur le bouton de réinitialisation à tout moment pour effacer ce graphique et le calcul de la vitesse moyenne et recommencer à partir de 0.",
+	"suggested-uses.p3": "Et si vous faites une balade à vélo? Vous avancez lentement le long du lac pour voir le coucher du soleil, mais tout d'un coup le ciel gris montre son visage laid et la pluie et le tonnerre commencent à tomber. Vous vous précipitez chez vous et vous voulez savoir à quelle vitesse vous alliez. Ouvrez simplement votre navigateur et découvrez en rentrant chez vous au sec et au chaud!",
+	"suggested-uses.p4": "Une autre excellente façon d'utiliser la vitesse à laquelle je vais est si vous êtes dans un bateau à moteur.",
+	"suggested-uses.p5": "Un trajet en train TGV de Paris à Nice est un excellent moyen de passer 6 heures. La campagne pastorale pittoresque que la France offre est sans précédent. Mais que se passe-t-il si vous admirez les arbres, la saleté et les autres offrandes naturelles et que vous voulez savoir à quelle vitesse le train va? Avant de savoir à quelle vitesse je vais, vous devez vous lever et demander au chef d'orchestre, qui se met généralement en colère. Maintenant, vous pouvez simplement ouvrir votre smartphone, vous connecter et découvrir à quelle vitesse le train va!",
+	"suggested-uses.p6": "Au fur et à mesure que le site Web collecte des lectures de vitesse, nous affichons un graphique montrant l'évolution de votre vitesse au fil du temps. Vous pouvez cliquer sur le bouton de réinitialisation à tout moment pour effacer ce graphique et le calcul de la vitesse moyenne et recommencer à partir de 0.",
+	"suggested-uses.p7": "Vroom Vroom! Votre moteur hors-bord à essence Honda de 5 HP (15) vous accélère à travers le lac local afin que vous puissiez pêcher la truite, le flétan et d'autres poissons. Vous saisissez votre canne à pêche, prêt à attraper le poisson qui prendra l'appât, mais vous voulez savoir combien de temps il faudra pour arriver au trou de pêche. Vous savez qu'il y en a un à environ 3 km. Si vous vérifiez votre vitesse en ligne, vous pouvez déterminer combien de temps il vous faudra pour vous y rendre. Une fois pêché, vous pouvez consommer le poisson cru ou le saler et le fumer.",
+	"current-speed.heading": "Vitesse actuelle",
+	"current-speed.p1": "Pour calculer votre vitesse actuelle ou instantanée, vous prenez la distance parcourue sur une très courte période. Une voiture qui roule à 50 km / h roule généralement moins d'une heure à vitesse constante, mais si elle roule à cette vitesse pendant une heure, elle parcourra 50 km. Si le véhicule continuait à cette vitesse pendant une demi-heure, il couvrirait la moitié de cette distance (25 km).",
+	"avg-speed.heading": "Vitesse moyenne",
+	"avg-speed.p1": "Différente de la vitesse instantanée, la vitesse moyenne est définie comme la distance totale parcourue divisée par l'intervalle de temps. Par exemple, si une distance de 80 kilomètres est parcourue en 1 heure, la vitesse moyenne est de 80 kilomètres par heure. De même, si 320 kilomètres sont parcourus en 4 heures, la vitesse moyenne est également de 80 kilomètres par heure. Lorsqu'une distance en kilomètres (km) est divisée par un temps en heures (h), le résultat est en kilomètres par heure (km / h).",
+	"avg-speed.p2": "",
+	"supported-speed.heading": "Unités de vitesse prises en charge",
+	"supported-speed.p1": "Kilomètres (ou Kilomètres) par heure: à l'échelle internationale, le km / h est l'unité de vitesse la plus couramment utilisée sur les panneaux de signalisation et les compteurs de vitesse. Les autres abréviations incluent \"km / h\", \"kmph\" et \"km / h\" comme abréviations anglaises.",
+	"supported-speed.p2": "Noeuds: Le noeud est une unité de vitesse égale à un mille marin par heure, exactement 1,852 km / h (environ 1,15078 mph). Dans le monde entier, le nœud est utilisé en météorologie et en navigation maritime et aérienne - par exemple, un navire se déplaçant à 1 nœud le long d'un méridien parcourt environ une minute de latitude géographique en une heure.",
+	"home": "Accueil",
+	"what-is-my-elevation": "À quelle altitude est-ce que je me trouve?",
+	"snowfall-guide": "Totaux de neige",
+	"visited-earth": "Visité la Terre"
 }

@@ -1,31 +1,49 @@
 {
-	"site-title": "Was ist meine Höhenlage?",
-	"site-description": "Wie hoch bin ich über Normal-Null? Finde die Höhenlage deines derzeitigen Standorts oder jedes Punktes auf der Erde.",
-	"site-mobile-app-title": "Höhenlage",
-	"source": {
-		"web": {
-			"description": "Laut des Internets",
-			"toggle": "Internet benutzen"
-		},
-		"phone": {
-			"description": "Laut deines Telefons",
-			"toggle": "Telefon benutzen"
-		}
-	},
+	"site-title": "Wie schnell gehe ich?",
+	"site-description": "Finden Sie Ihre aktuelle Geschwindigkeit in km / h mit dieser tachometer",
+	"site-mobile-app-title": "Wie Schnell",
 	"units": {
-    	"feet-default": "false",
+		"default-units": "kmh",
 		"hide-selection": "true",
-		"feet": "ft",
-		"meters": "m"
+		"mph": "mph",
+		"kmh": "km/h",
+		"kn": "knots"
 	},
 	"location-format": "{value} {units}",
-	"change-location": "Standort ändern",
-	"address": {
-		"label": "Standort",
-		"placeholder": "Deinen Standort eingeben",
-		"cancel": "Abbrechen"
-	},
 	"sponsored-by": "Gesponsert von",
-	"brought-to-you-by": "Für dich präsentiert von {0}",
-	"hide-altimeters": "true"
+	"brought-to-you-by": "Ihnen von {0} gebracht",
+	"reset": "Zurücksetzen",
+	"avg-speed": "Durchschnittsgeschwindigkeit",
+	"current-speed": "Momentane Geschwindigkeit",
+	"heading": "Richtung",
+	"location-read-error": "Beim Laden Ihres aktuellen Standorts ist ein Fehler aufgetreten.",
+	"color-scheme-light": "Lichtmodus",
+	"color-scheme-dark": "Dunkler Modus",
+	"color-scheme-auto": "Automatisch",
+	"what-is-this.heading": "Was ist das?",
+	"what-is-this.p1": "Diese Website wurde erstellt, um Ihre aktuelle Geschwindigkeit, Durchschnittsgeschwindigkeit und Kompassrichtung in Meilen pro Stunde, Kilometer pro Stunde oder Knoten zu ermitteln. Um diesen Online-Tachometer zu verwenden, besuchen Sie diese Seite auf einem GPS-fähigen Gerät. Ihre Geschwindigkeit wird automatisch aktualisiert, wenn Sie sich bewegen. Es funktioniert sogar, wenn Ihr Telefon offline ist. Auf diese Weise können Sie sehen, wie schnell Sie beim Gehen, Radfahren, Fahren, Bootfahren oder im Zug unterwegs sind.",
+	"how-we-calc-speed.heading": "Wie berechnen wir Ihre Geschwindigkeit?",
+	"how-we-calc-speed.p1": "Wir verwenden die von Ihrem GPS-Gerät gemeldete Geschwindigkeit. Diese Site funktioniert möglicherweise nicht zuverlässig auf Desktop-Computern ohne GPS-Sensor oder wenn Sie nicht zulassen, dass diese Site auf Ihren aktuellen Standort zugreift.",
+	"graph-speed.heading": "Zeichnen Sie Ihre Geschwindigkeit",
+	"graph-speed.p1": "Während die Website Geschwindigkeitsdaten erfasst, wird ein Diagramm angezeigt, in dem die Änderung Ihrer Geschwindigkeit im Zeitverlauf dargestellt ist. Sie können jederzeit auf die Schaltfläche zum Zurücksetzen klicken, um dieses Diagramm und die Durchschnittsgeschwindigkeitsberechnung zu löschen und von 0 aus neu zu starten.",
+	"suggested-uses.heading": "Vorgeschlagene Verwendungen",
+	"suggested-uses.p1": "Nehmen wir an, Sie befinden sich in einem Uber-, Lyft- oder einem anderen Mitfahrgelegenheiten-Fahrzeug. Die Frage taucht in Ihrem Kopf auf: \"Wie schnell fährt dieses Fahrzeug?\" Es könnte ein Ford, ein BMW, ein Subaru, ein Toyota oder jedes andere der verschiedenen Autos sein, die den Standards von Uber und Lyft entsprechen. Vielleicht sind Sie wegen des extremen Verkehrs auf der Autobahn im Schneckentempo, oder Ihr Fahrer fährt extrem schnell und Sie möchten sich melden, haben aber Angst, auf den Tacho zu schauen. Keine Angst! Wie schnell ich gehe, erfahren Sie hier.",
+	"suggested-uses.p2": "Während die Website Geschwindigkeitsdaten erfasst, wird ein Diagramm angezeigt, in dem die Änderung Ihrer Geschwindigkeit im Zeitverlauf dargestellt ist. Sie können jederzeit auf die Schaltfläche zum Zurücksetzen klicken, um dieses Diagramm und die Durchschnittsgeschwindigkeitsberechnung zu löschen und von 0 aus neu zu starten.",
+	"suggested-uses.p3": "Was ist, wenn Sie eine gemütliche Radtour machen? Sie bewegen sich langsam am See entlang, um den Sonnenuntergang zu sehen, aber plötzlich zeigt der graue Himmel sein hässliches Gesicht und es beginnt zu regnen und zu donnern. Sie eilen nach Hause und möchten herausfinden, wie schnell Sie waren. Öffnen Sie einfach Ihren Browser und finden Sie es heraus, während Sie zu Trockenheit und Wärme nach Hause eilen!",
+	"suggested-uses.p4": "Eine weitere großartige Möglichkeit, How Fast Am I Going zu nutzen, besteht darin, in einem Motorboot zu sitzen.",
+	"suggested-uses.p5": "Eine ICE-Zugfahrt von Berlin nach Frankford ist eine großartige Möglichkeit, Zeit zu verbringen. Die landschaftlich reizvolle Weidelandschaft Deutschlands ist einzigartig. Aber was ist, wenn Sie die Bäume, den Dreck und die anderen natürlichen Gaben bewundern und sich danach sehnen, herauszufinden, wie schnell der Zug fährt? Bevor ich losgehe, musst du aufstehen und den Dirigenten fragen, wer normalerweise sehr wütend wird. Jetzt können Sie einfach Ihr Smartphone öffnen, online gehen und herausfinden, wie schnell der Zug fährt!",
+	"suggested-uses.p6": "Während die Website Geschwindigkeitsdaten erfasst, wird ein Diagramm angezeigt, in dem die Änderung Ihrer Geschwindigkeit im Zeitverlauf dargestellt ist. Sie können jederzeit auf die Schaltfläche zum Zurücksetzen klicken, um dieses Diagramm und die Durchschnittsgeschwindigkeitsberechnung zu löschen und von 0 aus neu zu starten.",
+	"suggested-uses.p7": "Vroom Vroom! Ihr gasbetriebener Honda 5 PS (15) Außenbordmotor beschleunigt Sie über den örtlichen See, damit Sie Forellen, Heilbutt und andere Fische fischen können. Sie umklammern Ihre Angelrute und sind bereit, jeden Fisch zu fangen, der den Köder nimmt. Sie möchten jedoch wissen, wie lange es dauern wird, bis Sie das Angelloch erreichen. Sie wissen, dass es einen gibt, der ungefähr 2 Meilen entfernt ist. Wenn Sie Ihre Geschwindigkeit online überprüfen, können Sie bestimmen, wie lange Sie brauchen, um dorthin zu gelangen. Einmal gefangen, können Sie den Fisch roh verzehren oder salzen und rauchen.",
+	"current-speed.heading": "Momentane Geschwindigkeit",
+	"current-speed.p1": "Um Ihre aktuelle oder momentane Geschwindigkeit zu berechnen, nehmen Sie die zurückgelegte Strecke über einen sehr kurzen Zeitraum. Ein Auto, das mit 50 km / h fährt, fährt in der Regel weniger als eine Stunde mit konstanter Geschwindigkeit, aber wenn es eine volle Stunde mit dieser Geschwindigkeit fahren würde, würde es 50 km zurücklegen. Wenn das Fahrzeug eine halbe Stunde lang mit dieser Geschwindigkeit fahren würde, würde es die Hälfte dieser Strecke zurücklegen (25 km).",
+	"avg-speed.heading": "Durchschnittsgeschwindigkeit",
+	"avg-speed.p1": "Abweichend von der momentanen Geschwindigkeit wird die Durchschnittsgeschwindigkeit als die gesamte zurückgelegte Strecke geteilt durch das Zeitintervall definiert. Wenn zum Beispiel eine Strecke von 80 Kilometern in einer Stunde gefahren wird, beträgt die Durchschnittsgeschwindigkeit 80 Kilometer pro Stunde. Wenn 320 Kilometer in 4 Stunden zurückgelegt werden, beträgt die Durchschnittsgeschwindigkeit ebenfalls 80 Kilometer pro Stunde. Wenn eine Entfernung in Kilometern (km) durch eine Zeit in Stunden (h) geteilt wird, ist das Ergebnis in Kilometern pro Stunde (km / h).",
+	"avg-speed.p2": "Meilen pro Stunde sind eine imperiale und in den USA übliche Einheit für die Geschwindigkeit, die die Anzahl der Meilen angibt, die in einer Stunde zurückgelegt wurden. Es wird in den Vereinigten Staaten, im Vereinigten Königreich und in einigen Commonwealth-Staaten, insbesondere in der Karibik, eingesetzt.",
+	"supported-speed.heading": "Unterstützte Geschwindigkeitseinheiten",
+	"supported-speed.p1": "Kilometer (oder Kilometer) pro Stunde: International ist km / h die am häufigsten verwendete Geschwindigkeitseinheit für Verkehrszeichen und Geschwindigkeitsmesser. Andere Abkürzungen sind \"km / h\", \"kmph\" und \"km / h\" als englische Abkürzungen.",
+	"supported-speed.p2": "Knoten: Der Knoten ist eine Geschwindigkeitseinheit, die einer Seemeile pro Stunde entspricht, genau 1,852 km / h. Weltweit wird der Knoten in der Meteorologie sowie in der See- und Luftfahrt verwendet. Beispielsweise fährt ein Schiff, das mit 1 Knoten entlang eines Meridians fährt, in einer Stunde ungefähr eine Minute geografischer Breite.",
+	"home": "Zuhause",
+	"what-is-my-elevation": "Was ist meine Höhenlage?",
+	"snowfall-guide": "Schneesummen",
+	"visited-earth": "Besuchte die Erde"
 }

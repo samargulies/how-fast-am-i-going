@@ -18,7 +18,7 @@
             smooth: true,
             fill: true,
             }]" />
-        <a class="button" @click.prevent="clearLocations">Reset</a>
+        <a class="button" @click.prevent="clearLocations">{{ $t('reset') }}</a>
     </div>
     </div>
   </transition>
