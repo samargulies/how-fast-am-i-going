@@ -44,7 +44,7 @@ export default new Vuex.Store({
   actions: {
     getUserLocation({ state, commit, dispatch }) {
       if (state.watchId !== null) {
-        console.log('existing watch');
+        // console.log('existing watch');
         dispatch('stopWatchingUserLocation');
       }
       const watchId = navigator.geolocation.watchPosition((location) => {
@@ -65,8 +65,8 @@ export default new Vuex.Store({
 
       commit('addLocation', location);
     },
-    locationError({ dispatch }, error) {
-      console.warn('location access denied', error);
+    locationError({ dispatch }) {
+      // console.warn('location access denied', error);
       dispatch('setLoading', false);
       dispatch('setSupportsLocation', false);
     },
