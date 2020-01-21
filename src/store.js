@@ -21,7 +21,7 @@ export default new Vuex.Store({
       return state.locations[state.locations.length - 1];
     },
     speedReadings(state) {
-      return state.locations.map((location) => location.coords.speed || 0);
+      return state.locations.map(location => location.coords.speed || 0);
     },
     currentSpeed(state, getters) {
       return getters.latestLocation.coords.speed || 0;
@@ -50,7 +50,7 @@ export default new Vuex.Store({
       const watchId = navigator.geolocation.watchPosition((location) => {
         dispatch('setLocation', location);
       },
-      (error) => dispatch('locationError', error),
+      error => dispatch('locationError', error),
       {
         enableHighAccuracy: true,
         timeout: 30 * 1000,

@@ -8,7 +8,7 @@
     <DataReadings />
     <Settings />
     <SpeedChart />
-    <TheFooter/>
+    <TheFooter :page="page" />
   </div>
 </template>
 <script>
@@ -26,10 +26,21 @@ export default {
     TheFooter,
     SpeedChart,
   },
+  props: ['page'],
   data() {
     return {
       online: navigator.onLine,
       hasFocus: true,
+    };
+  },
+  computed: {
+    formattedTitle() {
+      return this.page ? this.$t(`page.${this.page}.heading`) : null;
+    },
+  },
+  metaInfo() {
+    return {
+      title: this.formattedTitle,
     };
   },
   methods: {

@@ -11,7 +11,7 @@ const router = new Router({
   routes: [
     {
       path: '/en/*',
-      redirect: (to) => `/${to.params.pathMatch}`,
+      redirect: to => `/${to.params.pathMatch}`,
     },
     {
       path: '/:lang(\\w{2})?',
@@ -20,9 +20,10 @@ const router = new Router({
       },
       children: [
         {
-          path: '',
+          path: '/:page?',
           name: 'home',
           component: SpeedPage,
+          props: true,
         },
       ],
     },
