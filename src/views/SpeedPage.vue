@@ -1,13 +1,25 @@
 <template>
   <div :class="[online ? 'online' : 'offline','page page--elevation']">
+    <!-- Ezoic - Top of Page - top_of_page -->
+    <div id="ezoic-pub-ad-placeholder-101"> </div>
+    <!-- End Ezoic - Top of Page - top_of_page -->
     <h1>
       <router-link :to="pathForLocale({path: '/'})">
         {{ $t('site-title') }}
       </router-link>
     </h1>
+    <!-- Ezoic - Under Page Title - under_page_title -->
+    <div id="ezoic-pub-ad-placeholder-102"> </div>
+    <!-- End Ezoic - Under Page Title - under_page_title -->
     <DataReadings />
     <Settings />
+    <!-- Ezoic - Above Speed Chart - mid_content -->
+    <div id="ezoic-pub-ad-placeholder-104"> </div>
+    <!-- End Ezoic - Above Speed Chart - mid_content -->
     <SpeedChart />
+    <!-- Ezoic - Under Readings - under_first_paragraph -->
+    <div id="ezoic-pub-ad-placeholder-103"> </div>
+    <!-- End Ezoic - Under Readings - under_first_paragraph -->
     <TheFooter :page="page" />
   </div>
 </template>

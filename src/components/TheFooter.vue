@@ -14,6 +14,9 @@
       <li><router-link :to="pathForLocale({locale: 'zh'})">中文</router-link></li>
     </ul>
   </div>
+  <!-- Ezoic - Below Localizations - long_content -->
+  <div id="ezoic-pub-ad-placeholder-105"> </div>
+  <!-- End Ezoic - Below Localizations - long_content -->
   <slot>
     <div class="section section--about" v-if="page">
       <h2 class="section__title">{{ $t(`page.${page}.heading`) }}</h2>
@@ -27,6 +30,9 @@
         <p>{{ $t('what-is-this.p1') }}</p>
         <h3>{{ $t('how-we-calc-speed.heading') }}</h3>
         <p>{{ $t('how-we-calc-speed.p1') }}</p>
+        <!-- Ezoic - Below Description Paragraph 1 - longer_content -->
+        <div id="ezoic-pub-ad-placeholder-106"> </div>
+        <!-- End Ezoic - Below Description Paragraph 1 - longer_content -->
         <h3>{{ $t('graph-speed.heading') }}</h3>
         <p>{{ $t('graph-speed.p1') }}</p>
         <h3>{{ $t('suggested-uses.heading') }}</h3>
