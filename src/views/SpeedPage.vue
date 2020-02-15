@@ -1,8 +1,5 @@
 <template>
   <div :class="[online ? 'online' : 'offline','page page--elevation']">
-    <!-- Ezoic - Top of Page - top_of_page -->
-    <div id="ezoic-pub-ad-placeholder-101"> </div>
-    <!-- End Ezoic - Top of Page - top_of_page -->
     <h1>
       <router-link :to="pathForLocale({path: '/'})">
         {{ $t('site-title') }}

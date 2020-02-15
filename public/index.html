@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <% if (NODE_ENV === 'production') { %>
-      <!-- <script>var ezoicId = 173280; </script>
-      <script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script> -->
-    <% } %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -25,15 +21,11 @@
         Please enable it to continue.
     </strong>
     </noscript>
+    <div class="page page--above-content-ad">
+      <!-- Ezoic - Top of Page - top_of_page -->
+      <div id="ezoic-pub-ad-placeholder-101"></div>
+      <!-- End Ezoic - Top of Page - top_of_page -->
+    </div>
     <div id="app"></div>
-    <% if (NODE_ENV === 'production') { %>
-      <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-6102117487539042",
-                enable_page_level_ads: true
-           });
-      </script> -->
-    <% } %>
   </body>
 </html>
