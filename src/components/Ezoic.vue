@@ -15,8 +15,6 @@ export default {
   },
   computed: {
     adGeneratedContent() {
-      console.log(this.id);
-      console.log(this.$store.state.ezoicAds[this.id]);
       return this.$store.state.ezoicAds[this.id];
     },
   },
