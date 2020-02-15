@@ -12,6 +12,7 @@ export default new Vuex.Store({
     supportsLocation: true,
     watchId: null,
     colorScheme: localStorage.getItem('colorScheme') || 'auto',
+    ezoicAds: {},
   },
   getters: {
     firstLocation(state) {
@@ -95,11 +96,16 @@ export default new Vuex.Store({
       localStorage.setItem('colorScheme', colorScheme);
       commit('setItem', { item: 'colorScheme', value: colorScheme });
     },
-
+    setAd({ commit }, { id, html }) {
+      commit('setAd', { id, html });
+    },
   },
   mutations: {
     setItem(state, { item, value }) {
       Vue.set(state, item, value);
+    },
+    setAd(state, { id, html }) {
+      Vue.set(state.ezoicAds, id, html);
     },
     addLocation(state, location) {
       if (location.coords.longitude && location.coords.latitude) {

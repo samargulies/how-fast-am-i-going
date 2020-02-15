@@ -6,16 +6,16 @@
       </router-link>
     </h1>
     <!-- Ezoic - Under Page Title - under_page_title -->
-    <div id="ezoic-pub-ad-placeholder-102"> </div>
+    <Ezoic id="102"/>
     <!-- End Ezoic - Under Page Title - under_page_title -->
     <DataReadings />
     <Settings />
     <!-- Ezoic - Above Speed Chart - mid_content -->
-    <div id="ezoic-pub-ad-placeholder-104"> </div>
+    <Ezoic id="104"/>
     <!-- End Ezoic - Above Speed Chart - mid_content -->
     <SpeedChart />
     <!-- Ezoic - Under Readings - under_first_paragraph -->
-    <div id="ezoic-pub-ad-placeholder-103"> </div>
+    <Ezoic id="103"/>
     <!-- End Ezoic - Under Readings - under_first_paragraph -->
     <TheFooter :page="page" />
   </div>
@@ -26,7 +26,7 @@ import { pathForLocale } from '@/helpers';
 import DataReadings from '@/components/DataReadings.vue';
 import Settings from '@/components/Settings.vue';
 import TheFooter from '@/components/TheFooter.vue';
-
+import Ezoic from '@/components/Ezoic.vue';
 
 export default {
   components: {
@@ -34,6 +34,7 @@ export default {
     Settings,
     TheFooter,
     SpeedChart,
+    Ezoic,
   },
   props: ['page'],
   data() {
