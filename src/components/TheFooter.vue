@@ -60,15 +60,6 @@
   <div class="section section--navigation">
     <nav>
       <ul>
-        <li v-for="currentPage in ['train', 'boat', 'car', 'bicycle', 'bus', 'walking', 'moped', 'motorcycle']" :key="currentPage">
-          <router-link :to="pathForLocale({path: `/${currentPage}`})">{{ $t(`page.${currentPage}.heading`) }}</router-link>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="section section--navigation">
-    <nav>
-      <ul>
         <li><router-link :to="pathForLocale({path: '/'})">{{ $t('home') }}</router-link></li>
         <li><a href="https://www.whatismyelevation.com/">{{ $t('what-is-my-elevation') }}</a></li>
         <li><a href="https://snowfall.guide/">{{ $t('snowfall-guide') }}</a></li>

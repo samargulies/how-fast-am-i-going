@@ -45,21 +45,5 @@
 	"home": "Home",
 	"what-is-my-elevation": "What is my elevation?",
 	"snowfall-guide": "Snowfall Guide",
-	"visited-earth": "Visited Earth",
-	"page.train.heading": "Train Speed",
-	"page.train.text": "This page provides your current speed while you are aboard a train. ­Chugging across short distan­ces or entire continents, trains act as a major form of transportation worldwide. Also called railroads or railways, trains carry within their cars passeng­ers or freight -- such as raw materials, supplies or finished goods -- and sometimes both. Railways were the first form of rapid land transportation and had an effective monopoly on long distance passenger traffic until the development of the car in the 20th century. Speed had always been an important factor for railroads and they constantly tried to achieve higher speeds and decrease travel durations. Rail transportation in the late 19th Century was not much slower than non-high-speed trains today and many railroads regularly operated relatively fast express trains which averaged speeds of around 100 km/h (62 mph).",
-	"page.boat.heading": "Boat Speed",
-	"page.boat.text": "This page provides your current speed while you are aboard a boat. How fast is a boat on average? Is a fast boat the exception or the rule? The fastest boat speed record ever was 317.6 MPH. Pontoon boat speeds can surpass 30 MPH under the right conditions, with a few pontoon boats even reaching the 35 MPH mark thanks to larger engines and great conditions. The enjoyment that comes from speed is a huge plus for adrenaline-seeking boaters. And that’s one reason why knowing how fast a boat goes is important. ",
-	"page.car.heading": "Car Speed",
-	"page.car.text": "This page provides your current speed while you are riding in a car. A speedometer or a speed meter is a gauge that measures and displays the instantaneous speed of a vehicle. Speedometers for other vehicles have specific names and use other means of sensing speed.",
-	"page.bicycle.heading": "Bicycle Speed",
-	"page.bicycle.text": "This page provides your current speed while you are riding a bike. A human traveling on a bicycle at 16–24 km/h (10–15 mph), using only the power required to walk, is the most energy-efficient means of human transport generally available. For cyclists in Copenhagen, the average cycling speed is 15.5 km/h (9.6 mph). On a racing bike, a fit rider can ride at 40 km/h (25 mph) on flat surface.",
-	"page.bus.heading": "Bus Speed",
-	"page.bus.text": "This page provides your current speed while you are aboard a bus. Typical speeds of BRT systems range from 17 to 30 miles per hour (27 to 48 km/h). Regular bus routes can be significantly slower.",
-	"page.walking.heading": "Walking Speed",
-	"page.walking.text": "This page provides your current speed while you are walking. The average human walking speed at crosswalks is about 5.0 kilometres per hour (km/h), or about 3.1 miles per hour (mph).",
-	"page.moped.heading": "Moped Speed",
-	"page.moped.text": "This page provides your current speed while you are riding a moped. The moped is legally defined as a two- or three-wheeled vehicle with engine displacement of no more than 50 cc (3.1 cu in) and maximum speed of no more than 50 km/h (31 mph).",
-	"page.motorcycle.heading": "Motorcycle Speed",
-	"page.motorcycle.text": "This page provides your current speed while you are riding a motorcycle. The average driving speeds on 30 km/h roads was more than 40 km/h for both motorcyclists and car drivers. The average speed of motorbikes was above the speed limit on 50, 70, double lane 90 km/h roads and highways."
+	"visited-earth": "Visited Earth"
 }

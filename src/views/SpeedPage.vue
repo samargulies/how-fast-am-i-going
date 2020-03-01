@@ -17,7 +17,7 @@
     <!-- Ezoic - Under Readings - under_first_paragraph -->
     <Ezoic id="103"/>
     <!-- End Ezoic - Under Readings - under_first_paragraph -->
-    <TheFooter :page="page" />
+    <TheFooter />
   </div>
 </template>
 <script>
@@ -36,17 +36,11 @@ export default {
     SpeedChart,
     Ezoic,
   },
-  props: ['page'],
   data() {
     return {
       online: navigator.onLine,
       hasFocus: true,
     };
-  },
-  computed: {
-    formattedTitle() {
-      return this.page ? this.$t(`page.${this.page}.heading`) : null;
-    },
   },
   metaInfo() {
     return {

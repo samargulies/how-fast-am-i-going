@@ -20,10 +20,9 @@ const router = new Router({
       },
       children: [
         {
-          path: '/:page?',
+          path: '',
           name: 'home',
           component: SpeedPage,
-          props: true,
         },
       ],
     },
