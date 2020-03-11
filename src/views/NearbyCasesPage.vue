@@ -54,6 +54,7 @@ export default {
     pathForLocale,
   },
   created() {
+    this.$store.dispatch('fetchDataset');
     this.$store.dispatch('getUserLocation');
     window.addEventListener('online', this.updateOnlineStatus);
     window.addEventListener('offline', this.updateOnlineStatus);

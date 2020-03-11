@@ -1,0 +1,7 @@
+name = "covid19"
+type = "webpack"
+account_id = "1895682efc8a49bb5b9fecb820a6acd0"
+workers_dev = true
+route = ""
+zone_id = ""
+webpack_config = "webpack.config.js"

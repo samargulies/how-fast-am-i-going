@@ -1,7 +1,7 @@
 {
-	"site-title": "How fast am I going?",
-	"site-description": "Find your current speed in mph or km/h with this online speedometer app",
-	"site-mobile-app-title": "How Fast?",
+	"site-title": "Nearby Coronavirus",
+	"site-description": "Up-to-date data on where the coronavirus (COVID-19) is being reported near your location",
+	"site-mobile-app-title": "Nearby Coronavirus",
 	"units": {
 		"default-units": "mph",
 		"hide-selection": "false",

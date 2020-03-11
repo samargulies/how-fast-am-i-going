@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import SpeedPage from './views/SpeedPage.vue';
+import NearbyCasesPage from './views/NearbyCasesPage.vue';
 import i18n from '@/i18n';
 
 Vue.use(Router);
@@ -22,7 +22,7 @@ const router = new Router({
         {
           path: '',
           name: 'home',
-          component: SpeedPage,
+          component: NearbyCasesPage,
         },
       ],
     },

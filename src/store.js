@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
+import sortLocations from './location';
 import i18n from '@/i18n';
 
 Vue.use(Vuex);
@@ -7,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     loading: true,
+    dataset: {},
     locations: [],
     units: localStorage.getItem('units') || i18n.t('units.default-units'),
     supportsLocation: true,
@@ -41,8 +44,23 @@ export default new Vuex.Store({
     currentHeading(state, getters) {
       return getters.latestLocation.coords.heading;
     },
+    nearbyConfirmed(state, getters) {
+      return sortLocations(state.dataset.confirmed, getters.latestLocation);
+    },
+    nearbyDeaths(state, getters) {
+      return sortLocations(state.dataset.confirmed, getters.latestLocation);
+    },
+    nearbyRecovered(state, getters) {
+      return sortLocations(state.dataset.confirmed, getters.latestLocation);
+    },
   },
   actions: {
+    fetchDataset({ commit }) {
+      return axios.get('https://covid19.belabor.workers.dev/').then((response) => {
+        console.log(response.data);
+        commit('setItem', { item: 'dataset', value: response.data });
+      });
+    },
     getUserLocation({ state, commit, dispatch }) {
       if (state.watchId !== null) {
         // console.log('existing watch');
