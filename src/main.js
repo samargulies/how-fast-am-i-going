@@ -26,6 +26,6 @@ const app = new Vue({
   mounted: () => document.dispatchEvent(new Event('x-app-rendered')),
 }).$mount('#app');
 
-// if (process.env.NODE_ENV !== 'production') {
-window.$vm = app;
-// }
+if (process.env.NODE_ENV !== 'production') {
+  window.$vm = app;
+}

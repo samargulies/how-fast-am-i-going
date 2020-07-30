@@ -51,32 +51,10 @@
         <h3>{{ $t('supported-speed.heading') }}</h3>
         <p>{{ $t('supported-speed.p1') }}</p>
         <p>{{ $t('supported-speed.p2') }}</p>
-        <i18n path="brought-to-you-by" tag="p">
-          <a href="https://belabor.org/">belabor.org</a>
-        </i18n>
       </div>
     </div>
   </slot>
-  <div class="section section--about">
-    <h3>Where are coronavirus cases near me?</h3>
-    <h2 class="section__title"><a href="https://coronavirusnearme.net/">Find coronavirus cases near you</a></h2>
-    <div class="text-block">
-        <p>
-          See <a href="https://coronavirusnearme.net/">how coronavirus is affecting your community</a> by looking at the official reported cases of coronavirus (COVID-19) that are closest to your location. You can see how quickly the virus is spreading, as well as how many have died of the virus for each location reported.
-        </p>
-    </div>
-  </div>
-  <div class="section section--navigation">
-    <nav>
-      <ul>
-        <li><router-link :to="pathForLocale({path: '/'})">{{ $t('home') }}</router-link></li>
-        <li><a href="https://coronavirusnearme.net">Coronavirus near me</a></li>
-        <li><a href="https://www.whatismyelevation.com/">{{ $t('what-is-my-elevation') }}</a></li>
-        <li><a href="https://snowfall.guide/">{{ $t('snowfall-guide') }}</a></li>
-        <li><a href="http://visited.earth/">{{ $t('visited-earth') }}</a></li>
-      </ul>
-    </nav>
-  </div>
+  <WhereWhat :fast="false" />
   <div class="app-settings">
     <a v-for="colorScheme in colorSchemes"
       :key="colorScheme"
@@ -91,9 +69,10 @@
 <script>
 import { pathForLocale } from '@/helpers';
 import Ezoic from '@/components/Ezoic.vue';
+import WhereWhat from '@/components/WhereWhat.vue';
 
 export default {
-  components: { Ezoic },
+  components: { Ezoic, WhereWhat },
   props: {
     page: {
       type: String,
