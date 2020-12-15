@@ -446,6 +446,11 @@ a {
 .languages a {
 	color: var(--light-grey);
 
+	@media (max-width: 480px) {
+		padding: 0.85em 0;
+		display: block;
+	}
+
 	&:hover,
 	&:active {
 		color: var(--brand);
