@@ -1,10 +1,10 @@
 <template>
-  <div class="elevation-reading">
+  <div class="elevation-reading" :class="loading ? 'loading' : ''">
     <div v-if="loading" class="spinner">
       <div class="double-bounce1"></div>
       <div class="double-bounce2"></div>
     </div>
-    <div v-else-if="!supportsLocation" class="location-error">
+    <div v-if="!supportsLocation" class="location-error">
       <p>{{ $t('location-read-error') }}</p>
     </div>
     <div v-else :class="['topline-readings', watchId ? 'watching' : 'not-watching']">

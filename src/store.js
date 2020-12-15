@@ -21,10 +21,16 @@ export default new Vuex.Store({
     latestLocation(state) {
       return state.locations[state.locations.length - 1];
     },
-    speedReadings(state) {
+    speedReadings(state, getters) {
+      if (!getters.latestLocation) {
+        return 0;
+      }
       return state.locations.map((location) => location.coords.speed || 0);
     },
     currentSpeed(state, getters) {
+      if (!getters.latestLocation) {
+        return 0;
+      }
       return getters.latestLocation.coords.speed || 0;
     },
     averageSpeed(state) {
@@ -39,7 +45,10 @@ export default new Vuex.Store({
       return (totalSpeed / readings) || 0;
     },
     currentHeading(state, getters) {
-      return getters.latestLocation.coords.heading;
+      if (!getters.latestLocation) {
+        return null;
+      }
+      return getters.latestLocation.coords.heading || null;
     },
   },
   actions: {
@@ -108,7 +117,7 @@ export default new Vuex.Store({
       Vue.set(state.ezoicAds, id, html);
     },
     addLocation(state, location) {
-      if (location.coords.longitude && location.coords.latitude) {
+      if (typeof location.coords !== 'undefined' && location.coords.longitude && location.coords.latitude) {
         state.locations.push(location);
       }
     },
