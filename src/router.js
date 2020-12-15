@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import SpeedPage from './views/SpeedPage.vue';
 import i18n from '@/i18n';
+import SpeedPage from './views/SpeedPage.vue';
 
 Vue.use(Router);
 
