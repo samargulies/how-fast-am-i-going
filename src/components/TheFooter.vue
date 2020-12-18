@@ -13,32 +13,8 @@
       </div>
       <div class="section section--about" v-else-if="includeAbout">
         <h2 class="section__title">{{ $t('what-is-this.heading') }}</h2>
-        <div class="text-block">
-          <p>{{ $t('what-is-this.p1') }}</p>
-          <h3>{{ $t('how-we-calc-speed.heading') }}</h3>
-          <p>{{ $t('how-we-calc-speed.p1') }}</p>
-          <!-- Ezoic - Below Description Paragraph 1 - longer_content -->
-          <Ezoic id="106" />
-          <!-- End Ezoic - Below Description Paragraph 1 - longer_content -->
-          <h3>{{ $t('graph-speed.heading') }}</h3>
-          <p>{{ $t('graph-speed.p1') }}</p>
-          <h3>{{ $t('suggested-uses.heading') }}</h3>
-          <p>{{ $t('suggested-uses.p1') }}</p>
-          <p>{{ $t('suggested-uses.p2') }}</p>
-          <p>{{ $t('suggested-uses.p3') }}</p>
-          <p>{{ $t('suggested-uses.p4') }}</p>
-          <p>{{ $t('suggested-uses.p5') }}</p>
-          <p>{{ $t('suggested-uses.p6') }}</p>
-          <p>{{ $t('suggested-uses.p7') }}</p>
-          <h3>{{ $t('current-speed.heading') }}</h3>
-          <p>{{ $t('current-speed.p1') }}</p>
-          <h3>{{ $t('avg-speed.heading') }}</h3>
-          <p>{{ $t('avg-speed.p1') }}</p>
-          <p>{{ $t('avg-speed.p2') }}</p>
-          <h3>{{ $t('supported-speed.heading') }}</h3>
-          <p>{{ $t('supported-speed.p1') }}</p>
-          <p>{{ $t('supported-speed.p2') }}</p>
-        </div>
+        <div class="text-block" v-html="$t('what-is-this.html')"></div>
+        <Ezoic id="106" />
       </div>
     </slot>
     <div class="section section--localizations">

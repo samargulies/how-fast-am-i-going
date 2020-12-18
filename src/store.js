@@ -23,7 +23,7 @@ export default new Vuex.Store({
     },
     speedReadings(state, getters) {
       if (!getters.latestLocation) {
-        return 0;
+        return [];
       }
       return state.locations.map((location) => location.coords.speed || 0);
     },
