@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import i18n from '@/i18n';
 import SpeedPage from './views/SpeedPage.vue';
+import ConverterPage from './views/ConverterPage.vue';
+import CalculatorPage from './views/CalculatorPage.vue';
 
 Vue.use(Router);
 
@@ -23,6 +25,16 @@ const router = new Router({
           path: '',
           name: 'home',
           component: SpeedPage,
+        },
+        {
+          path: 'convert',
+          name: 'convert',
+          component: ConverterPage,
+        },
+        {
+          path: 'calculate',
+          name: 'calculate',
+          component: CalculatorPage,
         },
       ],
     },

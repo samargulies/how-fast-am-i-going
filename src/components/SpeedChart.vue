@@ -1,7 +1,7 @@
 <template>
   <transition name="slide">
     <div>
-      <div class="speed-chart"  v-if="speedReadings.length > 1">
+      <div class="speed-chart" v-if="speedReadings.length > 1">
         <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
           <defs>
             <linearGradient id="fillColor" x1="1" x2="1" y1="0" y2="1">

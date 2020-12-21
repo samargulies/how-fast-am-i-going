@@ -7,9 +7,7 @@
     <slot>
       <div class="section section--about" v-if="page">
         <h2 class="section__title">{{ $t(`page.${page}.heading`) }}</h2>
-        <div class="text-block">
-          <p>{{ $t(`page.${page}.text`)}}</p>
-        </div>
+        <div class="text-block" v-html="$t(`page.${page}.html`)"></div>
       </div>
       <div class="section section--about" v-else-if="includeAbout">
         <h2 class="section__title">{{ $t('what-is-this.heading') }}</h2>
@@ -49,6 +47,21 @@
       </ul>
     </div>
     <WhereWhat :fast="false" />
+    <div class="section section--navigation">
+      <nav>
+        <ul>
+          <li>
+            <router-link :to="pathForLocale({path: '/'})">{{ $t('home') }}</router-link>
+          </li>
+          <li>
+            <router-link :to="pathForLocale({path: '/calculate'})">{{ $t('calculator-title') }}</router-link>
+          </li>
+          <li>
+            <router-link :to="pathForLocale({path: '/convert'})">{{ $t('converter-title') }}</router-link>
+          </li>
+        </ul>
+      </nav>
+    </div>
     <div class="app-settings">
       <a
         v-for="colorScheme in colorSchemes"

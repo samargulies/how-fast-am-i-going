@@ -13,7 +13,7 @@
           <i18n path="location-format" tag="div">
             <template v-slot:value>
               <span>
-                {{ averageSpeed | numberFormatted({units, locale: $t.locale}) }}
+                {{ averageSpeed }}
               </span>
             </template>
             <template v-slot:units>
@@ -28,7 +28,7 @@
           <i18n path="location-format" tag="div">
             <template v-slot:value>
               <span>
-                {{ currentSpeed | numberFormatted({units, locale: $t.locale}) }}
+                {{ currentSpeed }}
               </span>
             </template>
             <template v-slot:units>
@@ -49,6 +49,7 @@
 </template>
 <script>
 import { mapState, mapGetters } from 'vuex';
+import { convertSpeed, numberFormatted } from '@/helpers';
 
 export default {
   data() {
@@ -58,7 +59,15 @@ export default {
   },
   computed: {
     ...mapState(['units', 'loading', 'watchId', 'supportsLocation']),
-    ...mapGetters(['currentHeading', 'currentSpeed', 'averageSpeed']),
+    ...mapGetters(['currentHeading']),
+    currentSpeed() {
+      const speed = convertSpeed(this.$store.getters.currentSpeed, { units: this.units });
+      return numberFormatted(speed, { locale: this.$t.locale });
+    },
+    averageSpeed() {
+      const speed = convertSpeed(this.$store.getters.averageSpeed, { units: this.units });
+      return numberFormatted(speed, { locale: this.$t.locale });
+    },
   },
 };
 </script>

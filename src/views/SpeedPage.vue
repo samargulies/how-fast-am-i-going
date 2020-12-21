@@ -1,5 +1,5 @@
 <template>
-  <div :class="[online ? 'online' : 'offline','page page--elevation']">
+  <div class="page page--speed">
     <h1>
       <router-link :to="pathForLocale({path: '/'})">
         {{ $t('site-title') }}
@@ -48,15 +48,10 @@ export default {
     };
   },
   methods: {
-    updateOnlineStatus() {
-      this.online = navigator.onLine;
-    },
     pathForLocale,
   },
   created() {
     this.$store.dispatch('getUserLocation');
-    window.addEventListener('online', this.updateOnlineStatus);
-    window.addEventListener('offline', this.updateOnlineStatus);
     window.addEventListener('focus', () => {
       this.hasFocus = true;
       this.$store.dispatch('getUserLocation');

@@ -2,6 +2,8 @@
 	"site-title": "How fast am I going?",
 	"site-description": "Find your current speed in mph or km/h with this online speedometer app",
 	"site-mobile-app-title": "How Fast?",
+	"converter-title": "Speed Unit Converter",
+	"calculator-title": "Speed Calculator",
 	"units": {
 		"default-units": "mph",
 		"hide-selection": "false",
@@ -25,5 +27,10 @@
 	"home": "Home",
 	"what-is-my-elevation": "What is my elevation?",
 	"snowfall-guide": "Snowfall Guide",
-	"visited-earth": "Visited Earth"
+	"visited-earth": "Visited Earth",
+	"page.converter.heading": "Convert Speed Measurements",
+	"page.converter.html": "<p>Quickly change speed units between miles per hour, kilometers per hour, meters per second, and knots. </p>",
+	"page.calculator.heading": "Convert Speed Measurements",
+	"page.calculator.html": "<p>Easily enter a distance, and a length of time and we will compute the speed for you, with support multiple types of units. For distance we support miles, meters, and kilometers. For time (or duration) we support hours, minutes, and seconds. For speed we support miles per hour, kilometers per hour, meters per second, and knots. </p>"
+
 }
