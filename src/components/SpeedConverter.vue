@@ -80,7 +80,7 @@ export default {
       return this.formats[this.secondUnit];
     },
     formula() {
-      return round(this.firstFormat.mpsMultiplier / this.secondFormat.mpsMultiplier, 6);
+      return round(this.secondFormat.mpsMultiplier / this.firstFormat.mpsMultiplier, 6);
     },
   },
   methods: {

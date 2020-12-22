@@ -4,6 +4,8 @@ module.exports = {
       registry: undefined,
       renderRoutes: [
         '/',
+        '/calculate',
+        '/convert',
       ],
       useRenderEvent: true,
       headless: true,
