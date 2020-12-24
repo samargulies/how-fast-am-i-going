@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import i18n from '@/i18n';
+import { headingFormatted } from './helpers';
 
 Vue.use(Vuex);
 
@@ -49,6 +50,12 @@ export default new Vuex.Store({
         return null;
       }
       return getters.latestLocation.coords.heading || null;
+    },
+    currentHeadingFormatted(state, getters) {
+      if (getters.currentHeading === null) {
+        return null;
+      }
+      return headingFormatted(getters.currentHeading);
     },
   },
   actions: {

@@ -39,8 +39,8 @@
         <div class="reading__label">{{ $t('current-speed') }}</div>
       </div>
       <div class="reading">
-        <div class="reading__value" v-if="currentHeading !== null">
-          {{ currentHeading | headingFormatted }}
+        <div class="reading__value" v-if="currentHeadingFormatted !== null">
+          {{ currentHeadingFormatted }}
         </div>
         <div class="reading__label">{{ $t('heading') }}</div>
       </div>
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     ...mapState(['units', 'loading', 'watchId', 'supportsLocation']),
-    ...mapGetters(['currentHeading']),
+    ...mapGetters(['currentHeadingFormatted']),
     currentSpeed() {
       const speed = convertSpeed(this.$store.getters.currentSpeed, { units: this.units });
       return numberFormatted(speed, { locale: this.$t.locale });

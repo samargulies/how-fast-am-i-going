@@ -8,7 +8,6 @@
           type="number"
           id="distance"
           v-model="distance"
-          @input="distanceUpdated"
         />
         <select class="converter-box__unit" v-model="distanceUnit">
           <option
@@ -25,7 +24,6 @@
           type="number"
           id="duration"
           v-model="duration"
-          @input="durationUpdated"
         />
         <select class="converter-box__unit" v-model="durationUnit">
           <option
@@ -64,11 +62,11 @@ import { round } from '@/helpers';
 export default {
   data() {
     return {
-      distance: '1',
+      distance: '60',
       distanceUnit: 0,
       duration: '1',
       durationUnit: 0,
-      speedUnit: 2,
+      speedUnit: 0,
       distanceFormats: [
         {
           shortName: 'mi',
