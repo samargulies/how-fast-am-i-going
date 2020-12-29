@@ -1,27 +1,26 @@
 <template>
-  <transition name="slide">
-    <div>
-      <div class="speed-chart" v-if="speedReadings.length > 1">
-        <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
-          <defs>
-            <linearGradient id="fillColor" x1="1" x2="1" y1="0" y2="1">
-              <stop offset="0%" stop-color="#f13a3a"></stop>
-              <stop offset="100%" stop-color="rgba(241, 58, 58, 0)"></stop>
-            </linearGradient>
-          </defs>
-        </svg>
-        <TrendChart
-          :min="0"
-          :max="maxReading"
-          :datasets="[{
+  <div v-if="supportsLocation">
+    <div class="speed-chart" :class="loading ? 'loading' : ''">
+      <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="fillColor" x1="1" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#f13a3a" />
+            <stop offset="100%" stop-color="rgba(241, 58, 58, 0)" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <TrendChart
+        :min="0"
+        :max="maxReading"
+        :datasets="[{
             data: speedReadings,
             smooth: true,
             fill: true,
-            }]" />
-        <a class="button" @click.prevent="clearLocations">{{ $t('reset') }}</a>
+            }]"
+      />
+      <a class="button" @click.prevent="clearLocations">{{ $t('reset') }}</a>
     </div>
-    </div>
-  </transition>
+  </div>
 </template>
 <script>
 import TrendChart from 'vue-trend-chart';
@@ -32,7 +31,7 @@ export default {
     TrendChart,
   },
   computed: {
-    ...mapState(['units']),
+    ...mapState(['units', 'loading', 'supportsLocation']),
     ...mapGetters(['speedReadings']),
     maxReading() {
       const max = Math.max(...this.speedReadings);
@@ -64,7 +63,8 @@ export default {
 .slide-leave-active {
   transition: all 0.5s ease-out;
 }
-.slide-enter, .slide-leave-to {
+.slide-enter,
+.slide-leave-to {
   transform: scaleY(0);
   opacity: 0;
   margin-top: -10em;

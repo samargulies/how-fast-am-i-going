@@ -22,9 +22,9 @@ export default new Vuex.Store({
     latestLocation(state) {
       return state.locations[state.locations.length - 1];
     },
-    speedReadings(state, getters) {
-      if (!getters.latestLocation) {
-        return [];
+    speedReadings(state) {
+      if (state.locations.length < 2) {
+        return [0, 0];
       }
       return state.locations.map((location) => location.coords.speed || 0);
     },
@@ -83,9 +83,11 @@ export default new Vuex.Store({
       commit('addLocation', location);
     },
     locationError({ dispatch }) {
-      // console.warn('location access denied', error);
-      dispatch('setLoading', false);
-      dispatch('setSupportsLocation', false);
+      // delay settings a location error for prerendering purposes
+      setTimeout(() => {
+        dispatch('setLoading', false);
+        dispatch('setSupportsLocation', false);
+      }, 150);
     },
     stopWatchingUserLocation({ state, commit }) {
       navigator.geolocation.clearWatch(state.watchId);
@@ -124,7 +126,8 @@ export default new Vuex.Store({
       Vue.set(state.ezoicAds, id, html);
     },
     addLocation(state, location) {
-      if (typeof location.coords !== 'undefined' && location.coords.longitude && location.coords.latitude) {
+      // eslint-disable-next-line valid-typeof
+      if (typeof location === 'GeolocationPosition' && location.coords.longitude && location.coords.latitude) {
         state.locations.push(location);
       }
     },
