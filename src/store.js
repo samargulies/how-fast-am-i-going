@@ -83,11 +83,12 @@ export default new Vuex.Store({
       commit('addLocation', location);
     },
     locationError({ dispatch }) {
-      // delay settings a location error for prerendering purposes
-      setTimeout(() => {
-        dispatch('setLoading', false);
-        dispatch('setSupportsLocation', false);
-      }, 150);
+      // disable settings a location error when prerendering
+      if (!window.chrome) {
+        return;
+      }
+      dispatch('setLoading', false);
+      dispatch('setSupportsLocation', false);
     },
     stopWatchingUserLocation({ state, commit }) {
       navigator.geolocation.clearWatch(state.watchId);
