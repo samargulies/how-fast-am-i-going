@@ -84,7 +84,7 @@ export default new Vuex.Store({
     },
     locationError({ dispatch }) {
       // disable settings a location error when prerendering
-      if (!window.chrome) {
+      if (typeof window.chrome === 'undefined' && navigator.userAgent.includes('Chrome')) {
         return;
       }
       dispatch('setLoading', false);
